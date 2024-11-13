@@ -58,7 +58,7 @@
         
         <br /><br />
         <div class="text-center text-light">
-        	Copyright &copy; 2022 Y School. All rights reserved.
+        	Copyright &copy; 2022 Diopong Primary School. All rights reserved.
         </div>
 
     	</div>
