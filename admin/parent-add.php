@@ -99,7 +99,7 @@ if (isset($_SESSION['admin_id']) &&
           <input type="text" 
                  class="form-control"
                  value="<?=$address?>"
-                 name="address">
+                 name="address" required>
         </div>
         <div class="mb-3">
           <label class="form-label">employee Number</label>
