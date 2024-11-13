@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login - Y School</title>
+	<title>Login - Diopong Primary School</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="icon" href="1.jpg">
@@ -51,14 +51,14 @@
 		  </div>
 
 		  <button type="submit" class="btn btn-primary">Login</button>
-		  <a href="forgotpassword.php" class="text-decoration-none">Forgot Password</a>
-		  <a href="index.php" class="text-decoration-none">Home</a>
+		  <a href="forgotpassword.php" class="btn btn-secondary">Forgot Password</a>
+		  <a href="index.php" class="btn btn-secondary">Home</a>
 		  
 		</form>
         
         <br /><br />
         <div class="text-center text-light">
-        	Copyright &copy; 2022 Y School. All rights reserved.
+        	Copyright &copy; 2022 Diopong Primary School. All rights reserved.
         </div>
 
     	</div>

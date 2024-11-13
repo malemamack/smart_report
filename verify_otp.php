@@ -38,18 +38,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['otp'])) {
 </head>
 <body class="body-login">
     <div class="black-fill"><br /> <br />
+	
     	<div class="d-flex justify-content-center align-items-center flex-column">
+		<form class="login">
+		<div class="text-center">
+    			<img src="1.jpg" style="border-radius: 40%;"
+    			     width="100" >
+    		</div>
     	
 	<h2 style="color: white;">Enter the OTP sent to your email</h2>
 	<form method="post" action="">
-		<input type="text" name="otp" required placeholder="Enter OTP">
-		<button type="submit" >Verify OTP</button>
+		<input type="text" class="form-control" name="otp" required placeholder="Enter OTP">
+		<button type="submit" class="btn btn-primary btn-block">Verify OTP</button>
 	</form>
 	<?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
         
         <br /><br />
-        <div class="text-center text-light">
-        	Copyright &copy; 2022 Y School. All rights reserved.
+        <div class="text-center text-light" style="margin-top:150px;">
+        	Copyright &copy; 2022 Diopong Primary School. All rights reserved.
         </div>
 
     	</div>
