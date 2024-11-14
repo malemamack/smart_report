@@ -55,9 +55,9 @@ if ($setting != 0) {
         </section>
         
         
-        <div class="text-center text-light">
+        <!-- <div class="text-center text-light">
         	Copyright &copy; <?=$setting['current_year']?> <?=$setting['school_name']?>. All rights reserved.
-        </div>
+        </div> -->
 
     	</div>
     </div>

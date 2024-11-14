@@ -56,7 +56,7 @@ if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['role'])) {
 				if ($role == 'Parent' || $role == 'Teacher') {
 					$otp = rand(100000, 999999); // Generate a 6-digit OTP
 					$_SESSION['otp'] = $otp; // Store OTP in session
-					$_SESSION['temp_user_id'] = $user['id']; // Store user ID temporarily
+					$_SESSION['user_id'] = $user['id']; // Store user ID temporarily
 					
 					// Send OTP via PHPMailer
 					$mail = new PHPMailer(true);

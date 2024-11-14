@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['otp'])) {
         
         <br /><br />
         <div class="text-center text-light">
-        	Copyright &copy; 2022 Y School. All rights reserved.
+        	Diopong Primary School
         </div>
 
     	</div>

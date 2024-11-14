@@ -13,11 +13,11 @@ if (isset($_SESSION['r_user_id']) &&
        if (isset($_GET['student_id'])) {
            $student_id = $_GET['student_id'];
            $parent_id = $_SESSION['r_user_id'];
-
+       }
            // Fetch the student details and check if the student is linked to the logged-in parent
-           $student = getStudentByIdAndParent($student_id, $parent_id, $conn);
+           $student = getStudentByIdAndParentId ($student_id, $parent_id, $conn);
 
-           if ($student) { // If the student belongs to the logged-in parent
+           if ($student) { // If the student belongs to the logged-in parent 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,12 +83,12 @@ if (isset($_SESSION['r_user_id']) &&
            header("Location: student.php");
            exit;
        }
+    
     } else {
-        header("Location: ../login.php");
-        exit;
-    } 
-} else {
 	header("Location: ../login.php");
 	exit;
-} 
+
+    
+    }
+
 ?>

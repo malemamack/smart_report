@@ -61,9 +61,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 <label class="form-label">Address</label>
                 <input type="text" class="form-control" value="<?= $address ?>" name="address">
             </div>
-            <div class="mb-3">
-                <label class="form-label">Email address</label>
-                <input type="email" class="form-control" value="<?= $email_address ?>" name="email_address">
+            
             </div>
             <div class="mb-3">
                 <label class="form-label">Date of birth</label>
