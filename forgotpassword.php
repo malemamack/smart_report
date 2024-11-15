@@ -13,7 +13,7 @@ $setting = getSetting($conn);
 	<title>Welcome to <?=$setting['school_name']?></title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
-	<link rel="icon" href="logo.png">
+	<link rel="icon" href="1.jpg">
 	<style>
 		.form-contai {
 	background-color: grey;
@@ -75,7 +75,7 @@ input[type="submit"]:hover {
     	     id="homeNav">
 		  <div class="container-fluid">
 		    <a class="navbar-brand" href="#">
-		    	<img src="image.png" width="50" height="50" >
+		    	<img src="1.jpg" width="50" height="50" >
 		    </a>
 		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		      <span class="navbar-toggler-icon"></span>

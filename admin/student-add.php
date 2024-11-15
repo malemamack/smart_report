@@ -61,9 +61,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 <label class="form-label">Address</label>
                 <input type="text" class="form-control" value="<?= $address ?>" name="address">
             </div>
+<<<<<<< HEAD
             <div class="mb-3">
                 <label class="form-label">Id number</label>
                 <input type="email" class="form-control" value="<?= $Id_number??''?>" name="Id number">
+=======
+            
+>>>>>>> 45c7f0e9355c7e940dca0f49d376fde64cc6073f
             </div>
             <div class="mb-3">
                 <label class="form-label">Date of birth</label>

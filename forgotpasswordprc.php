@@ -8,7 +8,7 @@ require 'vendor/autoload.php'; // Include Composer's autoloader
 $servername = "localhost"; 
 $username = "root"; 
 $password = ""; 
-$dbname = "smart_report"; 
+$dbname = "sms_db"; 
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

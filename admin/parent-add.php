@@ -21,9 +21,9 @@ if (isset($_SESSION['admin_id']) &&
        if (isset($_GET['lname'])) $lname = $_GET['lname'];
        if (isset($_GET['uname'])) $uname = $_GET['uname'];
        if (isset($_GET['address'])) $address = $_GET['address'];
-       if (isset($_GET['en'])) $en = $_GET['en'];
-       if (isset($_GET['pn'])) $pn = $_GET['pn'];
-       if (isset($_GET['qf'])) $qf = $_GET['qf'];
+       if (isset($_GET['gender'])) $en = $_GET['gender'];
+       if (isset($_GET['date of birth'])) $pn = $_GET['date of birth'];
+       if (isset($_GET['password'])) $qf = $_GET['password'];
        if (isset($_GET['email'])) $email = $_GET['email'];
  ?>
 <!DOCTYPE html>
@@ -65,16 +65,61 @@ if (isset($_SESSION['admin_id']) &&
           <input type="text" 
                  class="form-control"
                  value="<?=$fname?>" 
-                 name="fname">
+                 name="fname" required pattern="[A-Za-z]+" title="Only letters are allowed.">
         </div>
         <div class="mb-3">
           <label class="form-label">Last name</label>
           <input type="text" 
                  class="form-control"
                  value="<?=$lname?>"
-                 name="lname">
+                 name="lname" required pattern="[A-Za-z]+" title="Only letters are allowed.">
         </div>
+        
+
+          <div class="mb-3">
+          <label class="form-label">Email Address</label>
+          <input type="text" 
+                 class="form-control"
+                 value="<?=$email?>"
+                 name="email_address" required title="Please enter a valid email address.">
+
+                 </div>
+
+          <div class="mb-3">
+          <label class="form-label">Address</label>
+          <input type="text" 
+                 class="form-control"
+                 value="<?=$address?>"
+                 name="address" required required  minlength="5" maxlength="100" title="Address must be between 5 and 100 characters.">
+
+                </div>
+
+          <div class="mb-3">
+          <label class="form-label">Gender</label><br>
+          <input type="radio"
+                 value="Male"
+                 checked 
+                 name="gender"> Male
+                <input type="radio"
+                 value="Female"
+                 checked                  
+                 name="gender"> Female
+                <input type="radio"
+                 value="other"
+                 checked 
+                 name="gender"> other
+        </div>
+
         <div class="mb-3">
+          <label class="form-label">Date of Birth</label>
+          <input type="date" 
+                 class="form-control"
+                 value=""
+                 name="date_of_birth" >
+
+        </div>
+
+          <div class="mb-3">
           <label class="form-label">Username</label>
           <input type="text" 
                  class="form-control"
@@ -93,21 +138,17 @@ if (isset($_SESSION['admin_id']) &&
                       Random</button>
           </div>
           
+        
+
+      
+        
         </div>
-        <div class="mb-3">
-          <label class="form-label">Address</label>
-          <input type="text" 
-                 class="form-control"
-                 value="<?=$address?>"
-                 name="address">
+        
         </div>
-        <div class="mb-3">
-          <label class="form-label">employee Number</label>
-          <input type="text" 
-                 class="form-control"
-                 value="<?=$en?>"
-                 name="employee_number">
+       
+        
         </div>
+<<<<<<< HEAD
         <div class="mb-3">
           <label class="form-label">Phone Number</label>
           <input type="text" 
@@ -141,6 +182,10 @@ if (isset($_SESSION['admin_id']) &&
                  class="form-control"
                  value=""
                  name="date_of_birth">
+=======
+        
+        
+>>>>>>> 45c7f0e9355c7e940dca0f49d376fde64cc6073f
         </div>
       <button type="submit" class="btn btn-primary">Add</button>
      </form>
