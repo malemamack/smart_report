@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-esrom-branch',
         'version' => 'dev-esrom-branch',
-        'reference' => 'a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6',
+        'reference' => 'd33dcf9cac89dfe31b314edecbd3b7fdd8a62fb7',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-esrom-branch',
             'version' => 'dev-esrom-branch',
-            'reference' => 'a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6',
+            'reference' => 'd33dcf9cac89dfe31b314edecbd3b7fdd8a62fb7',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

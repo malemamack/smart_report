@@ -50,8 +50,8 @@
 		  </div>
 
 		  <button type="submit" class="btn btn-primary">Login</button>
-		  <a href="forgotpassword.php" class="text-decoration-none">Forgot Password</a>
-		  <a href="index.php" class="text-decoration-none">Home</a>
+		  <a href="forgotpassword.php" class="btn btn-secondary">Forgot Password</a>
+		  <a href="index.php" class="btn btn-secondary">Home</a>
 		  
 		</form>
         
