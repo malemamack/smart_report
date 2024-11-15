@@ -75,7 +75,7 @@ input[type="submit"]:hover {
     	     id="homeNav">
 		  <div class="container-fluid">
 		    <a class="navbar-brand" href="#">
-		    	<img src="image.png" width="50" height="50" >
+		    	<img src="1.jpg" width="50" height="50" >
 		    </a>
 		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		      <span class="navbar-toggler-icon"></span>
@@ -94,20 +94,17 @@ input[type="submit"]:hover {
 		  </div>
 		    </div>
 		</nav>
+		<div class="contai">
         <section class="welcome-text d-flex justify-content-center align-items-center flex-column">
-        	<div class="contai">
-        
+		<img src="1.jpg" style="border-radius: 30%;" >
 			<form action="forgotpasswordprc.php" method="post">
-    <div class="form-contai">
+    <!-- <div class="form-contai"> -->
         <h2>Forgot Password</h2>
-        
         <label for="email">Enter your email address:</label>
         <input type="email" id="email" name="email" required>
-        
         <input type="submit" value="Send">
-    </div>
 </form>
-
+</div>
 <section class="footer">
     <div class="text-center text-light">
         Copyright &copy; <?=$setting['current_year']?> <?=$setting['school_name']?>. All rights reserved.
