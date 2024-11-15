@@ -87,8 +87,8 @@ if (isset($_POST['fname'])      &&
                 username = ?, fname=?, lname=?,
                 address = ?, employee_number=?, date_of_birth = ?, phone_number = ?, qualification = ?,gender=?, email_address = ?
                 WHERE r_user_id=?";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([$uname, $fname, $lname, $address, $employee_number, $date_of_birth, $phone_number, $qualification, $gender, $email_address, $r_user_id]);
+        // $stmt = $conn->prepare($sql);
+        // $stmt->execute([$uname, $fname, $lname, $address, $employee_number, $date_of_birth, $phone_number, $qualification, $gender, $email_address, $r_user_id]);
         $sm = "successfully updated!";
         header("Location: ../registrar-office-edit.php?success=$sm&$data");
         exit;

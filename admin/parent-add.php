@@ -116,11 +116,6 @@ if (isset($_SESSION['admin_id']) &&
                  name="phone_number">
         </div>
         <div class="mb-3">
-          <label class="form-label">Qualification</label>
-          <input type="text" 
-                 class="form-control"
-                 value="<?=$qf?>"
-                 name="qualification">
         </div>
         <div class="mb-3">
           <label class="form-label">Email Address</label>

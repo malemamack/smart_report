@@ -143,7 +143,7 @@ if (isset($_SESSION['admin_id']) &&
               Update</button>
      </form>
 
-     <form method="post"
+     <!-- <form method="post"
               class="shadow p-3 my-5 form-w" 
               action="req/parent-change.php"
               id="change_password">
@@ -194,7 +194,7 @@ if (isset($_SESSION['admin_id']) &&
           <button type="submit" 
               class="btn btn-primary">
               Change</button>
-        </form>
+        </form> -->
      </div>
      
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>	

@@ -109,13 +109,13 @@ if (isset($_POST['fname']) &&
         $stmt = $conn->prepare($sql);
         $stmt->execute([$uname, $pass, $classes, $fname, $lname, $subjects, $address, $employee_number, $date_of_birth, $phone_number, $qualification, $gender, $email_address]);
         $sm = "New teacher registered successfully";
-        header("Location: ../teacher-add.php?success=$sm");
+        header("Location: ../teacher.php?success=$sm");
         exit;
 	}
     
   }else {
   	$em = "An error occurred";
-    header("Location: ../teacher-add.php?error=$em");
+    header("Location: ../teacher.php?error=$em");
     exit;
   }
 
