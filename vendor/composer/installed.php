@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-kat-branch',
         'version' => 'dev-kat-branch',
-        'reference' => '6126f1313f773fd16c189540244db20a58c84332',
+        'reference' => '61a6716cb50174a552127cb8434dd6b023e744de',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-kat-branch',
             'version' => 'dev-kat-branch',
-            'reference' => '6126f1313f773fd16c189540244db20a58c84332',
+            'reference' => '61a6716cb50174a552127cb8434dd6b023e744de',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
