@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+ 
 // Error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -22,13 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['otp'])) {
             exit;
         } elseif ($role == 'Parent') {
             // Set parent session variable
-            $_SESSION['parent_id'] = $id;
-            header("Location: parent/index.php");
+            $_SESSION['parent_id'] = $id;   // Ensure r_user_id is set correctly
+            header("Location: parent/index.php"); // Redirect to parent dashboard
             exit;
         } elseif ($role == 'Teacher') {
             // Set teacher session variable
             $_SESSION['teacher_id'] = $id;
-            header("Location: Teacher/index.php");
+            header("Location: teacher/index.php");
             exit;
         }
 
