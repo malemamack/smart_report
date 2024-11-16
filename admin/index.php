@@ -1,10 +1,11 @@
 <?php 
-session_start();
-if (isset($_SESSION['admin_id']) && 
-    isset($_SESSION['role'])) {
-
-    if ($_SESSION['role'] == 'Admin') {
- ?>
+      session_start();
+      
+      // Ensure the session variable is checked correctly for the parent user
+      if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
+          if ($_SESSION['role'] == 'Admin') { 
+            $parent_id = $_SESSION['admin_id'];
+      ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

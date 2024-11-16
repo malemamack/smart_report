@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['otp'])) {
         $id = $_SESSION['temp_user_id'];
 
         // Set the appropriate session variables based on the role
-        if ($role == 'admin') {
+        if ($role == 'Admin') {
             // Set admin session variable
             $_SESSION['admin_id'] = $id;
             header("Location: admin/index.php");
