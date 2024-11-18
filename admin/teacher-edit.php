@@ -89,13 +89,6 @@ if (isset($_SESSION['admin_id']) &&
                  name="address">
         </div>
         <div class="mb-3">
-          <label class="form-label">Employee number</label>
-          <input type="text" 
-                 class="form-control"
-                 value="<?=$teacher['employee_number']?>"
-                 name="employee_number">
-        </div>
-        <div class="mb-3">
           <label class="form-label">Date of birth</label>
           <input type="date" 
                  class="form-control"
@@ -108,13 +101,6 @@ if (isset($_SESSION['admin_id']) &&
                  class="form-control"
                  value="<?=$teacher['phone_number']?>"
                  name="phone_number">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Qualification</label>
-          <input type="text" 
-                 class="form-control"
-                 value="<?=$teacher['qualification']?>"
-                 name="qualification">
         </div>
         <div class="mb-3">
           <label class="form-label">Email address</label>
