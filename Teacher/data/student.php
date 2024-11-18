@@ -34,8 +34,8 @@ function getStudentById($id, $conn){
 
 // Check if the username Unique
 function unameIsUnique($uname, $conn, $student_id=0){
-   $sql = "SELECT username, student_id FROM students
-           WHERE username=?";
+   $sql = "SELECT id_number, student_id FROM students
+           WHERE id_number=?";
    $stmt = $conn->prepare($sql);
    $stmt->execute([$uname]);
    

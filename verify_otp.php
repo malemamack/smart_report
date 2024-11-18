@@ -1,35 +1,40 @@
 <?php
 session_start();
+ 
+// Error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// If OTP or username is not set in the session, redirect to login
-if (!isset($_SESSION['otp']) || !isset($_SESSION['username'])) {
-    header("Location: ../login.php");
-    exit;
-}
+// Check if form is submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['otp'])) {
+    $enteredOtp = $_POST['otp'];
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $input_otp = $_POST['otp'];
-    $stored_otp = $_SESSION['otp'];
+    // Ensure OTP is set in the session
+    if (isset($_SESSION['otp']) && $enteredOtp == $_SESSION['otp']) {
+        $role = $_SESSION['role'];
+        $id = $_SESSION['temp_user_id'];
 
-    // Get role and username from session
-    $role = $_SESSION['role'];
-    $username = $_SESSION['username'];
-
-    print_r($role); // This will print the role for debugging
-
-    if ($input_otp == $stored_otp) {
-        // OTP is correct, redirect to the user’s role-based dashboard
+        // Set the appropriate session variables based on the role
         if ($role == 'Admin') {
+            // Set admin session variable
+            $_SESSION['admin_id'] = $id;
             header("Location: admin/index.php");
+            exit;
+        } elseif ($role == 'Parent') {
+            // Set parent session variable
+            $_SESSION['parent_id'] = $id;   // Ensure r_user_id is set correctly
+            header("Location: parent/index.php"); // Redirect to parent dashboard
+            exit;
         } elseif ($role == 'Teacher') {
-            header("Location: Teacher/index.php");
-        } elseif ($role == 'parent') {
-            header("Location: parent/index.php");
-        } else {
-            // Default redirect if role is not recognized
-            header("Location: ../login.php");
+            // Set teacher session variable
+            $_SESSION['teacher_id'] = $id;
+            header("Location: teacher/index.php");
+            exit;
         }
-        exit;
+
+        // Clear OTP and temporary user ID after successful verification
+        unset($_SESSION['otp']);
+        unset($_SESSION['temp_user_id']);
     } else {
         $error = "Invalid OTP. Please try again.";
     }
@@ -37,52 +42,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTP Verification - Y School</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>OTP Verification</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="icon" href="1.jpg">
 </head>
-<body class="body-login">
-    <div class="black-fill"><br /> <br />
-    	<div class="d-flex justify-content-center align-items-center flex-column">
-    	
-
-    		<div class="text-center">
-    			<img src="1.jpg"
-    			     width="100" style="border-radius: 50%;">
+<body>
+<div class="d-flex justify-content-center align-items-center flex-column">
+<div class="text-center">
+    
+    			<img src="1.jpg" style="border-radius: 40%;"
+    			     width="100" >
     		</div>
-    		<div class="container">
-        <h3 class="text-center">Verify OTP</h3>
-        
-        <?php if (isset($error)) { ?>
-            <div class="alert alert-danger" role="alert">
-                <?= $error ?>
-            </div>
-        <?php } ?>
-
-        <div class="d-flex justify-content-center align-items-center flex-column"><form method="post" class="login" >
-            <div class="mb-3">
-                <label class="form-label">OTP</label>
-                <input type="text" class="form-control" name="otp" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Verify OTP</button>
-        </form></div>
+    <h2>Enter the OTP sent to your email</h2>
+    <form method="post" action="">
+        <input type="text" name="otp" required placeholder="Enter OTP">
+        <button type="submit" class="btn btn-secondary">Verify OTP</button>
+    </form>
+    <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
     </div>
-		
-        
-        <br /><br />
-        <div class="text-center text-light">
-        	Diopong Primary School
-        </div>
-
-    	</div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>	
 </body>
 </html>

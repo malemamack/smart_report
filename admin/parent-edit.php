@@ -2,7 +2,7 @@
 session_start();
 if (isset($_SESSION['admin_id']) && 
     isset($_SESSION['role'])     &&
-    isset($_GET['r_user_id'])) {
+    isset($_GET['parent_id'])) {
 
     if ($_SESSION['role'] == 'Admin') {
       
@@ -12,7 +12,7 @@ if (isset($_SESSION['admin_id']) &&
 
        
        
-       $r_user_id = $_GET['r_user_id'];
+       $r_user_id = $_GET['parent_id'];
        $r_user = getR_usersById($r_user_id, $conn);
 
        if ($r_user == 0) {
@@ -27,7 +27,7 @@ if (isset($_SESSION['admin_id']) &&
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Admin - Edit Registrar Office User</title>
+	<title>Admin - Edit Parent User</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/style.css">
 	<link rel="icon" href="../1.jpg">
@@ -45,7 +45,7 @@ if (isset($_SESSION['admin_id']) &&
         <form method="post"
               class="shadow p-3 mt-5 form-w" 
               action="req/parent-edit.php">
-        <h3>Edit Registraro Office User</h3><hr>
+        <h3>Edit Parent User</h3><hr>
         <?php if (isset($_GET['error'])) { ?>
           <div class="alert alert-danger" role="alert">
            <?=$_GET['error']?>
@@ -132,8 +132,8 @@ if (isset($_SESSION['admin_id']) &&
                  name="gender"> Female
         </div>
         <input type="text"
-                value="<?=$r_user['r_user_id']?>"
-                name="r_user_id"
+                value="<?=$r_user['parent_id']?>"
+                name="parent_id"
                 hidden>
 
         
@@ -180,8 +180,8 @@ if (isset($_SESSION['admin_id']) &&
             
           </div>
           <input type="text"
-                value="<?=$r_user['r_user_id']?>"
-                name="r_user_id"
+                value="<?=$r_user['parent_id']?>"
+                name="parent_id"
                 hidden>
 
           <div class="mb-3">

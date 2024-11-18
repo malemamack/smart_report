@@ -67,3 +67,18 @@ function searchStudents($key, $conn){
     return 0;
    }
 }
+
+// All Parents
+function getAllParents($conn){
+  $sql = "SELECT parent_id, CONCAT(fname, ' ', lname) AS parent_name FROM parent";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+
+  if ($stmt->rowCount() >= 1) {
+      $parents = $stmt->fetchAll();
+      return $parents;
+  } else {
+      return 0; // Return 0 if no parents found
+  }
+}
+

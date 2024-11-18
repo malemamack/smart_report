@@ -164,9 +164,21 @@ if (isset($_SESSION['admin_id']) &&
         </div>
         <br><hr>
 
-       
+        <div class="mb-3">
+          <label class="form-label">ID Number</label>
+          <input type="text" 
+                 class="form-control"
+                 value="<?=$student['id_number']?>"
+                 name="id_number">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Contact Number</label>
+          <input type="text" 
+                 class="form-control"
+                 value="<?=$student['contact']?>"
+                 name="contact">
+        </div>
       
-
 
         
 
@@ -175,8 +187,7 @@ if (isset($_SESSION['admin_id']) &&
               Update</button>
      </form>
 
-     
-     </div>
+    </div>
      
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>	
     <script>
