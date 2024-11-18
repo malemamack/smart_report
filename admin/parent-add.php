@@ -148,8 +148,39 @@ if (isset($_SESSION['admin_id']) &&
        
         
         </div>
-        
-        
+        <div class="mb-3">
+          <label class="form-label">Phone Number</label>
+          <input type="text" 
+                 class="form-control"
+                 value="<?=$pn?>"
+                 name="phone_number">
+        </div>
+        <div class="mb-3">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email Address</label>
+          <input type="text" 
+                 class="form-control"
+                 value="<?=$email?>"
+                 name="email_address">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Gender</label><br>
+          <input type="radio"
+                 value="Male"
+                 checked 
+                 name="gender"> Male
+                 &nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="radio"
+                 value="Female"
+                 name="gender"> Female
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Date of Birth</label>
+          <input type="date" 
+                 class="form-control"
+                 value=""
+                 name="date_of_birth">
         </div>
       <button type="submit" class="btn btn-primary">Add</button>
      </form>

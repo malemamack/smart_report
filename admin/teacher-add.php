@@ -186,7 +186,7 @@ if (isset($_SESSION['admin_id']) &&
           </div>
         </div>
 
-      <button type="submit" class="btn btn-primary">Add</button>
+      <button type="submit"  class="btn btn-primary">Add</button>
      </form>
      </div>
      

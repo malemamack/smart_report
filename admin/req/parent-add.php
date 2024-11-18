@@ -94,7 +94,7 @@ if (isset($_POST['fname']) &&
                  VALUES(?,?,?,?,?,?,?,?,?,?,?)";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$uname, $pass, $fname, $lname, $address, $employee_number, $date_of_birth, $phone_number, $qualification, $gender, $email_address]);
-        $sm = "New teacher registered successfully";
+        $sm = "New parent registered successfully";
         header("Location: ../teacher-add.php?success=$sm");
         exit;
 	}

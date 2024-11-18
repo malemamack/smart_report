@@ -11,15 +11,15 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         $sections = getAllSections($conn);
         $students = getAllStudents($conn);
 
-        $fname = $lname = $address = $email_address = $preferred_name = $id_number = $contact = '';
+        $fname = $lname = $address  = $id_number  = '';
 
         if (isset($_GET['fname'])) $fname = $_GET['fname'];
         if (isset($_GET['lname'])) $lname = $_GET['lname'];
         if (isset($_GET['address'])) $address = $_GET['address'];
-        if (isset($_GET['email_address'])) $email_address = $_GET['email_address'];
-        if (isset($_GET['preferred_name'])) $preferred_name = $_GET['preferred_name'];
+       // if (isset($_GET['email_address'])) $email_address = $_GET['email_address'];
+       // if (isset($_GET['preferred_name'])) $preferred_name = $_GET['preferred_name'];
         if (isset($_GET['id_number'])) $id_number = $_GET['id_number'];
-        if (isset($_GET['contact'])) $contact = $_GET['contact'];
+       // if (isset($_GET['contact'])) $contact = $_GET['contact'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,29 +61,28 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 <label class="form-label">Address</label>
                 <input type="text" class="form-control" value="<?= $address ?>" name="address">
             </div>
+<<<<<<< HEAD
+            <div class="mb-3">
+                <label class="form-label">Id number</label>
+                <input type="email" class="form-control" value="<?= $Id_number??''?>" name="Id number">
+=======
             
+>>>>>>> 45c7f0e9355c7e940dca0f49d376fde64cc6073f
             </div>
             <div class="mb-3">
                 <label class="form-label">Date of birth</label>
                 <input type="date" class="form-control" name="date_of_birth">
             </div>
             <div class="mb-3">
+                <label class="form-label"> parent Id</label>
+                <input type="id" class="form-control" value="<?= $parent_Id??''?>" name="parent id">
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label">Gender</label><br>
                 <input type="radio" value="Male" checked name="gender"> Male
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="radio" value="Female" name="gender"> Female
-            </div><hr>
-            <div class="mb-3">
-                <label class="form-label">Preferred Name</label>
-                <input type="text" class="form-control" value="<?= $preferred_name ?>" name="preferred_name">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Id Number</label>
-                <input type="text" class="form-control" value="<?= $id_number ?>" name="id_number">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Contact Number</label>
-                <input type="text" class="form-control" value="<?= $contact ?>" name="contact">
             </div><hr>
             <div class="mb-3">
                 <label class="form-label">Grade</label>

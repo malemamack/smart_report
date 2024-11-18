@@ -77,68 +77,86 @@ if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['role'])) {
         header("Location: ../login.php?error=$em");
         exit;
     } else if (empty($role)) {
-        $em  = "Role is required";
+        $em  = "An error occurred";
         header("Location: ../login.php?error=$em");
         exit;
-    }
-
-    // Determine the correct table and role
-    switch ($role) {
-        case '1':
+    } else {
+        // Handle role-based logic
+        if($role == '1'){
             $sql = "SELECT * FROM admin WHERE username = ?";
-            $roleName = "Admin";
-            break;
-        case '2':
+            $role = "Admin";
+        } else if($role == '2'){
             $sql = "SELECT * FROM teachers WHERE username = ?";
-            $roleName = "Teacher";
-            break;
-        case '3':
+            $role = "Teacher";
+        } else if($role == '3'){
             $sql = "SELECT * FROM students WHERE username = ?";
-            $roleName = "Student";
-            break;
-        case '4':
+            $role = "Student";
+        } else if($role == '4'){
             $sql = "SELECT * FROM parent WHERE username = ?";
-            $roleName = "Parent";
-            break;
-        default:
-            $em  = "Invalid role";
-            header("Location: ../login.php?error=$em");
-            exit;
-    }
+            $role = "Parent";
+        }
 
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$uname]);
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$uname]);
 
-    if ($stmt->rowCount() == 1) {
-        $user = $stmt->fetch();
-        $username = $user['username'];
-        $password = $user['password'];
-        $email = $user['email_address'];  // Assuming email_address exists in the database
+        if ($stmt->rowCount() == 1) {
+            $user = $stmt->fetch();
+            $username = $user['username'];
+            $password = $user['password'];
+            $email = $user['email_address']; // Assuming email_address exists in the database
 
-        if ($username === $uname && password_verify($pass, $password)) {
-            // User authenticated, generate OTP
-            $otp = rand(100000, 999999); // 6-digit OTP
-            $_SESSION['otp'] = $otp; // Store OTP in session
-            $_SESSION['role'] = $roleName;
-            $_SESSION['username'] = $username;
+            if ($username === $uname && password_verify($pass, $password)) {
+                $_SESSION['role'] = $role;
 
-            // Send OTP via email
-            $subject = 'Your OTP for Diopong Primary School Login';
-            $body = "Dear $username,<br><br>Your OTP for Diopong Primary School login is: <strong>$otp</strong><br><br>Thank you,<br>Y School";
-            sendEmail($user['email_address'], $subject, $body);
+                // Generate and send OTP for Parent and Teacher roles
+                if ($role == 'Parent' || $role == 'Teacher') {
+                    $otp = rand(100000, 999999);  // Generate a 6-digit OTP
+                    $_SESSION['otp'] = $otp;  // Store OTP in session
+                    $_SESSION['temp_user_id'] = $user['id'];  // Store user ID temporarily
 
-            // Redirect to OTP verification page
-            header("Location: ../verify_otp.php");
-            exit;
+                    // Send OTP via PHPMailer
+                    $mail = new PHPMailer(true);
+                    try {
+                        $mail->isSMTP();
+                        $mail->Host       = 'smtp.gmail.com';  // Replace with your SMTP server
+                        $mail->SMTPAuth   = true;
+                        $mail->Username   = 'malemamahlatse70@gmail.com';  // SMTP username
+                        $mail->Password   = 'cdbhkiurykowykqw';  // SMTP password
+                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                        $mail->Port       = 587;
+
+                        $mail->setFrom('your_email@example.com', 'DIOPONG PRIMARY SCHOOL');
+                        $mail->addAddress($email);
+
+                        $mail->isHTML(true);
+                        $mail->Subject = 'Your Login OTP';
+                        $mail->Body    = "Your OTP is <b>$otp</b>. It expires in 5 minutes.";
+
+                        $mail->send();
+                        header("Location: ../verify_otp.php");  // Redirect to OTP verification page
+                        exit;
+                    } catch (Exception $e) {
+                        $em = "OTP could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                        header("Location: ../login.php?error=$em");
+                        exit;
+                    }
+                } else {
+                    // For Admin and Student roles, login directly
+                    $id = ($role == 'Admin') ? $user['admin_id'] : $user['student_id'];
+                    $_SESSION[strtolower($role) . '_id'] = $id;
+                    header("Location: ../" . strtolower($role) . "/index.php");
+                    exit;
+                }
+            } else {
+                $em = "Incorrect Username or Password";
+                header("Location: ../login.php?error=$em");
+                exit;
+            }
         } else {
-            $em  = "Incorrect Username or Password";
+            $em = "Incorrect Username or Password";
             header("Location: ../login.php?error=$em");
             exit;
         }
-    } else {
-        $em  = "Incorrect Username or Password";
-        header("Location: ../login.php?error=$em");
-        exit;
     }
 } else {
     header("Location: ../login.php");
