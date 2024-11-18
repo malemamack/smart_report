@@ -1,5 +1,5 @@
 <?php
-<?php
+
 session_start();
  
 // Error reporting for debugging
