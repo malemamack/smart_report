@@ -101,7 +101,7 @@ if (isset($_POST['fname'])      &&
         $stmt = $conn->prepare($sql);
         $stmt->execute([$uname,  $classes, $fname, $lname, $subjects, $address, $employee_number, $date_of_birth, $phone_number, $qualification, $gender, $email_address,        $teacher_id]);
         $sm = "successfully updated!";
-        header("Location: ../teacher-edit.php?success=$sm&$data");
+        header("Location: ../teacher.php?success=$sm&$data");
         exit;
 	}
     

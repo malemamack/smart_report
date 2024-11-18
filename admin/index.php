@@ -1,9 +1,8 @@
 <?php 
 session_start();
-if (isset($_SESSION['admin_id']) && 
-    isset($_SESSION['role'])) {
+if (isset($_SESSION['role'])) {
 
-    if ($_SESSION['role'] == 'Admin') {
+    // if ($_SESSION['role'] == 'Admin') {
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,9 +83,6 @@ if (isset($_SESSION['admin_id']) &&
     header("Location: ../login.php");
     exit;
   } 
-}else {
-	header("Location: ../login.php");
-	exit;
-} 
+
 
 ?>

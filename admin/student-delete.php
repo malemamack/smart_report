@@ -25,6 +25,6 @@ if (isset($_SESSION['admin_id']) &&
     exit;
   } 
 }else {
-	header("Location: teacher.php");
-	exit;
+	header("Location: student.php");
+	exit; 
 } 

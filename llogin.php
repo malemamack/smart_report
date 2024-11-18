@@ -111,7 +111,7 @@ if ($user) {
             $mail->send();
 
             // Redirect to OTP verification page
-            header("Location: verityotp.php");
+            header("Location: verify_otp.php");
             exit();
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
