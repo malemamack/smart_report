@@ -107,13 +107,7 @@ if (isset($_SESSION['admin_id']) &&
                  name="gender"> Female
         </div>
 
-        <div class="mb-3">
-          <label class="form-label">Username</label>
-          <input type="text" 
-                 class="form-control"
-                 value="<?=$student['username']?>"
-                 name="username">
-        </div>
+        
         <input type="text"
                 value="<?=$student['student_id']?>"
                 name="student_id"
@@ -171,26 +165,20 @@ if (isset($_SESSION['admin_id']) &&
         <br><hr>
 
         <div class="mb-3">
-          <label class="form-label">Parent first name</label>
+          <label class="form-label">ID Number</label>
           <input type="text" 
                  class="form-control"
-                 value="<?=$student['parent_fname']?>"
-                 name="parent_fname">
+                 value="<?=$student['id_number']?>"
+                 name="id_number">
         </div>
         <div class="mb-3">
-          <label class="form-label">Parent last name</label>
+          <label class="form-label">Contact Number</label>
           <input type="text" 
                  class="form-control"
-                 value="<?=$student['parent_lname']?>"
-                 name="parent_lname">
+                 value="<?=$student['contact']?>"
+                 name="contact">
         </div>
-        <div class="mb-3">
-          <label class="form-label">Parent phone number</label>
-          <input type="text" 
-                 class="form-control"
-                 value="<?=$student['parent_phone_number']?>"
-                 name="parent_phone_number">
-        </div>
+      
 
         
 
@@ -199,59 +187,7 @@ if (isset($_SESSION['admin_id']) &&
               Update</button>
      </form>
 
-     <form method="post"
-              class="shadow p-3 my-5 form-w" 
-              action="req/student-change.php"
-              id="change_password">
-        <h3>Change Password</h3><hr>
-          <?php if (isset($_GET['perror'])) { ?>
-            <div class="alert alert-danger" role="alert">
-             <?=$_GET['perror']?>
-            </div>
-          <?php } ?>
-          <?php if (isset($_GET['psuccess'])) { ?>
-            <div class="alert alert-success" role="alert">
-             <?=$_GET['psuccess']?>
-            </div>
-          <?php } ?>
-
-       <div class="mb-3">
-            <div class="mb-3">
-            <label class="form-label">Admin password</label>
-                <input type="password" 
-                       class="form-control"
-                       name="admin_pass"> 
-          </div>
-
-            <label class="form-label">New password </label>
-            <div class="input-group mb-3">
-                <input type="text" 
-                       class="form-control"
-                       name="new_pass"
-                       id="passInput">
-                <button class="btn btn-secondary"
-                        id="gBtn">
-                        Random</button>
-            </div>
-            
-          </div>
-          <input type="text"
-                value="<?=$student['student_id']?>"
-                name="student_id"
-                hidden>
-
-          <div class="mb-3">
-            <label class="form-label">Confirm new password  </label>
-                <input type="text" 
-                       class="form-control"
-                       name="c_new_pass"
-                       id="passInput2"> 
-          </div>
-          <button type="submit" 
-              class="btn btn-primary">
-              Change</button>
-        </form>
-     </div>
+    </div>
      
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>	
     <script>

@@ -25,13 +25,13 @@ if (isset($_SESSION['parent_id']) && isset($_SESSION['role'])) {
      <div class="container mt-5">
          <div class="container text-center">
              <div class="row row-cols-5">
-               <a href="student-view.php" 
+               <a href="#" 
                   class="col btn btn-dark m-2 py-3">
                  <i class="fa fa-user-plus fs-1" aria-hidden="true"></i><br>
                   Dashboard
                </a> 
 
-               <a href="student-view.php" class="col btn btn-dark m-2 py-3">
+               <a href="learners.php" class="col btn btn-dark m-2 py-3">
                  <i class="fa fa-user fs-1" aria-hidden="true"></i><br>
                   Your Learners
                </a> 

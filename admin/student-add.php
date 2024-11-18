@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     if ($_SESSION['role'] == 'Admin') {
@@ -9,7 +9,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         
         $grades = getAllGrades($conn);
         $sections = getAllSections($conn);
-        $students = getAllStudents($conn);
+        $parents = getAllParents($conn); // Fetch parents
 
         $fname = $lname = $address = $email_address = $preferred_name = $id_number = $contact = '';
 
@@ -24,12 +24,12 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Admin - Add Learner</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../css/style.css">
-	<link rel="icon" href="../1.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Add Learner</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../1.jpg">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -109,10 +109,29 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     <?php endforeach ?>
                 </div>
             </div>
+
+            <!-- Parent Selection Dropdown -->
+<div class="mb-3">
+    <label class="form-label">Select Parent</label>
+    <select class="form-select" name="parent_id">
+        <option value="">Select Parent</option>
+        <?php
+        // Assuming $parents is fetched from the database
+        if ($parents) {
+            foreach ($parents as $parent) {
+                echo "<option value='" . $parent['parent_id'] . "'>" . $parent['parent_name'] . "</option>";
+            }
+        } else {
+            echo "<option>No Parents Available</option>";
+        }
+        ?>
+    </select>
+</div>
+
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>	
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>    
 </body>
 </html>
 <?php 
@@ -121,7 +140,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     exit;
   } 
 } else {
-	header("Location: ../login.php");
-	exit;
+    header("Location: ../login.php");
+    exit;
 } 
 ?>
