@@ -7,11 +7,11 @@ if (isset($_SESSION['admin_id']) &&
        include "../DB_connection.php";
        include "data/parent.php";
 
-       if(isset($_GET['r_user_id'])){
+       if(isset($_GET['parent_id'])){
 
-       $r_user_id = $_GET['r_user_id'];
+       $parent_id = $_GET['parent_id'];
 
-       $r_user = getR_usersById($r_user_id,$conn);    
+       $r_user = getR_usersById($parent_id,$conn);    
  ?>
 <!DOCTYPE html>
 <html lang="en">

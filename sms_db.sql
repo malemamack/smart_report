@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2024 at 10:51 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Feb 19, 2023 at 02:16 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -62,8 +62,7 @@ INSERT INTO `class` (`class_id`, `grade`, `section`) VALUES
 (1, 7, 2),
 (2, 1, 1),
 (3, 3, 3),
-(4, 2, 1),
-(7, 7, 7);
+(4, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -84,9 +83,9 @@ CREATE TABLE `grades` (
 INSERT INTO `grades` (`grade_id`, `grade`, `grade_code`) VALUES
 (1, '1', 'G'),
 (2, '2', 'G'),
-(3, '3', 'G'),
-(4, '4', 'G'),
-(7, '5', 'G');
+(3, '1', 'KG'),
+(4, '2', 'KG'),
+(7, '3', 'G');
 
 -- --------------------------------------------------------
 
@@ -114,10 +113,10 @@ INSERT INTO `message` (`message_id`, `sender_full_name`, `sender_email`, `messag
 -- --------------------------------------------------------
 
 --
--- Table structure for table `parent`
+-- Table structure for table `registrar_office`
 --
 
-CREATE TABLE `parent` (
+CREATE TABLE `registrar_office` (
   `r_user_id` int(11) NOT NULL,
   `username` varchar(127) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -134,12 +133,12 @@ CREATE TABLE `parent` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `parent`
+-- Dumping data for table `registrar_office`
 --
 
-INSERT INTO `parent` (`r_user_id`, `username`, `password`, `fname`, `lname`, `address`, `employee_number`, `date_of_birth`, `phone_number`, `qualification`, `gender`, `email_address`, `date_of_joined`) VALUES
-(2, 'mack1', '$2y$10$v1DU88UZr5ipVj.jg3sBn.Jn.I0skCV6YlFz0199b.Qpv03Xy2iay', 'Mahlatse Mack', 'Malema', 'MENTZ MSHOGOVILL STAND NO1731', 123456, '2024-10-30', '0765668747', 'bsc', 'Male', 'malemamack@gmail.com', '2024-11-12 15:54:53'),
-(3, 'thabo', '$2y$10$45xd2hpYpwE8NoqedhmYxeRo/xfOlcF6U3Azsjm1DkgyTSyWV5oPq', 'Mahlatse Mack', 'Malema', 'MENTZ MSHOGOVILL STAND NO1731', 123456, '2024-10-29', '0765668747', 'bsc', 'Male', 'malemamack@gmail.com', '2024-11-12 20:33:20');
+INSERT INTO `registrar_office` (`r_user_id`, `username`, `password`, `fname`, `lname`, `address`, `employee_number`, `date_of_birth`, `phone_number`, `qualification`, `gender`, `email_address`, `date_of_joined`) VALUES
+(1, 'james', '$2y$10$t0SCfeXNcyiO9hdzNTKKB.j2xlE2yt8Hm2.0AWJR5kSE469JIkHKG', 'James', 'William', 'West Virginia', 843583, '2022-10-04', '+12328324092', 'diploma', 'Male', 'james@j.com', '2022-10-23 01:03:25'),
+(2, 'oliver2', '$2y$10$7XhzOu.3OgHPFv7hKjvfUu3waU.8j6xTASj4yIWMfo...k/p8yvvS', 'Oliver2', 'Noah', 'California,  Los angeles', 6546, '1999-06-11', '09457396789', 'BSc, BA', 'Male', 'ov@ab.com', '2022-11-12 23:06:18');
 
 -- --------------------------------------------------------
 
@@ -160,8 +159,7 @@ INSERT INTO `section` (`section_id`, `section`) VALUES
 (1, 'A'),
 (2, 'B'),
 (3, 'C'),
-(6, 'D'),
-(7, 'E');
+(6, 'D');
 
 -- --------------------------------------------------------
 
@@ -183,7 +181,7 @@ CREATE TABLE `setting` (
 --
 
 INSERT INTO `setting` (`id`, `current_year`, `current_semester`, `school_name`, `slogan`, `about`) VALUES
-(1, 2024, '1', 'Diopong Primary School', 'THE KEY TO A BRIGHTER FUTURE', 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.');
+(1, 2023, 'II', 'Y School', 'Lux et Veritas Light and Truth', 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.');
 
 -- --------------------------------------------------------
 
@@ -193,8 +191,8 @@ INSERT INTO `setting` (`id`, `current_year`, `current_semester`, `school_name`, 
 
 CREATE TABLE `students` (
   `student_id` int(11) NOT NULL,
-  `id_number` int(13) NOT NULL,
-  `preferred_name` varchar(255) NOT NULL,
+  `username` varchar(127) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `fname` varchar(127) NOT NULL,
   `lname` varchar(255) NOT NULL,
   `grade` int(11) NOT NULL,
@@ -204,16 +202,20 @@ CREATE TABLE `students` (
   `email_address` varchar(255) NOT NULL,
   `date_of_birth` date NOT NULL,
   `date_of_joined` timestamp NULL DEFAULT current_timestamp(),
-  `r_user_id` int(11) DEFAULT NULL,
-  `contact` int(11) NOT NULL
+  `parent_fname` varchar(127) NOT NULL,
+  `parent_lname` varchar(127) NOT NULL,
+  `parent_phone_number` varchar(31) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`student_id`, `id_number`, `preferred_name`, `fname`, `lname`, `grade`, `section`, `address`, `gender`, `email_address`, `date_of_birth`, `date_of_joined`, `r_user_id`, `contact`) VALUES
-(1, 0, '123', 'kagiso', 'malema', 1, 1, 'mentz', 'male', 'kagi@gmail.com', '2024-11-06', '2024-11-12 13:27:02', 2, 0);
+INSERT INTO `students` (`student_id`, `username`, `password`, `fname`, `lname`, `grade`, `section`, `address`, `gender`, `email_address`, `date_of_birth`, `date_of_joined`, `parent_fname`, `parent_lname`, `parent_phone_number`) VALUES
+(1, 'john', '$2y$10$xmtROY8efWeORYiuQDE3SO.eZwscao20QNuLky1Qlr88zDzNNq4gm', 'John', 'Doe', 1, 1, 'California,  Los angeles', 'Male', 'abas55@ab.com', '2012-09-12', '2019-12-11 14:16:44', 'Doe', 'Mark', '09393'),
+(3, 'abas', '$2y$10$KLFheMWgpLfoiqMuW2LQxOPficlBiSIJ9.wE2qr5yJUbAQ.5VURoO', 'Abas', 'A.', 2, 1, 'Berlin', 'Male', 'abas@ab.com', '2002-12-03', '2021-12-01 14:16:51', 'dsf', 'dfds', '7979'),
+(4, 'jo', '$2y$10$pYyVlWg9jxkT0u/4LrCMS.ztMaOvgyol1hgNt.jqcFEqUC7yZLIYe', 'John3', 'Doe', 1, 1, 'California,  Los angeles', 'Female', 'jo@jo.com', '2013-06-13', '2022-09-10 13:48:49', 'Doe', 'Mark', '074932040'),
+(5, 'jo2', '$2y$10$lRQ58lbak05rW7.be8ok4OaWJcb9znRp9ra.qXqnQku.iDrA9N8vy', 'Jhon', 'Doe', 1, 1, 'UK', 'Male', 'jo@jo.com', '1990-02-15', '2023-02-12 18:11:26', 'Doe', 'Do', '0943568654');
 
 -- --------------------------------------------------------
 
@@ -260,7 +262,7 @@ CREATE TABLE `subjects` (
 INSERT INTO `subjects` (`subject_id`, `subject`, `subject_code`, `grade`) VALUES
 (1, 'English', 'En', 1),
 (2, 'Physics', 'Phy', 2),
-(3, 'Biology', 'Bio-01', 7),
+(3, 'Biology', 'Bio-01', 1),
 (4, 'Math', 'Math-01', 1),
 (5, 'Chemistry', 'ch-01', 1),
 (6, 'Programming', 'pro-01', 1),
@@ -296,9 +298,7 @@ CREATE TABLE `teachers` (
 
 INSERT INTO `teachers` (`teacher_id`, `username`, `password`, `class`, `fname`, `lname`, `subjects`, `address`, `employee_number`, `date_of_birth`, `phone_number`, `qualification`, `gender`, `email_address`, `date_of_joined`) VALUES
 (1, 'oliver', '$2y$10$JruTW/rNZ6CVO4nxYWCrn.GJpiIKMACEPYrK00S7Dk/fkbJIdYau2', '1234', 'Oliver', 'Noah', '1245', 'California,  Los angeles', 6546, '2022-09-12', '0945739', 'BSc', 'Male', 'ol@ab.com', '2022-09-09 05:23:45'),
-(5, 'abas', '$2y$10$cMSKcHEJcg3K6wbVcxcXGuksgU39i70aEQVKN7ZHrzqTH9oAc3y5m', '123', 'Abas', 'A.', '12', 'Berlin', 1929, '2003-09-16', '09457396789', 'BSc,', 'Male', 'abas55@ab.com', '2022-09-09 06:42:31'),
-(8, 'mack', '$2y$10$4FMn4mVFMr8L6sCAwgZ93ulnZFSc95wX2wLRwy.hfyMmDZOwbABHi', '1', 'Mahlatse Mack', 'Malema', '16', 'MENTZ MSHOGOVILL STAND NO1731', 123456, '2024-10-30', '0765668747', 'bsc', 'Male', 'malemamack@gmail.com', '2024-11-13 09:49:13'),
-(9, 'audrekat', '$2y$10$29BaL44GvUJPl6xkVCu5/OMquBoNC7UVrb6mK/7ybgslgQd1.tVVa', '2', 'audrey', 'makaepea', '136', 'lahlane', 12345, '2024-11-29', '08787657568', 'bsc', 'Female', 'audreymmakaepea@gmail.com', '2024-11-13 11:37:26');
+(5, 'abas', '$2y$10$cMSKcHEJcg3K6wbVcxcXGuksgU39i70aEQVKN7ZHrzqTH9oAc3y5m', '123', 'Abas', 'A.', '12', 'Berlin', 1929, '2003-09-16', '09457396789', 'BSc,', 'Male', 'abas55@ab.com', '2022-09-09 06:42:31');
 
 --
 -- Indexes for dumped tables
@@ -330,9 +330,9 @@ ALTER TABLE `message`
   ADD PRIMARY KEY (`message_id`);
 
 --
--- Indexes for table `parent`
+-- Indexes for table `registrar_office`
 --
-ALTER TABLE `parent`
+ALTER TABLE `registrar_office`
   ADD PRIMARY KEY (`r_user_id`);
 
 --
@@ -352,7 +352,7 @@ ALTER TABLE `setting`
 --
 ALTER TABLE `students`
   ADD PRIMARY KEY (`student_id`),
-  ADD KEY `parent_id` (`r_user_id`);
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `student_score`
@@ -387,7 +387,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `grades`
@@ -402,16 +402,16 @@ ALTER TABLE `message`
   MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `parent`
+-- AUTO_INCREMENT for table `registrar_office`
 --
-ALTER TABLE `parent`
+ALTER TABLE `registrar_office`
   MODIFY `r_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
-  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `setting`
@@ -423,7 +423,7 @@ ALTER TABLE `setting`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `student_score`
@@ -441,17 +441,7 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `students`
---
-ALTER TABLE `students`
-  ADD CONSTRAINT `students_ibfk_1` FOREIGN KEY (`r_user_id`) REFERENCES `parent` (`r_user_id`) ON DELETE SET NULL;
+  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

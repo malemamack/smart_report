@@ -51,8 +51,8 @@ if (isset($_SESSION['admin_id']) &&
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Subject</th>
-                    <th scope="col">Subject Code</th>
-                    <th scope="col">Grade</th>
+                    <!-- <th scope="col">Subject Code</th> -->
+                    <!-- <th scope="col">Grade</th> -->
                   </tr>
                 </thead>
                 <tbody>
@@ -65,17 +65,17 @@ if (isset($_SESSION['admin_id']) &&
                           echo $course['subject'];
                        ?>
                     </td>
-                    <td>
+                    <!-- <td>
                       <?php 
                           echo $course['subject_code'];
                        ?>
-                    </td>
-                    <td>
+                    </td> -->
+                    <!-- <td>
                       <?php 
                           $grade = getGradeById($course['grade'], $conn);
                           echo $grade['grade_code'].'-'.$grade['grade'];
                        ?>
-                    </td>
+                    </td> -->
                     <td>
                         <a href="course-edit.php?course_id=<?=$course['subject_id']?>"
                            class="btn btn-warning">Edit</a>

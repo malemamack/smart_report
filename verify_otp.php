@@ -1,65 +1,68 @@
-<?php 
+<?php
 session_start();
+ 
+// Error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
+// Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['otp'])) {
-	$enteredOtp = $_POST['otp'];
+    $enteredOtp = $_POST['otp'];
 
-	if ($enteredOtp == $_SESSION['otp']) {
-		$role = $_SESSION['role'];
-		$id = $_SESSION['temp_user_id'];
+    // Ensure OTP is set in the session
+    if (isset($_SESSION['otp']) && $enteredOtp == $_SESSION['otp']) {
+        $role = $_SESSION['role'];
+        $id = $_SESSION['temp_user_id'];
 
-		// Set the appropriate session variable based on role
-		if ($role == 'Parent') {
-			$_SESSION['r_user_id'] = $id;
-			header("Location: parent/index.php");
-		} elseif ($role == 'Teacher') {
-			$_SESSION['teacher_id'] = $id;
-			header("Location: teacher/index.php");
-		}
-		unset($_SESSION['otp']); // Clear OTP after verification
-		unset($_SESSION['temp_user_id']);
-		exit;
-	} else {
-		$error = "Invalid OTP. Please try again.";
-	}
+        // Set the appropriate session variables based on the role
+        if ($role == 'Admin') {
+            // Set admin session variable
+            $_SESSION['admin_id'] = $id;
+            header("Location: admin/index.php");
+            exit;
+        } elseif ($role == 'Parent') {
+            // Set parent session variable
+            $_SESSION['parent_id'] = $id;   // Ensure r_user_id is set correctly
+            header("Location: parent/index.php"); // Redirect to parent dashboard
+            exit;
+        } elseif ($role == 'Teacher') {
+            // Set teacher session variable
+            $_SESSION['teacher_id'] = $id;
+            header("Location: teacher/index.php");
+            exit;
+        }
+
+        // Clear OTP and temporary user ID after successful verification
+        unset($_SESSION['otp']);
+        unset($_SESSION['temp_user_id']);
+    } else {
+        $error = "Invalid OTP. Please try again.";
+    }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>OTP Verification</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>OTP Verification</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="icon" href="1.jpg">
 </head>
-<body class="body-login">
-    <div class="black-fill"><br /> <br />
-	
-    	<div class="d-flex justify-content-center align-items-center flex-column">
-		<form class="login">
-		<div class="text-center">
+<body>
+<div class="d-flex justify-content-center align-items-center flex-column">
+<div class="text-center">
+    
     			<img src="1.jpg" style="border-radius: 40%;"
     			     width="100" >
     		</div>
-    	
-	<h2 style="color: white;">Enter the OTP sent to your email</h2>
-	<form method="post" action="">
-		<input type="text" class="form-control" name="otp" required placeholder="Enter OTP">
-		<button type="submit" class="btn btn-primary btn-block">Verify OTP</button>
-	</form>
-	<?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
-        
-        <br /><br />
-        <div class="text-center text-light" style="margin-top:150px;">
-        	Copyright &copy; 2022 Diopong Primary School. All rights reserved.
-        </div>
-
-    	</div>
+    <h2>Enter the OTP sent to your email</h2>
+    <form method="post" action="">
+        <input type="text" name="otp" required placeholder="Enter OTP">
+        <button type="submit" class="btn btn-secondary">Verify OTP</button>
+    </form>
+    <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>	
 </body>
 </html>

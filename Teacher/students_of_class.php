@@ -54,7 +54,7 @@ if (isset($_SESSION['teacher_id']) &&
                     <th scope="col">ID</th>
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
-                    <th scope="col">Username</th>
+                    <th scope="col">id_number</th>
                     <th scope="col">Grade</th>
                   </tr>
                 </thead>
@@ -69,7 +69,7 @@ if (isset($_SESSION['teacher_id']) &&
                       </a>
                     </td>
                     <td><?=$student['lname']?></td>
-                    <td><?=$student['username']?></td>
+                    <td><?=$student['id_number']?></td>
                     <td>
                       <?php 
                            $grade = $student['grade'];
