@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTP Verification - Y School</title>
+    <title>OTP Verification - Diopong Primary School</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="icon" href="1.jpg">
@@ -69,7 +69,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="d-flex justify-content-center align-items-center flex-column"><form method="post" class="login" >
             <div class="mb-3">
                 <label class="form-label">OTP</label>
-                <input type="text" class="form-control" name="otp" required>
+                <input type="text" class="form-control" name="otp"
+                
+                    required 
+                    maxlength="6" 
+                    minlength="6"
+                    pattern="\d{6}" 
+                    autocomplete="off"
+                    placeholder="Enter 6-digit OTP"
+                    inputmode="numeric">
+                    
             </div>
             <button type="submit" class="btn btn-primary">Verify OTP</button>
         </form></div>

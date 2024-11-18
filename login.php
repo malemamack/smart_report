@@ -29,14 +29,22 @@
 		    <label class="form-label">Username</label>
 		    <input type="text" 
 		           class="form-control"
-		           name="uname">
+		           name="uname"
+				   required
+           		minlength="3"
+           maxlength="20"
+           pattern="[A-Za-z0-9_]{3,20}"
+           autocomplete="username">
 		  </div>
 		  
 		  <div class="mb-3">
 		    <label class="form-label">Password</label>
 		    <input type="password" 
 		           class="form-control"
-		           name="pass">
+		           name="pass"
+				    required
+               minlength="3"
+               maxlength="20">
 		  </div>
 
 		  <div class="mb-3">
@@ -57,7 +65,7 @@
         
         <br /><br />
         <div class="text-center text-light">
-        	 2024 Diopong Primary School.
+        	  Diopong Primary School.
         </div>
 
     	</div>

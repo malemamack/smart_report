@@ -102,7 +102,7 @@ input[type="submit"]:hover {
         <h2>Forgot Password</h2>
         
         <label for="email">Enter your email address:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" required  autocomplete="email">
         
         <input type="submit" value="Send">
     </div>
