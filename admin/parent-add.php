@@ -95,19 +95,21 @@ if (isset($_SESSION['admin_id']) &&
           
         </div>
         <div class="mb-3">
+          <label class="form-label">ID number</label>
+          <input type="text" 
+                 class="form-control"
+                 value="<?=$in?>"
+                 name="ID number">
+        </div>
+
+        <div class="mb-3">
           <label class="form-label">Address</label>
           <input type="text" 
                  class="form-control"
                  value="<?=$address?>"
                  name="address">
         </div>
-        <div class="mb-3">
-          <label class="form-label">employee Number</label>
-          <input type="text" 
-                 class="form-control"
-                 value="<?=$en?>"
-                 name="employee_number">
-        </div>
+        
         <div class="mb-3">
           <label class="form-label">Phone Number</label>
           <input type="text" 
@@ -115,13 +117,7 @@ if (isset($_SESSION['admin_id']) &&
                  value="<?=$pn?>"
                  name="phone_number">
         </div>
-        <div class="mb-3">
-          <label class="form-label">Qualification</label>
-          <input type="text" 
-                 class="form-control"
-                 value="<?=$qf?>"
-                 name="qualification">
-        </div>
+        
         <div class="mb-3">
           <label class="form-label">Email Address</label>
           <input type="text" 

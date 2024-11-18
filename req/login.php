@@ -59,8 +59,10 @@ if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['role'])) {
                     $_SESSION['otp'] = $otp; // Store OTP in session
                     $_SESSION['temp_user_id'] = $user[strtolower($role) . '_id'] ?? null; // Ensure role_id exists
                     
+                    
                     // Send OTP via PHPMailer
                     $mail = new PHPMailer(true);
+
                     try {
                         $mail->isSMTP();
                         $mail->Host       = 'smtp.gmail.com'; // Replace with your SMTP server
