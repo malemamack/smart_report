@@ -1,5 +1,6 @@
 <?php
 session_start();
+
  
 // Error reporting for debugging
 error_reporting(E_ALL);
