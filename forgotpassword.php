@@ -94,20 +94,18 @@ input[type="submit"]:hover {
 		  </div>
 		    </div>
 		</nav>
+		<div class="contai">
         <section class="welcome-text d-flex justify-content-center align-items-center flex-column">
-        	<div class="contai">
-        
+		<img src="1.jpg" style="border-radius: 30%;" >
 			<form action="forgotpasswordprc.php" method="post">
-    <div class="form-contai">
+    <!-- <div class="form-contai"> -->
         <h2>Forgot Password</h2>
-        
         <label for="email">Enter your email address:</label>
         <input type="email" id="email" name="email" required  autocomplete="email">
         
         <input type="submit" value="Send">
-    </div>
 </form>
-
+</div>
 <section class="footer">
     <div class="text-center text-light">
         Copyright &copy; <?=$setting['current_year']?> <?=$setting['school_name']?>. All rights reserved.
