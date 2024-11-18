@@ -24,19 +24,19 @@ if (isset($_SESSION['role'])) {
          <div class="container text-center">
              <div class="row row-cols-5">
                <a href="teacher.php" 
-                  class="col btn btn-dark m-2 py-3">
+                  class="col btn btn-primary m-2 py-3">
                  <i class="fa fa-user-md fs-1" aria-hidden="true"></i><br>
                   Teachers
                </a> 
-               <a href="student.php" class="col btn btn-dark m-2 py-3">
+               <a href="student.php" class="col btn btn-primary m-2 py-3">
                  <i class="fa fa-graduation-cap fs-1" aria-hidden="true"></i><br>
                   Learners
                </a> 
-               <a href="parent.php" class="col btn btn-dark m-2 py-3">
+               <a href="parent.php" class="col btn btn-primary m-2 py-3">
                  <i class="fa fa-home fs-1" aria-hidden="true"></i><br>
                   Parent
                </a> 
-               <a href="class.php" class="col btn btn-dark m-2 py-3">
+               <a href="class.php" class="col btn btn-primary m-2 py-3">
                  <i class="fa fa-cubes fs-1" aria-hidden="true"></i><br>
                   Class
                </a> 
@@ -44,11 +44,11 @@ if (isset($_SESSION['role'])) {
                  <i class="fa fa-columns fs-1" aria-hidden="true"></i><br>
                   Section
                </a>  -->
-               <a href="grade.php" class="col btn btn-dark m-2 py-3">
+               <a href="grade.php" class="col btn btn-primary m-2 py-3">
                  <i class="fa fa-level-up fs-1" aria-hidden="true"></i><br>
                   Grade
                </a> 
-               <a href="course.php" class="col btn btn-dark m-2 py-3">
+               <a href="course.php" class="col btn btn-primary m-2 py-3">
                  <i class="fa fa-book fs-1" aria-hidden="true"></i><br>
                   Subjects
                </a> 
@@ -60,7 +60,7 @@ if (isset($_SESSION['role'])) {
                  <i class="fa fa-cogs fs-1" aria-hidden="true"></i><br>
                   Settings
                </a>  -->
-               <a href="../logout.php" class="col btn btn-warning m-2 py-3 col-5">
+               <a href="../logout.php" class="col btn btn-dark m-2 py-3 col-5">
                  <i class="fa fa-sign-out fs-1" aria-hidden="true"></i><br>
                   Logout
                </a> 
