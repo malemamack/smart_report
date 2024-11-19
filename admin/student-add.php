@@ -13,7 +13,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
         $fname = $lname = $address = $email_address = $preferred_name = $id_number = $contact = '';
 
-        if (isset($_GET['fname'])) $fname = $_GET['fname'];
+        if (isset($_GET['fnames'])) $fname = $_GET['fname'];
         if (isset($_GET['lname'])) $lname = $_GET['lname'];
         if (isset($_GET['address'])) $address = $_GET['address'];
         if (isset($_GET['email_address'])) $email_address = $_GET['email_address'];
