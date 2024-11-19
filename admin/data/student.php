@@ -72,6 +72,7 @@ function searchStudents($key, $conn){
 function getAllParents($conn){
   $sql = "SELECT parent_id, CONCAT(fname, ' ', lname) AS parent_name FROM parent";
   $stmt = $conn->prepare($sql);
+  
   $stmt->execute();
 
   if ($stmt->rowCount() >= 1) {
