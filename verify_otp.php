@@ -135,6 +135,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input type="text" name="otp" required placeholder="Enter OTP">
         <button type="submit">Verify OTP</button>
     </form>
-    <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+    <?php if (isset($error)) echo "<p style='color:red;'>$error<<?php
+session_start();
+require 'utils.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_SESSION['email'] ?? null;
+
+    if (!$email) {
+        echo json_encode(['error' => 'No email address found']);
+        exit;
+    }
+
+    // Generate a new OTP
+    $otp = generateOtp();
+    $_SESSION['otp'] = $otp;
+    $_SESSION['otp_timestamp'] = time();
+
+    $subject = "Your Resent OTP Code";
+    $message = "Your new OTP is: <b>$otp</b>. It is valid for 5 minutes.";
+
+    if (sendOtpEmail($email, $subject, $message)) {
+        echo json_encode(['message' => 'OTP resent successfully']);
+    } else {
+        echo json_encode(['error' => 'Failed to resend OTP']);
+    }
+}
+?>
+/p>"; ?>
 </body>
 </html>
