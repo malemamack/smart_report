@@ -1,21 +1,11 @@
 <?php 
-session_start();
-
-// Temporary code for testing: Simulate a logged-in admin
-if (!isset($_SESSION['admin_id']) || !isset($_SESSION['role'])) {
-    $_SESSION['admin_id'] = 1; // Simulated admin ID
-    $_SESSION['role'] = 'Admin'; // Simulated admin role
-}
-
-// Check if the user is logged in and has the correct role
-if ($_SESSION['role'] == 'Admin') {
-    $admin_id = $_SESSION['admin_id'];
-} else {
-    header("Location: ../login.php");
-    exit;
-}
-?>
-
+      session_start();
+      
+      // Ensure the session variable is checked correctly for the parent user
+      if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) 
+          if ($_SESSION['role'] == 'Admin') 
+            $parent_id = $_SESSION['admin_id'];
+      ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
