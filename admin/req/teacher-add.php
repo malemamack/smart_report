@@ -101,7 +101,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 exit;
             } else {
                 // hashing the password
-                $pass = password_hash($pass, PASSWORD_DEFAULT);
+                $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
 
                 // Insert the teacher data
                 $sql  = "INSERT INTO teachers(username, password, class, fname, lname, subjects, address, employee_number, date_of_birth, phone_number, qualification, gender, email_address) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -150,7 +150,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 }
 
                 // Success message
-                $sm = "New teacher registered successfully";
+                $sm = "New teacher registered successfully, and login details have been sent!";
                 header("Location: ../teacher-add.php?success=$sm");
                 exit;
             }
