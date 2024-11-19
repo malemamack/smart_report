@@ -41,11 +41,11 @@ if (isset($_SESSION['admin_id']) &&
             <li class="list-group-item">Last name: <?=$r_user['lname']?></li>
             <li class="list-group-item">Username: <?=$r_user['username']?></li>
 
-            <li class="list-group-item">Employee number: <?=$r_user['employee_number']?></li>
+            
             <li class="list-group-item">Address: <?=$r_user['address']?></li>
             <li class="list-group-item">Date of birth: <?=$r_user['date_of_birth']?></li>
             <li class="list-group-item">Phone number: <?=$r_user['phone_number']?></li>
-            <li class="list-group-item">Qualification: <?=$r_user['qualification']?></li>
+          
             <li class="list-group-item">Email address: <?=$r_user['email_address']?></li>
             <li class="list-group-item">Gender: <?=$r_user['gender']?></li>
             <li class="list-group-item">Date of joined: <?=$r_user['date_of_joined']?></li>

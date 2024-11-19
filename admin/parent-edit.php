@@ -84,13 +84,7 @@ if (isset($_SESSION['admin_id']) &&
                  value="<?=$r_user['address']?>"
                  name="address">
         </div>
-        <div class="mb-3">
-          <label class="form-label">Employee number</label>
-          <input type="text" 
-                 class="form-control"
-                 value="<?=$r_user['employee_number']?>"
-                 name="employee_number">
-        </div>
+        
         <div class="mb-3">
           <label class="form-label">Date of birth</label>
           <input type="date" 
@@ -105,13 +99,7 @@ if (isset($_SESSION['admin_id']) &&
                  value="<?=$r_user['phone_number']?>"
                  name="phone_number">
         </div>
-        <div class="mb-3">
-          <label class="form-label">Qualification</label>
-          <input type="text" 
-                 class="form-control"
-                 value="<?=$r_user['qualification']?>"
-                 name="qualification">
-        </div>
+        
         <div class="mb-3">
           <label class="form-label">Email address</label>
           <input type="text" 
@@ -143,58 +131,7 @@ if (isset($_SESSION['admin_id']) &&
               Update</button>
      </form>
 
-     <form method="post"
-              class="shadow p-3 my-5 form-w" 
-              action="req/parent-change.php"
-              id="change_password">
-        <h3>Change Password</h3><hr>
-          <?php if (isset($_GET['perror'])) { ?>
-            <div class="alert alert-danger" role="alert">
-             <?=$_GET['perror']?>
-            </div>
-          <?php } ?>
-          <?php if (isset($_GET['psuccess'])) { ?>
-            <div class="alert alert-success" role="alert">
-             <?=$_GET['psuccess']?>
-            </div>
-          <?php } ?>
-
-       <div class="mb-3">
-            <div class="mb-3">
-            <label class="form-label">Admin password</label>
-                <input type="password" 
-                       class="form-control"
-                       name="admin_pass"> 
-          </div>
-
-            <label class="form-label">New password </label>
-            <div class="input-group mb-3">
-                <input type="text" 
-                       class="form-control"
-                       name="new_pass"
-                       id="passInput">
-                <button class="btn btn-secondary"
-                        id="gBtn">
-                        Random</button>
-            </div>
-            
-          </div>
-          <input type="text"
-                value="<?=$r_user['parent_id']?>"
-                name="parent_id"
-                hidden>
-
-          <div class="mb-3">
-            <label class="form-label">Confirm new password  </label>
-                <input type="text" 
-                       class="form-control"
-                       name="c_new_pass"
-                       id="passInput2"> 
-          </div>
-          <button type="submit" 
-              class="btn btn-primary">
-              Change</button>
-        </form>
+     
      </div>
      
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>	

@@ -45,11 +45,11 @@ if (isset($_SESSION['teacher_id']) && $_SESSION['role'] == 'Teacher') {
                 <li class="list-group-item">First name: <?=$teacher['fname']?></li>
                 <li class="list-group-item">Last name: <?=$teacher['lname']?></li>
                 <li class="list-group-item">Username: <?=$teacher['username']?></li>
-                <li class="list-group-item">Employee number: <?=$teacher['employee_number']?></li>
+        
                 <li class="list-group-item">Address: <?=$teacher['address']?></li>
                 <li class="list-group-item">Date of birth: <?=$teacher['date_of_birth']?></li>
                 <li class="list-group-item">Phone number: <?=$teacher['phone_number']?></li>
-                <li class="list-group-item">Qualification: <?=$teacher['qualification']?></li>
+            
                 <li class="list-group-item">Email address: <?=$teacher['email_address']?></li>
                 <li class="list-group-item">Gender: <?=$teacher['gender']?></li>
                 <li class="list-group-item">Date of joined: <?=$teacher['date_of_joined']?></li>

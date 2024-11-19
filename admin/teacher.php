@@ -33,7 +33,7 @@ if (isset($_SESSION['admin_id']) &&
         <a href="teacher-add.php"
            class="btn btn-dark">Add New Teacher</a>
 
-           <form action="teacher-search.php" 
+           <form action="teacher.php" 
                  class="mt-3 n-table"
                  method="get">
              <div class="input-group mb-3">
@@ -72,7 +72,7 @@ if (isset($_SESSION['admin_id']) &&
                     <th scope="col">Username</th>
                     <th scope="col">Subject</th>
                     <th scope="col">Class</th>
-                    <th scope="col">Action</th>
+                    <th class="col-md-6" scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -116,7 +116,7 @@ if (isset($_SESSION['admin_id']) &&
                     </td>
                     <td>
                         <a href="teacher-edit.php?teacher_id=<?=$teacher['teacher_id']?>"
-                           class="btn btn-warning">Edit</a>
+                           class="btn btn-primary">Edit</a>
                         <a href="teacher-delete.php?teacher_id=<?=$teacher['teacher_id']?>"
                            class="btn btn-danger">Delete</a>
                     </td>

@@ -91,7 +91,7 @@ if (isset($_SESSION['admin_id']) &&
 
                 $mail->send();
                 $sm = "New parent registered successfully, and login details have been sent!";
-                header("Location: ../parent-add.php?success=$sm");
+                header("Location: ../parent.php?success=$sm");
                 exit;
             } catch (Exception $e) {
                 $em = "Parent registered, but email could not be sent. Mailer Error: {$mail->ErrorInfo}";

@@ -96,7 +96,7 @@ if (isset($_SESSION['admin_id']) &&
                     </td>
                     <td>
                         <a href="student-edit.php?student_id=<?=$student['student_id']?>"
-                           class="btn btn-warning">Edit</a>
+                           class="btn btn-primary">Edit</a>
                         <a href="student-delete.php?student_id=<?=$student['student_id']?>"
                            class="btn btn-danger">Delete</a>
                     </td>

@@ -11,9 +11,9 @@ if (isset($_POST['fname'])      &&
     isset($_POST['username'])   &&
     isset($_POST['r_user_id']) &&
     isset($_POST['address'])  &&
-    isset($_POST['employee_number']) &&
+
     isset($_POST['phone_number'])  &&
-    isset($_POST['qualification']) &&
+    
     isset($_POST['email_address']) &&
     isset($_POST['gender'])        &&
     isset($_POST['date_of_birth'])) {
@@ -26,9 +26,9 @@ if (isset($_POST['fname'])      &&
     $uname = $_POST['username'];
 
     $address = $_POST['address'];
-    $employee_number = $_POST['employee_number'];
+    
     $phone_number = $_POST['phone_number'];
-    $qualification = $_POST['qualification'];
+
     $email_address = $_POST['email_address'];
     $gender = $_POST['gender'];
     $date_of_birth = $_POST['date_of_birth'];
@@ -58,16 +58,8 @@ if (isset($_POST['fname'])      &&
         $em  = "Address is required";
         header("Location: ../parent-edit.php?error=$em&$data");
         exit;
-    }else if (empty($employee_number)) {
-        $em  = "Employee number is required";
-        header("Location: ../parent-edit.php?error=$em&$data");
-        exit;
     }else if (empty($phone_number)) {
         $em  = "Phone number is required";
-        header("Location: ../parent-edit.php?error=$em&$data");
-        exit;
-    }else if (empty($qualification)) {
-        $em  = "Qualification is required";
         header("Location: ../parent-edit.php?error=$em&$data");
         exit;
     }else if (empty($email_address)) {
@@ -85,12 +77,12 @@ if (isset($_POST['fname'])      &&
     }else {
         $sql = "UPDATE parent SET
                 username = ?, fname=?, lname=?,
-                address = ?, employee_number=?, date_of_birth = ?, phone_number = ?, qualification = ?,gender=?, email_address = ?
+                address = ?, date_of_birth = ?, phone_number = ?,gender=?, email_address = ?
                 WHERE r_user_id=?";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$uname, $fname, $lname, $address, $employee_number, $date_of_birth, $phone_number, $qualification, $gender, $email_address, $r_user_id]);
+        $stmt->execute([$uname, $fname, $lname, $address, $date_of_birth, $phone_number, $gender, $email_address, $r_user_id]);
         $sm = "successfully updated!";
-        header("Location: ../parent-edit.php?success=$sm&$data");
+        header("Location: ../parent.php?success=$sm&$data");
         exit;
 	}
     
