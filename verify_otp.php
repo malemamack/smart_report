@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['otp'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>OTP Verification</title>
+    <title>OTP Verification page</title>
 </head>
 <body>
     <h2>Enter the OTP sent to your email</h2>
