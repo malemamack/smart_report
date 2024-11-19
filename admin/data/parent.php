@@ -3,7 +3,7 @@
 // Get r_user by ID
 function getR_usersById($r_user_id, $conn){
    $sql = "SELECT * FROM parent
-           WHERE r_user_id=?";
+           WHERE parent_id=?";
    $stmt = $conn->prepare($sql);
    $stmt->execute([$r_user_id]);
 
@@ -30,8 +30,8 @@ function getAllR_users($conn){
 }
 
 // Check if the username Unique
-function unameIsUnique($uname, $conn, $r_user_id=0){
-   $sql = "SELECT username, r_user_id FROM parent
+function unameIsUnique($uname, $conn, $parent_id=0){
+   $sql = "SELECT username, parent_id FROM parent
            WHERE username=?";
    $stmt = $conn->prepare($sql);
    $stmt->execute([$uname]);
@@ -45,7 +45,7 @@ function unameIsUnique($uname, $conn, $r_user_id=0){
    }else {
     if ($stmt->rowCount() == 1) {
        $r_user = $stmt->fetch();
-       if ($r_user['r_user_id'] == $r_user_id) {
+       if ($r_user['parent_id'] == $parent_id) {
          return 1;
        }else {
         return 0;
@@ -60,7 +60,7 @@ function unameIsUnique($uname, $conn, $r_user_id=0){
 // DELETE
 function removeRUser($id, $conn){
    $sql  = "DELETE FROM parent
-           WHERE r_user_id=?";
+           WHERE parent_id=?";
    $stmt = $conn->prepare($sql);
    $re   = $stmt->execute([$id]);
    if ($re) {

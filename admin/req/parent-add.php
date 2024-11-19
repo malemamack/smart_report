@@ -1,115 +1,114 @@
 <?php 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// Include PHPMailer files
+require '../../vendor/autoload.php'; // Update the path if necessary
+
 session_start();
 if (isset($_SESSION['admin_id']) && 
     isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] == 'Admin') {
     	
+        if (isset($_POST['fname']) &&
+            isset($_POST['lname']) &&
+            isset($_POST['username']) &&
+            isset($_POST['pass'])     &&
+            isset($_POST['address'])  &&
+            isset($_POST['employee_number']) &&
+            isset($_POST['phone_number'])  &&
+            isset($_POST['qualification']) &&
+            isset($_POST['email_address']) &&
+            isset($_POST['date_of_birth'])) {
+            
+            include '../../DB_connection.php';
+            include "../data/parent.php";
 
-if (isset($_POST['fname']) &&
-    isset($_POST['lname']) &&
-    isset($_POST['username']) &&
-    isset($_POST['pass'])     &&
-    isset($_POST['address'])  &&
-    isset($_POST['employee_number']) &&
-    isset($_POST['phone_number'])  &&
-    isset($_POST['qualification']) &&
-    isset($_POST['email_address']) &&
-    isset($_POST['date_of_birth'])) {
-    
-    include '../../DB_connection.php';
-    include "../data/parent.php";
+            $fname = $_POST['fname'];
+            $lname = $_POST['lname'];
+            $uname = $_POST['username'];
+            $pass = $_POST['pass'];
 
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $uname = $_POST['username'];
-    $pass = $_POST['pass'];
+            $address = $_POST['address'];
+            $employee_number = $_POST['employee_number'];
+            $phone_number = $_POST['phone_number'];
+            $qualification = $_POST['qualification'];
+            $email_address = $_POST['email_address'];
+            $gender = $_POST['gender'];
+            $date_of_birth = $_POST['date_of_birth'];
 
-    $address = $_POST['address'];
-    $employee_number = $_POST['employee_number'];
-    $phone_number = $_POST['phone_number'];
-    $qualification = $_POST['qualification'];
-    $email_address = $_POST['email_address'];
-    $gender = $_POST['gender'];
-    $date_of_birth = $_POST['date_of_birth'];
+            $data = 'uname='.$uname.'&fname='.$fname.'&lname='.$lname.'&address='.$address.'&en='.$employee_number.'&pn='.$phone_number.'&qf='.$qualification.'&email='.$email_address;
 
+            if (empty($fname) || empty($lname) || empty($uname) || empty($pass) || 
+                empty($address) || empty($employee_number) || empty($phone_number) || 
+                empty($qualification) || empty($email_address) || empty($gender) || 
+                empty($date_of_birth)) {
+                $em = "All fields are required!";
+                header("Location: ../parent-add.php?error=$em&$data");
+                exit;
+            }
 
+            if (!unameIsUnique($uname, $conn)) {
+                $em = "Username is taken! Try another.";
+                header("Location: ../parent-add.php?error=$em&$data");
+                exit;
+            }
 
-    $data = 'uname='.$uname.'&fname='.$fname.'&lname='.$lname.'&address='.$address.'&en='.$employee_number.'&pn='.$phone_number.'&qf='.$qualification.'&email='.$email_address;
+            // Hash the password
+            $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
 
-    if (empty($fname)) {
-		$em  = "First name is required";
-		header("Location: ../parent-add.php?error=$em&$data");
-		exit;
-	}else if (empty($lname)) {
-		$em  = "Last name is required";
-		header("Location: ../parent-add.php?error=$em&$data");
-		exit;
-	}else if (empty($uname)) {
-		$em  = "Username is required";
-		header("Location: ../parent-add.php?error=$em&$data");
-		exit;
-	}else if (!unameIsUnique($uname, $conn)) {
-		$em  = "Username is taken! try another";
-		header("Location: ../parent-add.php?error=$em&$data");
-		exit;
-	}else if (empty($pass)) {
-		$em  = "Password is required";
-		header("Location: ../parent-add.php?error=$em&$data");
-		exit;
-	}else if (empty($address)) {
-        $em  = "Address is required";
-        header("Location: ../parent-add.php?error=$em&$data");
+            // Insert the new parent
+            $sql = "INSERT INTO parent (username, password, fname, lname, address, employee_number, date_of_birth, phone_number, qualification, gender, email_address)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$uname, $hashed_pass, $fname, $lname, $address, $employee_number, $date_of_birth, $phone_number, $qualification, $gender, $email_address]);
+
+            // Send email with login details
+            $mail = new PHPMailer(true);
+            try {
+                // Server settings
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com'; // Replace with your SMTP server
+                $mail->SMTPAuth = true;
+                $mail->Username = 'malemamahlatse70@gmail.com'; // Replace with your email
+                $mail->Password = 'cdbhkiurykowykqw'; // Replace with your email password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port = 587;
+
+                // Recipients
+                $mail->setFrom('malemamahlatse70@gmail.com', 'School Admin'); // Replace with your email and name
+                $mail->addAddress($email_address, $fname . ' ' . $lname);
+
+                // Content
+                $mail->isHTML(true);
+                $mail->Subject = 'Your Login Details';
+                $mail->Body = "<h4>Dear $fname $lname,</h4>
+                               <p>Your account has been created successfully. Here are your login details:</p>
+                               <p><strong>Username:</strong> $uname</p>
+                               <p><strong>Password:</strong> $pass</p>
+                               <p>Please log in and update your password at your earliest convenience.</p>
+                               <p>Best Regards,<br>School Admin Team</p>";
+
+                $mail->send();
+                $sm = "New parent registered successfully, and login details have been sent!";
+                header("Location: ../parent-add.php?success=$sm");
+                exit;
+            } catch (Exception $e) {
+                $em = "Parent registered, but email could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                header("Location: ../parent-add.php?error=$em");
+                exit;
+            }
+        } else {
+            $em = "An error occurred. Please fill in all fields.";
+            header("Location: ../parent-add.php?error=$em");
+            exit;
+        }
+    } else {
+        header("Location: ../../logout.php");
         exit;
-    }else if (empty($employee_number)) {
-        $em  = "Employee number is required";
-        header("Location: ../parent-add.php?error=$em&$data");
-        exit;
-    }else if (empty($phone_number)) {
-        $em  = "Phone number is required";
-        header("Location: ../parent-add.php?error=$em&$data");
-        exit;
-    }else if (empty($qualification)) {
-        $em  = "Qualification is required";
-        header("Location: ../parent-add.php?error=$em&$data");
-        exit;
-    }else if (empty($email_address)) {
-        $em  = "Email address is required";
-        header("Location: ../parent-add.php?error=$em&$data");
-        exit;
-    }else if (empty($gender)) {
-        $em  = "Gender address is required";
-        header("Location: ../parent-add.php?error=$em&$data");
-        exit;
-    }else if (empty($date_of_birth)) {
-        $em  = "Date of birth address is required";
-        header("Location: ../parent-add.php?error=$em&$data");
-        exit;
-    }else {
-        // hashing the password
-        $pass = password_hash($pass, PASSWORD_DEFAULT);
-
-        $sql  = "INSERT INTO
-                 parent(username, password, fname, lname, address, employee_number, date_of_birth, phone_number, qualification, gender, email_address)
-                 VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([$uname, $pass, $fname, $lname, $address, $employee_number, $date_of_birth, $phone_number, $qualification, $gender, $email_address]);
-        $sm = "New parent registered successfully";
-        header("Location: ../teacher-add.php?success=$sm");
-        exit;
-	}
-    
-  }else {
-  	$em = "An error occurred";
-    header("Location: ../registrar-office-add.php?error=$em");
-    exit;
-  }
-
-  }else {
+    }
+} else {
     header("Location: ../../logout.php");
     exit;
-  } 
-}else {
-	header("Location: ../../logout.php");
-	exit;
-} 
+}
