@@ -110,7 +110,7 @@ if (isset($_SESSION['admin_id']) &&
                  name="phone_number">
         </div>
         <div class="mb-3">
-          <label class="form-label">Qualification</label>
+          <label class="form-label">Qualifications</label>
           <input type="text" 
                  class="form-control"
                  value="<?=$teacher['qualification']?>"
