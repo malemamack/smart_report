@@ -1,69 +1,69 @@
 <?php
 session_start();
-if (isset($_SESSION['teacher_id']) && isset($_SESSION['role']) && $_SESSION['role'] == 'Teacher') {
-    include "../DB_connection.php";
+if (isset($_SESSION['teacher_id']) && isset($_SESSION['role'])) {
+    if ($_SESSION['role'] == 'Teacher') {
 
-    // Check if required POST parameters are set
-    if (isset($_POST['score-1'], $_POST['aoutof-1'], $_POST['score-2'], $_POST['aoutof-2'], 
-              $_POST['score-3'], $_POST['aoutof-3'], $_POST['exam'], $_POST['final_mark'], 
-              $_POST['attendance'], $_POST['comments'], $_POST['ssubject_id'], $_GET['student_id'])) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        $student_id = $_GET['student_id'];
-        $teacher_id = $_SESSION['teacher_id'];
-        $subject_id = $_POST['ssubject_id'];
-        $semester = $_SESSION['current_semester'];
-        $year = $_SESSION['current_year'];
+            if (isset($_POST['score-1']) && isset($_POST['score-2']) && isset($_POST['score-3']) && isset($_POST['attendance']) && isset($_POST['comment']) && isset($_POST['student_id']) && isset($_POST['subject_id']) && isset($_POST['current_year']) && isset($_POST['current_semester'])) {
+                
+                include '../../DB_connection.php';
 
-        // Sanitize and validate inputs
-        $test1_score = filter_var($_POST['score-1'], FILTER_VALIDATE_INT);
-        $test1_outof = filter_var($_POST['aoutof-1'], FILTER_VALIDATE_INT);
-        $test2_score = filter_var($_POST['score-2'], FILTER_VALIDATE_INT);
-        $test2_outof = filter_var($_POST['aoutof-2'], FILTER_VALIDATE_INT);
-        $test3_score = filter_var($_POST['score-3'], FILTER_VALIDATE_INT);
-        $test3_outof = filter_var($_POST['aoutof-3'], FILTER_VALIDATE_INT);
-        $exam_score = filter_var($_POST['exam'], FILTER_VALIDATE_INT);
-        $final_mark = filter_var($_POST['final_mark'], FILTER_VALIDATE_INT);
-        $attendance = htmlspecialchars(trim($_POST['attendance']));
-        $comments = htmlspecialchars(trim($_POST['comments']));
+                $score_1 = $_POST['score-1'];
+                $aoutof_1 = $_POST['aoutof-1'];
+                $score_2 = $_POST['score-2'];
+                $aoutof_2 = $_POST['aoutof-2'];
+                $score_3 = $_POST['score-3'];
+                $aoutof_3 = $_POST['aoutof-3'];
+                $attendance = $_POST['attendance'];
+                $comment = $_POST['comment'];
+                $student_id = $_POST['student_id'];
+                $subject_id = $_POST['subject_id'];
+                $current_year = $_POST['current_year'];
+                $current_semester = $_POST['current_semester'];
+                $teacher_id = $_SESSION['teacher_id'];
 
-        // Check for invalid data
-        if ($test1_score === false || $test1_outof === false || 
-            $test2_score === false || $test2_outof === false || 
-            $test3_score === false || $test3_outof === false || 
-            $exam_score === false || $final_mark === false) {
-            header("Location: ../students.php?error=Invalid input data");
+                // Construct results string
+                $data = "$score_1/$aoutof_1, $score_2/$aoutof_2, $score_3/$aoutof_3, Attendance: $attendance, Comment: $comment";
+                
+                // Update or Insert data
+                try {
+                    if (isset($_POST['student_score_id'])) {
+                        $student_score_id = $_POST['student_score_id'];
+                        $sql = "UPDATE student_score SET results = ? WHERE semester = ? AND year = ? AND student_id = ? AND teacher_id = ? AND subject_id = ?";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute([$data, $current_semester, $current_year, $student_id, $teacher_id, $subject_id]);
+                        $sm = "The Score has been updated successfully!";
+                        header("Location: ../student-grade.php?student_id=$student_id&success=$sm");
+                        exit;
+                    } else {
+                        $sql = "INSERT INTO student_score (semester, year, student_id, teacher_id, subject_id, results) VALUES (?, ?, ?, ?, ?, ?)";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute([$current_semester, $current_year, $student_id, $teacher_id, $subject_id, $data]);
+                        $sm = "The Score has been created successfully!";
+                        header("Location: ../student-grade.php?student_id=$student_id&success=$sm");
+                        exit;
+                    }
+                } catch (Exception $e) {
+                    $em = "An error occurred: " . $e->getMessage();
+                    header("Location: ../student-grade.php?student_id=$student_id&error=$em");
+                    exit;
+                }
+            } 
+            
+
+        } else {
+            $em = "Invalid request method";
+            header("Location: ../student-grade.php?student_id=$student_id&error=$em");
             exit;
         }
 
-        // Save to the database
-        $sql = "INSERT INTO student_scores (
-                    student_id, teacher_id, subject_id, semester, year,
-                    test1_score, test1_outof, test2_score, test2_outof,
-                    test3_score, test3_outof, exam_score, final_mark,
-                    attendance, comments
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param(
-            "iiisiiiiiiiiiss",
-            $student_id, $teacher_id, $subject_id, $semester, $year,
-            $test1_score, $test1_outof, $test2_score, $test2_outof,
-            $test3_score, $test3_outof, $exam_score, $final_mark,
-            $attendance, $comments
-        );
-
-        if ($stmt->execute()) {
-            header("Location: ../students.php?success=Scores saved successfully");
-        } else {
-            header("Location: ../students.php?error=Failed to save scores");
-        }
-        $stmt->close();
-        $conn->close();
     } else {
-        header("Location: ../students.php?error=Missing required fields");
+        header("Location: ../../logout.php");
+        exit;
     }
 } else {
-    header("Location: ../login.php");
+    header("Location: ../../logout.php");
     exit;
 }
 ?>
