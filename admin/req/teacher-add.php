@@ -16,9 +16,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             isset($_POST['username']) &&
             isset($_POST['pass']) &&
             isset($_POST['address']) &&
-            isset($_POST['employee_number']) &&
             isset($_POST['phone_number']) &&
-            isset($_POST['qualification']) &&
             isset($_POST['email_address']) &&
             isset($_POST['classes']) &&
             isset($_POST['date_of_birth']) &&
@@ -32,9 +30,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             $uname = $_POST['username'];
             $pass = $_POST['pass'];
             $address = $_POST['address'];
-            $employee_number = $_POST['employee_number'];
             $phone_number = $_POST['phone_number'];
-            $qualification = $_POST['qualification'];
             $email_address = $_POST['email_address'];
             $gender = $_POST['gender'];
             $date_of_birth = $_POST['date_of_birth'];
@@ -49,7 +45,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 $subjects .= $subject;
             }
 
-            $data = 'uname=' . $uname . '&fname=' . $fname . '&lname=' . $lname . '&address=' . $address . '&en=' . $employee_number . '&pn=' . $phone_number . '&qf=' . $qualification . '&email=' . $email_address;
+            $data = 'uname=' . $uname . '&fname=' . $fname . '&lname=' . $lname . '&address=' . $address . '&pn=' . $phone_number . '&email=' . $email_address;
 
             if (empty($fname)) {
                 $em = "First name is required";
@@ -75,19 +71,11 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 $em = "Address is required";
                 header("Location: ../teacher-add.php?error=$em&$data");
                 exit;
-            } else if (empty($employee_number)) {
-                $em = "Employee number is required";
-                header("Location: ../teacher-add.php?error=$em&$data");
-                exit;
-            } else if (empty($phone_number)) {
+            }else if (empty($phone_number)) {
                 $em = "Phone number is required";
                 header("Location: ../teacher-add.php?error=$em&$data");
                 exit;
-            } else if (empty($qualification)) {
-                $em = "Qualification is required";
-                header("Location: ../teacher-add.php?error=$em&$data");
-                exit;
-            } else if (empty($email_address)) {
+            }else if (empty($email_address)) {
                 $em = "Email address is required";
                 header("Location: ../teacher-add.php?error=$em&$data");
                 exit;
@@ -104,9 +92,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
 
                 // Insert the teacher data
-                $sql  = "INSERT INTO teachers(username, password, class, fname, lname, subjects, address, employee_number, date_of_birth, phone_number, qualification, gender, email_address) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                $sql  = "INSERT INTO teachers(username, password, class, fname, lname, subjects, address, date_of_birth, phone_number, gender, email_address) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->execute([$uname, $pass, $classes, $fname, $lname, $subjects, $address, $employee_number, $date_of_birth, $phone_number, $qualification, $gender, $email_address]);
+                $stmt->execute([$uname, $pass, $classes, $fname, $lname, $subjects, $address, $date_of_birth, $phone_number,$gender, $email_address]);
 
                 // Prepare email content
                 $to = $email_address;
