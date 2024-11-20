@@ -83,9 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['otp'])) {
     <title>OTP Verification page</title>
 </head>
 <body>
-<div class="d-flex justify-content-center align-items-center flex-column">
-<div class="text-center">
-    
+<div class="d-flex justify-content-center align-items-centr flex-column">                
+            <div class="text-center">
     			<img src="1.jpg" style="border-radius: 40%;"
     			     width="100" >
     		</div>
@@ -95,6 +94,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['otp'])) {
         <button type="submit" class="btn btn-secondary">Verify OTP</button>
     </form>
     <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
-    </div>
+</div>
 </body>
 </html>
