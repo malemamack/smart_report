@@ -37,12 +37,12 @@ if (isset($_SESSION['admin_id']) &&
          <div class="card" style="width: 22rem;">
           <img src="../img/student-<?=$student['gender']?>.png" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title text-center">@<?=$student['username']?></h5>
+            <h5 class="card-title text-center">@<?=$student['username']??''?></h5>
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">First name: <?=$student['fname']?></li>
             <li class="list-group-item">Last name: <?=$student['lname']?></li>
-            <li class="list-group-item">Username: <?=$student['username']?></li>
+           
             <li class="list-group-item">Address: <?=$student['address']?></li>
             <li class="list-group-item">Date of birth: <?=$student['date_of_birth']?></li>
             <li class="list-group-item">Email address: <?=$student['email_address']?></li>
@@ -64,9 +64,9 @@ if (isset($_SESSION['admin_id']) &&
                   ?>
             </li>
             <br><br>
-            <li class="list-group-item">Parent first name: <?=$student['parent_fname']?></li>
+            <!-- <li class="list-group-item">Parent first name: <?=$student['parent_fname']?></li>
             <li class="list-group-item">Parent last name: <?=$student['parent_lname']?></li>
-            <li class="list-group-item">Parent phone number: <?=$student['parent_phone_number']?></li>
+            <li class="list-group-item">Parent phone number: <?=$student['parent_phone_number']?></li> -->
           </ul>
           <div class="card-body">
             <a href="student.php" class="card-link">Go Back</a>

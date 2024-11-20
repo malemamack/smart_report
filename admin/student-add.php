@@ -11,13 +11,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         $sections = getAllSections($conn);
         $parents = getAllParents($conn); // Fetch parents
 
-        $fname = $lname = $address = $email_address = $preferred_name = $id_number = $contact = '';
+        $fname = $lname = $address = $email_address = $id_number = $contact = '';
 
         if (isset($_GET['fnames'])) $fname = $_GET['fname'];
         if (isset($_GET['lname'])) $lname = $_GET['lname'];
         if (isset($_GET['address'])) $address = $_GET['address'];
         if (isset($_GET['email_address'])) $email_address = $_GET['email_address'];
-        if (isset($_GET['preferred_name'])) $preferred_name = $_GET['preferred_name'];
+        
         if (isset($_GET['id_number'])) $id_number = $_GET['id_number'];
         if (isset($_GET['contact'])) $contact = $_GET['contact'];
 ?>
@@ -75,10 +75,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="radio" value="Female" name="gender"> Female
             </div><hr>
-            <div class="mb-3">
-                <label class="form-label">Preferred Name</label>
-                <input type="text" class="form-control" value="<?= $preferred_name ?>" name="preferred_name">
-            </div>
+         
             <div class="mb-3">
                 <label class="form-label">Id Number</label>
                 <input type="text" class="form-control" value="<?= $id_number ?>" name="id_number">
@@ -114,7 +111,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 <div class="mb-3">
     <label class="form-label">Select Parent</label>
     <select class="form-select" name="parent_id">
-        <option value="">Select Parents</option>
+        <option value="">Select Parent</option>
         <?php
         // Assuming $parents is fetched from the database
         if ($parents) {
