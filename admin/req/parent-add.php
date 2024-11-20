@@ -16,9 +16,9 @@ if (isset($_SESSION['admin_id']) &&
             isset($_POST['username']) &&
             isset($_POST['pass'])     &&
             isset($_POST['address'])  &&
-            isset($_POST['employee_number']) &&
+            
             isset($_POST['phone_number'])  &&
-            isset($_POST['qualification']) &&
+
             isset($_POST['email_address']) &&
             isset($_POST['date_of_birth'])) {
             
@@ -31,18 +31,17 @@ if (isset($_SESSION['admin_id']) &&
             $pass = $_POST['pass'];
 
             $address = $_POST['address'];
-            $employee_number = $_POST['employee_number'];
+            
             $phone_number = $_POST['phone_number'];
-            $qualification = $_POST['qualification'];
+            
             $email_address = $_POST['email_address'];
             $gender = $_POST['gender'];
             $date_of_birth = $_POST['date_of_birth'];
 
-            $data = 'uname='.$uname.'&fname='.$fname.'&lname='.$lname.'&address='.$address.'&en='.$employee_number.'&pn='.$phone_number.'&qf='.$qualification.'&email='.$email_address;
+            $data = 'uname='.$uname.'&fname='.$fname.'&lname='.$lname.'&address='.$address.'&pn='.$phone_number.'&email='.$email_address;
 
             if (empty($fname) || empty($lname) || empty($uname) || empty($pass) || 
-                empty($address) || empty($employee_number) || empty($phone_number) || 
-                empty($qualification) || empty($email_address) || empty($gender) || 
+                empty($address)  || empty($phone_number) || empty($email_address) || empty($gender) || 
                 empty($date_of_birth)) {
                 $em = "All fields are required!";
                 header("Location: ../parent-add.php?error=$em&$data");
@@ -59,10 +58,10 @@ if (isset($_SESSION['admin_id']) &&
             $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
 
             // Insert the new parent
-            $sql = "INSERT INTO parent (username, password, fname, lname, address, employee_number, date_of_birth, phone_number, qualification, gender, email_address)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO parent (username, password, fname, lname, address, date_of_birth, phone_number, gender, email_address)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$uname, $hashed_pass, $fname, $lname, $address, $employee_number, $date_of_birth, $phone_number, $qualification, $gender, $email_address]);
+            $stmt->execute([$uname, $hashed_pass, $fname, $lname, $address, $date_of_birth, $phone_number, $gender, $email_address]);
 
             // Send email with login details
             $mail = new PHPMailer(true);

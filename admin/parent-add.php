@@ -12,18 +12,18 @@ if (isset($_SESSION['admin_id']) &&
        $lname = '';
        $uname = '';
        $address = '';
-       $en = '';
+      
        $pn = '';
-       $qf = '';
+      
        $email = '';
 
        if (isset($_GET['fname'])) $fname = $_GET['fname'];
        if (isset($_GET['lname'])) $lname = $_GET['lname'];
        if (isset($_GET['uname'])) $uname = $_GET['uname'];
        if (isset($_GET['address'])) $address = $_GET['address'];
-       if (isset($_GET['en'])) $en = $_GET['en'];
+    
        if (isset($_GET['pn'])) $pn = $_GET['pn'];
-       if (isset($_GET['qf'])) $qf = $_GET['qf'];
+      
        if (isset($_GET['email'])) $email = $_GET['email'];
  ?>
 <!DOCTYPE html>
@@ -101,13 +101,7 @@ if (isset($_SESSION['admin_id']) &&
                  value="<?=$address?>"
                  name="address">
         </div>
-        <div class="mb-3">
-          <label class="form-label">employee Number</label>
-          <input type="text" 
-                 class="form-control"
-                 value="<?=$en?>"
-                 name="employee_number">
-        </div>
+        
         <div class="mb-3">
           <label class="form-label">Phone Number</label>
           <input type="text" 
@@ -115,13 +109,7 @@ if (isset($_SESSION['admin_id']) &&
                  value="<?=$pn?>"
                  name="phone_number">
         </div>
-        <div class="mb-3">
-          <label class="form-label">Qualification</label>
-          <input type="text" 
-                 class="form-control"
-                 value="<?=$qf?>"
-                 name="qualification">
-        </div>
+        
         <div class="mb-3">
           <label class="form-label">Email Address</label>
           <input type="text" 
