@@ -116,6 +116,14 @@ if (isset($_SESSION['admin_id']) &&
                  value="<?=$address?>"
                  name="address">
         </div>
+
+        <div class="mb-3">
+          <label class="form-label">ID Number</label>
+          <input type="text" 
+                 class="form-control"
+                 value="<?=$r_user['id_number']??''?>"
+                 name="id_number">
+        </div>
         
         <div class="mb-3">
           <label class="form-label">Phone Number</label>

@@ -88,59 +88,63 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 header("Location: ../teacher-add.php?error=$em&$data");
                 exit;
             } else {
-                // hashing the password
-                $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
+               // Save the unhashed password in a separate variable
+$plain_pass = $pass;
 
-                // Insert the teacher data
-                $sql  = "INSERT INTO teachers(username, password, class, fname, lname, subjects, address, date_of_birth, phone_number, gender, email_address) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-                $stmt = $conn->prepare($sql);
-                $stmt->execute([$uname, $pass, $classes, $fname, $lname, $subjects, $address, $date_of_birth, $phone_number,$gender, $email_address]);
+// Hash the password
+$hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
 
-                // Prepare email content
-                $to = $email_address;
-                $subject = "Your Account Details";
-                $message = "Hello $fname $lname,\n\n";
-                $message .= "Your account has been created successfully. Here are your login details:\n";
-                $message .= "Username: $uname\n";
-                $message .= "Password: $pass\n\n";
-                $message .= "Regards,\n";
-                $message .= "Your School Admin";
+// Insert the teacher data into the database
+$sql  = "INSERT INTO teachers(username, password, class, fname, lname, subjects, address, date_of_birth, phone_number, gender, email_address) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+$stmt = $conn->prepare($sql);
+$stmt->execute([$uname, $hashed_pass, $classes, $fname, $lname, $subjects, $address, $date_of_birth, $phone_number, $gender, $email_address]);
 
-                // Initialize PHPMailer
-                $mail = new PHPMailer(true);
-                try {
-                    //Server settings
-                    $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com';
-                    $mail->SMTPAuth = true;
-                    $mail->Username = 'malemamahlatse70@gmail.com'; // Your email
-                    $mail->Password = 'cdbhkiurykowykqw'; // Your SMTP password
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                    $mail->Port = 587;
+// Prepare email content
+$to = $email_address;
+$subject = "Your Account Details";
+$message = "Hello $fname $lname,\n\n";
+$message .= "Your account has been created successfully. Here are your login details:\n";
+$message .= "Username: $uname\n";
+$message .= "Password: $plain_pass\n\n"; // Use the unhashed password here
+$message .= "Regards,\n";
+$message .= "Your School Admin";
 
-                    //Recipients
-                    $mail->setFrom('malemamahlatse70@gmail.com', 'School Admin');
-                    $mail->addAddress($to, "$fname $lname $pass");
+// Initialize PHPMailer
+$mail = new PHPMailer(true);
+try {
+    //Server settings
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'malemamahlatse70@gmail.com'; // Your email
+    $mail->Password = 'cdbhkiurykowykqw'; // Your SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = 587;
 
-                    // Content
-                    $mail->isHTML(false);
-                    $mail->Subject = $subject;
-                    $mail->Body = $message;
+    //Recipients
+    $mail->setFrom('malemamahlatse70@gmail.com', 'School Admin');
+    $mail->addAddress($to, "$fname $lname");
 
-                    // Send email
-                    if ($mail->send()) {
-                        echo 'Message has been sent';
-                    } else {
-                        echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
-                    }
-                } catch (Exception $e) {
-                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                }
+    // Content
+    $mail->isHTML(false);
+    $mail->Subject = $subject;
+    $mail->Body = $message;
 
-                // Success message
-                $sm = "New teacher registered successfully, and login details have been sent!";
-                header("Location: ../teacher-add.php?success=$sm");
-                exit;
+    // Send email
+    if ($mail->send()) {
+        echo 'Message has been sent';
+    } else {
+        echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+    }
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
+
+// Success message
+$sm = "New teacher registered successfully, and login details have been sent!";
+header("Location: ../teacher.php?success=$sm");
+exit;
+
             }
         } else {
             $em = "An error occurred";

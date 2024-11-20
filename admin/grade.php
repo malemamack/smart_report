@@ -49,6 +49,7 @@ if (isset($_SESSION['admin_id']) &&
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Grade</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -64,7 +65,7 @@ if (isset($_SESSION['admin_id']) &&
                     </td>
                     <td>
                         <a href="grade-edit.php?grade_id=<?=$grade['grade_id']?>"
-                           class="btn btn-warning">Edit</a>
+                           class="btn btn-primary">Edit</a>
                         <a href="grade-delete.php?grade_id=<?=$grade['grade_id']?>"
                            class="btn btn-danger">Delete</a>
                     </td>

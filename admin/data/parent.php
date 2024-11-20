@@ -36,7 +36,7 @@ function unameIsUnique($uname, $conn, $parent_id=0){
    $stmt = $conn->prepare($sql);
    $stmt->execute([$uname]);
    
-   if ($r_user_id == 0) {
+   if ($parent_id == 0) {
      if ($stmt->rowCount() >= 1) {
        return 0;
      }else {

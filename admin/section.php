@@ -49,6 +49,7 @@ if (isset($_SESSION['admin_id']) &&
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Section</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -63,7 +64,7 @@ if (isset($_SESSION['admin_id']) &&
                     </td>
                     <td>
                         <a href="section-edit.php?section_id=<?=$section['section_id']?>"
-                           class="btn btn-warning">Edit</a>
+                           class="btn btn-primary">Edit</a>
                            
                         <a href="section-delete.php?section_id=<?=$section['section_id']?>"
                            class="btn btn-danger">Delete</a>
