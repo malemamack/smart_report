@@ -25,6 +25,10 @@ if (isset($_SESSION['admin_id']) &&
        if (isset($_GET['pn'])) $pn = $_GET['pn'];
       
        if (isset($_GET['email'])) $email = $_GET['email'];
+
+      
+
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,22 +68,32 @@ if (isset($_SESSION['admin_id']) &&
           <label class="form-label">First name</label>
           <input type="text" 
                  class="form-control"
-                 value="<?=$fname?>" 
-                 name="fname">
+                 value="<?= htmlspecialchars($fname ?? '', ENT_QUOTES, 'UTF-8')?>" 
+                 name="fname"
+                 required pattern="[A-Za-z\s'-]"
+                 maxlength="50"
+                 title="First name can only contain letters & spaces.">       
+           
         </div>
         <div class="mb-3">
           <label class="form-label">Last name</label>
           <input type="text" 
                  class="form-control"
-                 value="<?=$lname?>"
-                 name="lname">
+                  value="<?= htmlspecialchars($Lname ?? '', ENT_QUOTES, 'UTF-8')?>"
+                 name="lname"
+                 required pattern="[A-Za-z\s'-]"
+                 maxlength="50"
+                 title="last name can only contain letters & spaces.">
         </div>
         <div class="mb-3">
           <label class="form-label">Username</label>
           <input type="text" 
                  class="form-control"
-                 value="<?=$uname?>"
-                 name="username">
+                 value="<?= htmlspecialchars($uname ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                 name="username"
+                 pattern="[A-Za-z0-9._@$%!-()&]{5,20}" 
+                 maxlength="20"
+                 title="Username must be 5-20 characters long and can only contain letters, numbers, underscores (_), and periods (.)">
         </div>
         <div class="mb-3">
           <label class="form-label">Password</label>
@@ -88,6 +102,7 @@ if (isset($_SESSION['admin_id']) &&
                      class="form-control"
                      name="pass"
                      id="passInput">
+
               <button class="btn btn-secondary"
                       id="gBtn">
                       Random</button>
