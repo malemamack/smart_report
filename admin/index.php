@@ -22,30 +22,28 @@
     <?php 
         include "inc/navbar.php"; // Include navigation bar
     ?>
-    <div class="container mt-5">
-        <div class="container text-center">
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;margin-right: -80px; ">
+        <div class="container  text-center">
             <div class="row row-cols-md-3 row-cols-sm-2 row-cols-1 g-3">
-                <a href="teacher.php" class="col btn btn-dark m-2 py-3">
+                <a href="teacher.php" class="col btn btn-primary m-2 py-3">
                     <i class="fa fa-user-md fs-1" aria-hidden="true"></i><br>Teachers
                 </a> 
-                <a href="student.php" class="col btn btn-dark m-2 py-3">
+                <a href="student.php" class="col btn btn-primary m-2 py-3">
                     <i class="fa fa-graduation-cap fs-1" aria-hidden="true"></i><br>Learners
                 </a> 
-                <a href="parent.php" class="col btn btn-dark m-2 py-3">
+                <a href="parent.php" class="col btn btn-primary m-2 py-3">
                     <i class="fa fa-home fs-1" aria-hidden="true"></i><br>Parent
                 </a> 
-                <a href="class.php" class="col btn btn-dark m-2 py-3">
+                <a href="class.php" class="col btn btn-primary m-2 py-3">
                     <i class="fa fa-cubes fs-1" aria-hidden="true"></i><br>Class
                 </a> 
-                <a href="grade.php" class="col btn btn-dark m-2 py-3">
+                <a href="grade.php" class="col btn btn-primary m-2 py-3">
                     <i class="fa fa-level-up fs-1" aria-hidden="true"></i><br>Grade
                 </a> 
-                <a href="course.php" class="col btn btn-dark m-2 py-3">
+                <a href="course.php" class="col btn btn-primary m-2 py-3">
                     <i class="fa fa-book fs-1" aria-hidden="true"></i><br>Subjects
                 </a> 
-                <a href="../logout.php" class="col btn btn-warning m-2 py-3 col-5">
-                    <i class="fa fa-sign-out fs-1" aria-hidden="true"></i><br>Logout
-                </a> 
+                
             </div>
         </div>
     </div>

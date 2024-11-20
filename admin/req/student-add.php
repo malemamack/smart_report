@@ -10,7 +10,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role']) && $_SESSION['role'
     // Collect and sanitize form data
     $fname = $_POST['fname'] ?? '';
     $lname = $_POST['lname'] ?? '';
-    $preferred_name = $_POST['preferred_name'] ?? '';
+    
     $contact = $_POST['contact'] ?? '';
     $address = $_POST['address'] ?? '';
     $gender = $_POST['gender'] ?? '';
@@ -20,21 +20,22 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role']) && $_SESSION['role'
     $grade = $_POST['grade'] ?? '';
     $section = $_POST['section'] ?? '';
     $r_user_id = $_SESSION['r_user_id']; 
+    $parent_id = $_SESSION['parent_id'];
 
     // Error check: if any required fields are missing
-    if (empty($fname) || empty($lname) || empty($preferred_name) || empty($contact) || empty($address) || empty($gender) || empty($email_address) || empty($date_of_birth) || empty($id_number) || empty($grade) || empty($section)) {
+    if (empty($fname) || empty($lname) || empty($contact) || empty($address) || empty($gender) || empty($email_address) || empty($date_of_birth) || empty($id_number) || empty($grade) || empty($section)) {
         $em = "Please fill in all fields.";
         header("Location: ../student-add.php?error=$em");
         exit;
     }
 
     // Prepare SQL query to insert data into the database
-    $sql = "INSERT INTO students (preferred_name, contact, fname, lname, grade, section, address, gender, email_address, date_of_birth, r_user_id, id_number) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO students (contact, fname, lname, grade, section, address, gender, email_address, date_of_birth, r_user_id, id_number,parent_id) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
     try {
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$preferred_name, $contact, $fname, $lname, $grade, $section, $address, $gender, $email_address, $date_of_birth, $r_user_id, $id_number]);
+        $stmt->execute([ $contact, $fname, $lname, $grade, $section, $address, $gender, $email_address, $date_of_birth, $r_user_id, $parent_id, $id_number]);
 
         // Redirect with success message
         $sm = "New student registered successfully!";

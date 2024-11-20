@@ -70,7 +70,7 @@ if (isset($_SESSION['admin_id']) &&
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">ID</th>
+                    
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Username</th>
@@ -84,7 +84,7 @@ if (isset($_SESSION['admin_id']) &&
                     $i++;  ?>
                   <tr>
                     <th scope="row"><?=$i?></th>
-                    <td><?=$teacher['teacher_id']?></td>
+                    
                     <td><a href="teacher-view.php?teacher_id=<?=$teacher['teacher_id']?>">
                          <?=$teacher['fname']?></a></td>
                     <td><?=$teacher['lname']?></td>
