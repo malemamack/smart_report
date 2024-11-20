@@ -1,151 +1,94 @@
 <?php
-
 session_start();
-
-require 'vendor/autoload.php'; // Load PHPMailer
+require 'vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Send OTP via email
 function sendOtpEmail($to, $otp) {
-$mail = new PHPMailer(true);
-try {
-    // SMTP settings
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com'; // Your SMTP server
-    $mail->SMTPAuth = true;
-    $mail->Username = 'malemamahlatse70@gmail.com';       // SMTP username
-    $mail->Password = 'cdbhkiurykowykqw';     // Your email password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
-
-    // Recipients
-    $mail->setFrom('no-reply@yourdomain.com', 'DIOPONG PRIMARY SCHOOL');
-    $mail->addAddress($to); // User's email
-
-    // Content
-    $mail->isHTML(true);
-    $mail->Subject = 'Your OTP Code';
-    $mail->Body = "Your OTP code is: <strong>$otp</strong>";
-    $mail->AltBody = "Your OTP code is: $otp"; // Non-HTML version
-
-    $mail->send();
-
-} catch (Exception $e) { echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"; }
+    $mail = new PHPMailer(true);
+    try {
+        // SMTP settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = getenv('SMTP_EMAIL');
+        $mail->Password = getenv('SMTP_PASSWORD');
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+        
+        $mail->setFrom('no-reply@yourdomain.com', 'DIOPONG PRIMARY SCHOOL');
+        $mail->addAddress($to);
+        $mail->isHTML(true);
+        $mail->Subject = 'Your OTP Code';
+        $mail->Body = "Your OTP code is: <strong>$otp</strong>";
+        $mail->AltBody = "Your OTP code is: $otp";
+        
+        return $mail->send();
+    } catch (Exception $e) {
+        error_log("Error sending OTP: {$mail->ErrorInfo}");
+        return false;
+    }
 }
- 
-// Error reporting for debugging
+
+$email = $_SESSION['email'] ?? null;
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Check if form is submitted
- 
-// Error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-
-
-// Check if form is submitted
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['otp'])) {
-    $enteredOtp = $_POST['otp'];
-
-    // Ensure OTP is set in the session
+// Handle OTP verification
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['otp'])) {
+    $enteredOtp = htmlspecialchars($_POST['otp'], ENT_QUOTES, 'UTF-8');
+    
     if (isset($_SESSION['otp']) && $enteredOtp == $_SESSION['otp']) {
-        $role = $_SESSION['role'];
-        $id = $_SESSION['temp_user_id'];
-    // Ensure OTP is set in the session
-    if (isset($_SESSION['otp']) && $enteredOtp == $_SESSION['otp']) {
-        $role = $_SESSION['role'];
-        $id = $_SESSION['temp_user_id'];
-
-        // Set the appropriate session variables based on the role
-        if ($role == 'Admin') {
-            // Set admin session variable
-            $_SESSION['admin_id'] = $id;
-            header("Location: admin/index.php");
-            exit;
-        } elseif ($role == 'Parent') {
-            // Set parent session variable
-            $_SESSION['parent_id'] = $id;   // Ensure r_user_id is set correctly
-            header("Location: parent/index.php"); // Redirect to parent dashboard
-            exit;
-        } elseif ($role == 'Teacher') {
-            // Set teacher session variable
-            $_SESSION['teacher_id'] = $id;
-            header("Location: teacher/index.php");
+        $role = $_SESSION['role'] ?? '';
+        $id = $_SESSION['temp_user_id'] ?? '';
+        
+        switch ($role) {
+            case 'Admin':
+                $_SESSION['admin_id'] = $id;
+                header("Location: admin/index.php");
+                break;
+            case 'Parent':
+                $_SESSION['parent_id'] = $id;
+                header("Location: parent/index.php");
+                break;
+            case 'Teacher':
+                $_SESSION['teacher_id'] = $id;
+                header("Location: teacher/index.php");
+                break;
+            default:
+                $error = "Invalid role specified.";
+                break;
+        }
+        
+        if (!isset($error)) {
+            unset($_SESSION['otp'], $_SESSION['temp_user_id'], $_SESSION['otp_time']);
             exit;
         }
-
-        // Clear OTP and temporary user ID after successful verification
-        unset($_SESSION['otp']);
-        unset($_SESSION['temp_user_id']);
     } else {
         $error = "Invalid OTP. Please try again.";
     }
-        // Set the appropriate session variables based on the role
-        if ($role == 'Admin') {
-            // Set admin session variable
-            $_SESSION['admin_id'] = $id;
-            header("Location: admin/index.php");
-            exit;
-        } elseif ($role == 'Parent') {
-            // Set parent session variable
-            $_SESSION['parent_id'] = $id;   // Ensure r_user_id is set correctly
-            header("Location: parent/index.php"); // Redirect to parent dashboard
-            exit;
-        } elseif ($role == 'Teacher') {
-            // Set teacher session variable
-            $_SESSION['teacher_id'] = $id;
-            header("Location: teacher/index.php");
-            exit;
-        }
+}
 
-        // Clear OTP and temporary user ID after successful verification
-        unset($_SESSION['otp']);
-        unset($_SESSION['temp_user_id']);
-    } else {
-        $error = "Invalid OTP. Please try again.";
-    }
-} elseif (isset($_POST['resend'])) {
-    // Resend OTP functionality
-    if (isset($_SESSION['email'])) {
-        $email = $_SESSION['email'];
-
-        // Check for a cooldown period (e.g., 30 seconds)
+// Handle OTP resend
+if (isset($_POST['resend'])) {
+    if ($email) {
         $currentTime = time();
         $lastOtpTime = $_SESSION['otp_time'] ?? 0;
-        if ($currentTime - $lastOtpTime < 30) {
-            $error = "Please wait before resending the OTP.";
+        $cooldownPeriod = 30; // Cooldown in seconds
+        
+        if ($currentTime - $lastOtpTime < $cooldownPeriod) {
+            $waitTime = $cooldownPeriod - ($currentTime - $lastOtpTime);
+            $error = "Please wait {$waitTime} seconds before requesting a new OTP.";
         } else {
-            // Generate a new OTP and store it in the session
-            $otp = rand(100000, 999999);
+            $otp = random_int(100000, 999999); // More secure than rand()
             $_SESSION['otp'] = $otp;
             $_SESSION['otp_time'] = $currentTime;
-
-            // Send the OTP via PHPMailer
-            $mail = new PHPMailer(true);
-            try {
-                $mail->isSMTP();
-                $mail->Host       = 'smtp.gmail.com';
-                $mail->SMTPAuth   = true;
-                $mail->Username   = 'your_email@gmail.com'; // Replace with your email
-                $mail->Password   = 'your_password'; // Replace with your password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                $mail->Port       = 587;
-
-                $mail->setFrom('your_email@gmail.com', 'Your App Name');
-                $mail->addAddress($email);
-
-                $mail->isHTML(true);
-                $mail->Subject = 'Your OTP Code';
-                $mail->Body    = "Your OTP code is <b>$otp</b>. It expires in 5 minutes.";
-
-                $mail->send();
-                $success = "A new OTP has been sent to your email.";
-            } catch (Exception $e) {
-                $error = "Error sending OTP: {$mail->ErrorInfo}";
+            
+            if (sendOtpEmail($email, $otp)) {
+                $success = "A new OTP has been sent to " . htmlspecialchars($email);
+            } else {
+                $error = "Failed to send OTP. Please try again.";
             }
         }
     } else {
@@ -158,32 +101,82 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['otp'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>OTP Verification page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<div class="d-flex justify-content-center align-items-center flex-column">
-<div class="text-center">
-    
-    			<img src="1.jpg" style="border-radius: 40%;"
-    			     width="100" >
-    		</div>
-    <h2>Enter the OTP sent to your email</h2>
-    <form method="post" action="">
-        <input type="text" name="otp" required placeholder="Enter OTP">
-        <button type="submit" class="btn btn-secondary">Verify OTP</button>
-    </form>
-    <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+    <div class="container d-flex justify-content-center align-items-center flex-column" style="height: 100vh;">
+        <div class="text-center mb-4">
+            <img src="1.jpg" alt="School Logo" style="border-radius: 40%;" width="100">
+        </div>
+        <h2>Enter the OTP sent to your email</h2>
+        <form method="post" action="" class="mb-3">
+            <div class="form-group">
+                <input type="text" 
+                       name="otp" 
+                       required 
+                       placeholder="Enter OTP" 
+                       class="form-control mb-3"
+                       pattern="[0-9]{6}"
+                       maxlength="6">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Verify OTP</button>
+        </form>
+        
+        <?php if (isset($error)): ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo htmlspecialchars($error); ?>
+            </div>
+        <?php endif; ?>
+        
+        <?php if (isset($success)): ?>
+            <div class="alert alert-success" role="alert">
+                <?php echo htmlspecialchars($success); ?>
+            </div>
+        <?php endif; ?>
+        
+        <form method="post" action="" class="mt-3">
+            <button type="submit" 
+                    name="resend" 
+                    class="btn btn-secondary" 
+                    id="resendButton">
+                Resend OTP
+            </button>
+        </form>
     </div>
-    <form method="post" action="" style="margin-top: 10px;">
-        <button type="submit" name="resend" class="btn btn-secondary">Resend OTP</button>
-    </form>
-    <?php
-    if (isset($error)) {
-        echo "<p style='color:red;'>$error</p>";
-    }
-    if (isset($success)) {
-        echo "<p style='color:green;'>$success</p>";
-    }
-    ?>
+
+    <script>
+    // Add countdown timer for resend button
+    document.addEventListener('DOMContentLoaded', function() {
+        const resendButton = document.getElementById('resendButton');
+        let cooldown = <?php echo isset($_SESSION['otp_time']) ? 
+            max(0, 30 - (time() - $_SESSION['otp_time'])) : 0; ?>;
+        
+        function updateButton() {
+            if (cooldown > 0) {
+                resendButton.disabled = true;
+                resendButton.textContent = `Wait ${cooldown} seconds`;
+                cooldown--;
+                setTimeout(updateButton, 1000);
+            } else {
+                resendButton.disabled = false;
+                resendButton.textContent = 'Resend OTP';
+            }
+        }
+        
+        if (cooldown > 0) {
+            updateButton();
+        }
+        
+        // Add click handler
+        resendButton.addEventListener('click', function() {
+            if (!this.disabled) {
+                cooldown = 30;
+                updateButton();
+            }
+        });
+    });
+    </script>
 </body>
 </html>
