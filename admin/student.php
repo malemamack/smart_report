@@ -63,7 +63,7 @@ if (isset($_SESSION['admin_id']) &&
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">ID</th>
+                    
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Id Number</th>
@@ -76,7 +76,7 @@ if (isset($_SESSION['admin_id']) &&
                     $i++;  ?>
                   <tr>
                     <th scope="row"><?=$i?></th>
-                    <td><?=$student['student_id']?></td>
+                    
                     <td>
                       <a href="student-view.php?student_id=<?=$student['student_id']?>">
                         <?=$student['fname']?>

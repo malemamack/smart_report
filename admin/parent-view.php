@@ -41,7 +41,7 @@ if (isset($_SESSION['admin_id']) &&
             <li class="list-group-item">Last name: <?=$r_user['lname']?></li>
             <li class="list-group-item">Username: <?=$r_user['username']?></li>
 
-            
+          
             <li class="list-group-item">Address: <?=$r_user['address']?></li>
             <li class="list-group-item">Date of birth: <?=$r_user['date_of_birth']?></li>
             <li class="list-group-item">Phone number: <?=$r_user['phone_number']?></li>

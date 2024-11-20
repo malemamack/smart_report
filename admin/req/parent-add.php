@@ -21,7 +21,7 @@ if (isset($_SESSION['admin_id']) &&
 
             isset($_POST['email_address']) &&
             isset($_POST['date_of_birth'])) {
-            
+            isset($_POST['id_number'])  &&
             include '../../DB_connection.php';
             include "../data/parent.php";
 
@@ -33,15 +33,15 @@ if (isset($_SESSION['admin_id']) &&
             $address = $_POST['address'];
             
             $phone_number = $_POST['phone_number'];
-            
+            $id_number = $_POST['id_number'];
             $email_address = $_POST['email_address'];
             $gender = $_POST['gender'];
             $date_of_birth = $_POST['date_of_birth'];
 
-            $data = 'uname='.$uname.'&fname='.$fname.'&lname='.$lname.'&address='.$address.'&pn='.$phone_number.'&email='.$email_address;
+            $data = 'uname='.$uname.'&fname='.$fname.'&lname='.$lname.'&address='.$address.'&id_number='.$id_number.'&pn='.$phone_number.'&email='.$email_address;
 
             if (empty($fname) || empty($lname) || empty($uname) || empty($pass) || 
-                empty($address)  || empty($phone_number) || empty($email_address) || empty($gender) || 
+                empty($address)  || empty($phone_number) || empty($email_address) || empty($gender) ||  empty($id_number) ||
                 empty($date_of_birth)) {
                 $em = "All fields are required!";
                 header("Location: ../parent-add.php?error=$em&$data");
@@ -58,10 +58,10 @@ if (isset($_SESSION['admin_id']) &&
             $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
 
             // Insert the new parent
-            $sql = "INSERT INTO parent (username, password, fname, lname, address, date_of_birth, phone_number, gender, email_address)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO parent (username, password, fname, lname, address, date_of_birth, phone_number, id_number,gender, email_address)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$uname, $hashed_pass, $fname, $lname, $address, $date_of_birth, $phone_number, $gender, $email_address]);
+            $stmt->execute([$uname, $hashed_pass, $fname, $lname, $address, $date_of_birth ,$id_number, $phone_number, $gender, $email_address]);
 
             // Send email with login details
             $mail = new PHPMailer(true);

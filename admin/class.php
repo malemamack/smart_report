@@ -51,6 +51,7 @@ if (isset($_SESSION['admin_id']) &&
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Class</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>

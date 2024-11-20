@@ -22,8 +22,8 @@
     <?php 
         include "inc/navbar.php"; // Include navigation bar
     ?>
-    <div class="container mt-5">
-        <div class="container text-center">
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;margin-right: -80px; ">
+        <div class="container  text-center">
             <div class="row row-cols-md-3 row-cols-sm-2 row-cols-1 g-3">
                 <a href="teacher.php" class="col btn btn-primary m-2 py-3">
                     <i class="fa fa-user-md fs-1" aria-hidden="true"></i><br>Teachers

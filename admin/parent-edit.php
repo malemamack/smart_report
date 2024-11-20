@@ -84,6 +84,15 @@ if (isset($_SESSION['admin_id']) &&
                  value="<?=$r_user['address']?>"
                  name="address">
         </div>
+
+
+        <div class="mb-3">
+          <label class="form-label">ID Number</label>
+          <input type="text" 
+                 class="form-control"
+                 value="<?=$r_user['id_number']??''?>"
+                 name="id_number">
+        </div>
         
         <div class="mb-3">
           <label class="form-label">Date of birth</label>
@@ -99,7 +108,7 @@ if (isset($_SESSION['admin_id']) &&
                  value="<?=$r_user['phone_number']?>"
                  name="phone_number">
         </div>
-        
+       
         <div class="mb-3">
           <label class="form-label">Email address</label>
           <input type="text" 

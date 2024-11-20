@@ -27,7 +27,7 @@ if (isset($_SESSION['admin_id']) &&
      ?>
      <div class="container mt-5">
         <a href="parent-add.php"
-           class="btn btn-dark">Add New Parent</a>
+           class="btn btn-dark">Add New User</a>
 
            <?php if (isset($_GET['error'])) { ?>
             <div class="alert alert-danger mt-3 n-table" 
@@ -60,7 +60,7 @@ if (isset($_SESSION['admin_id']) &&
                     $i++;  ?>
                   <tr>
                     <th scope="row"><?=$i?></th>
-                    
+                  
                     <td><a href="parent-view.php?parent_id=<?=$r_user['parent_id']?>">
                          <?=$r_user['fname']?></a></td>
                     <td><?=$r_user['lname']?></td>
