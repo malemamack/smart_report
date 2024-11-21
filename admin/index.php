@@ -43,9 +43,7 @@
                 <a href="course.php" class="col btn btn-dark m-2 py-3">
                     <i class="fa fa-book fs-1" aria-hidden="true"></i><br>Subjects
                 </a> 
-                <a href="../logout.php" class="col btn btn-warning m-2 py-3 col-5">
-                    <i class="fa fa-sign-out fs-1" aria-hidden="true"></i><br>Logout
-                </a> 
+               
             </div>
         </div>
     </div>
