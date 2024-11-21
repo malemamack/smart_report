@@ -107,25 +107,25 @@ if (isset($_SESSION['teacher_id']) &&
         
         <form method="POST" action="req\save-score.php">
     <label for="score-1">Test 1 Score:</label>
-    <input type="number" name="score-1" id="score-1" min="0" max="100" required>
+    <input type="number" name="score-1" id="score-1" min="0" max="00" required>
     <label for="aoutof-1">Out of:</label>
-    <input type="number" name="aoutof-1" id="aoutof-1" min="0" max="100" required><br>
+    <input type="number" name="aoutof-1" id="aoutof-1" min="0" max="300" required><br>
 
     <label for="score-2">Test 2 Score:</label>
-    <input type="number" name="score-2" id="score-2" min="0" max="100" required>
+    <input type="number" name="score-2" id="score-2" min="0" max="300" required>
     <label for="aoutof-2">Out of:</label>
-    <input type="number" name="aoutof-2" id="aoutof-2" min="0" max="100" required><br>
+    <input type="number" name="aoutof-2" id="aoutof-2" min="0" max="300" required><br>
 
     <label for="score-3">Test 3 Score:</label>
-    <input type="number" name="score-3" id="score-3" min="0" max="100" required>
+    <input type="number" name="score-3" id="score-3" min="0" max="300" required>
     <label for="aoutof-3">Out of:</label>
-    <input type="number" name="aoutof-3" id="aoutof-3" min="0" max="100" required><br>
+    <input type="number" name="aoutof-3" id="aoutof-3" min="0" max="300" required><br>
 
     <label for="exam">Exam Score:</label>
-    <input type="number" name="exam" id="exam" min="0" max="100" required><br>
+    <input type="number" name="exam" id="exam" min="0" max="300" required><br>
 
     <label for="final_mark">Final Mark:</label>
-    <input type="number" name="final_mark" id="final_mark" min="0" max="100" required><br>
+    <input type="number" name="final_mark" id="final_mark" min="0" max="300" required><br>
 
     <label for="attendance">Attendance:</label>
     <input type="text" name="attendance" id="attendance"><br>
