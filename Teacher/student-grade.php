@@ -72,7 +72,7 @@ if (isset($_SESSION['teacher_id']) &&
                         echo $s['section'];
                     ?>
                   </li>
-                  <li class="list-group-item text-center"><b>Year: </b> <?php echo $setting['current_year']; ?> &nbsp;&nbsp;&nbsp;<b>Semester</b> <?php echo $setting['current_semester']; ?></li>
+                  <li class="list-group-item text-center"><b>Year: </b> <?php echo $setting['current_year']; ?> &nbsp;&nbsp;&nbsp;<b>Term</b> <?php echo $setting['current_semester']; ?></li>
                 </ul>
             </div>
             <h5 class="text-center">Add Grade</h5>
@@ -119,6 +119,13 @@ if (isset($_SESSION['teacher_id']) &&
         <input type="number" min="0" max="100" class="form-control" placeholder="Test 3 Score" name="score-3">
         <span class="input-group-text">/</span>
         <input type="number" min="0" max="100" class="form-control" placeholder="Out of" name="aoutof-3">
+    </div>
+    
+    <div class="input-group mb-3">
+        <input type="number" min="0" max="100" class="form-control" placeholder="exam" name="exam">
+    </div>
+    <div class="input-group mb-3">
+        <input type="number" min="0" max="100" class="form-control" placeholder="final_mark" name="final_mark">
     </div>
     <div class="input-group mb-3">
         <input type="number" min="0" max="100" class="form-control" placeholder="Attendance" name="attendance">

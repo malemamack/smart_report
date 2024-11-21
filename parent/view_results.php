@@ -1,49 +1,79 @@
 <?php
 session_start();
-if (isset($_SESSION['parent_id'])) {
-    include "../DB_connection.php";
+include "../DB_connection.php";
 
-    function getScoreById($student_id, $conn) {
-        $sql = "SELECT * FROM student_score WHERE student_id = :student_id";
+function getScoreById($student_id, $conn) {
+    $sql = "SELECT * FROM student_score WHERE student_id = :student_id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':student_id', $student_id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getSubjectById($subject_id, $conn) {
+    $sql = "SELECT * FROM subjects WHERE subject_id = :subject_id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':subject_id', $subject_id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+function getLearnerName($student_id, $conn) {
+    $sql = "SELECT fname FROM students WHERE student_id = :student_id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':student_id', $student_id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC)['fname'];
+}
+
+function gradeCalc($total) {
+    if ($total >= 90) return "A+";
+    if ($total >= 80) return "A";
+    if ($total >= 70) return "B";
+    if ($total >= 60) return "C";
+    if ($total >= 50) return "D";
+    return "F";
+}
+
+// Function to populate history table
+function populateHistory($conn) {
+    $sql = "INSERT INTO student_score_history (student_id, subject_id, semester, year, results)
+            SELECT student_id, subject_id, semester, year, results FROM student_score";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+}
+
+// Function to check if settings have changed
+function checkYearChange($current_year, $conn) {
+    // Fetch the current year from settings
+    $sql = "SELECT current_year FROM setting";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $setting = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Compare with provided year and populate history if different
+    if ($current_year != $setting['current_year']) {
+        populateHistory($conn);
+
+        // Update settings table with new year
+        $sql = "UPDATE setting SET current_year = :current_year";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':student_id', $student_id, PDO::PARAM_INT);
+        $stmt->bindParam(':current_year', $current_year, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+}
 
-    function getSubjectById($subject_id, $conn) {
-        $sql = "SELECT * FROM subjects WHERE subject_id = :subject_id";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':subject_id', $subject_id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+if (isset($_GET['student_id']) && is_numeric($_GET['student_id'])) {
+    $student_id = intval($_GET['student_id']);
+    $fname = getLearnerName($student_id, $conn);
+    $scores = getScoreById($student_id, $conn);
 
-    function getLearnerName($student_id, $conn) {
-        $sql = "SELECT fname FROM students WHERE student_id = :student_id";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':student_id', $student_id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC)['fname'];
-    }
-
-    function gradeCalc($total) {
-        if ($total >= 90) return "A+";
-        if ($total >= 80) return "A";
-        if ($total >= 70) return "B";
-        if ($total >= 60) return "C";
-        if ($total >= 50) return "D";
-        return "F";
-    }
-
-    if (isset($_GET['student_id']) && is_numeric($_GET['student_id'])) {
-        $student_id = intval($_GET['student_id']);
-        $fname = getLearnerName($student_id, $conn);
-        $scores = getScoreById($student_id, $conn);
-
-        if ($scores && $fname) {
-            ?>
-            <!DOCTYPE html>
+    if ($scores && $fname) {
+        // Example current year
+        $current_year = 2025;
+        checkYearChange($current_year, $conn);
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -59,14 +89,16 @@ if (isset($_SESSION['parent_id'])) {
 <?php include "inc/navbar.php"; ?>
 <div class="container mt-5">
     <h2 class="text-center">Results for Learner: <?= htmlspecialchars($fname) ?> (ID: <?= htmlspecialchars($student_id) ?>)</h2>
-    <div class="table-responsive" style="width: 90%; max-width: 700px; margin: auto;">
+    <div class="table-responsive" style="width: 90%; max-width: 900px; margin: auto;">
         <table class="table table-bordered">
             <thead class="table-dark">
                 <tr>
-                    <th>Course Title</th>
+                    <th>Subject Title</th>
                     <th>Test 1</th>
                     <th>Test 2</th>
                     <th>Test 3</th>
+                    <th>Exam</th>
+                    <th>Final Mark</th>
                     <th>Attendance</th>
                     <th>Comment</th>
                     <th>Total</th>
@@ -81,7 +113,7 @@ if (isset($_SESSION['parent_id'])) {
                     $total = 0;
                     $outOf = 0;
                     $results = explode(',', trim($score['results']));
-                    $test1 = $test2 = $test3 = $attendance = $comment = '';
+                    $test1 = $test2 = $test3 = $exam = $final_mark = $attendance = $comment = '';
                     foreach ($results as $result) {
                         if (strpos($result, 'Attendance') !== false) {
                             $attendance = explode(': ', trim($result))[1];
@@ -92,27 +124,31 @@ if (isset($_SESSION['parent_id'])) {
                             $total += intval($marks);
                             $outOf += intval($max);
                             if (empty($test1)) {
-                                $test1 = "$marks  $max";
+                                $test1 = "$marks $max";
                             } elseif (empty($test2)) {
-                                $test2 = "$marks  $max";
+                                $test2 = "$marks $max";
                             } elseif (empty($test3)) {
-                                $test3 = "$marks  $max";
+                                $test3 = "$marks $max";
+                            } elseif (empty($exam)) {
+                                $exam = "$marks $max";
                             }
                         }
                     }
-                    ?>
+                ?>
                     <tr>
                         <td><?= htmlspecialchars($subject['subject']) ?></td>
-                        <td><?= $test1 ?></td>
-                        <td><?= $test2 ?></td>
-                        <td><?= $test3 ?></td>
-                        <td><?= $attendance ?></td>
-                        <td><?= $comment ?></td>
-                        <td><?= "$total / $outOf" ?></td>
-                        <td><?= gradeCalc($total) ?></td>
+                        <td><?= htmlspecialchars($test1) ?></td>
+                        <td><?= htmlspecialchars($test2) ?></td>
+                        <td><?= htmlspecialchars($test3) ?></td>
+                        <td><?= htmlspecialchars($exam) ?></td>
+                        <td><?= htmlspecialchars($final_mark) ?></td>
+                        <td><?= htmlspecialchars($attendance) ?></td>
+                        <td><?= htmlspecialchars($comment) ?></td>
+                        <td><?= htmlspecialchars("$total / $outOf") ?></td>
+                        <td><?= htmlspecialchars(gradeCalc($total)) ?></td>
                         <td><?= htmlspecialchars($score['semester']) ?></td>
                     </tr>
-                    <?php
+                <?php
                 }
                 ?>
             </tbody>
@@ -121,16 +157,12 @@ if (isset($_SESSION['parent_id'])) {
 </div>
 </body>
 </html>
-            <?php
-        } else {
-            echo "<div class='alert alert-info text-center'>No results found for this learner.</div>";
-        }
+<?php
     } else {
-        echo "<div class='alert alert-danger text-center'>Invalid Learner ID.</div>";
+        echo "<div class='alert alert-info text-center'>No results found for this learner.</div>";
     }
 } else {
-    header("Location: ../login.php");
-    exit;
+    echo "<div class='alert alert-danger text-center'>Invalid Learner ID.</div>";
 }
 
 $conn = null;
