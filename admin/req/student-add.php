@@ -19,23 +19,23 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role']) && $_SESSION['role'
     $id_number = $_POST['id_number'] ?? '';
     $grade = $_POST['grade'] ?? '';
     $section = $_POST['section'] ?? '';
-    $r_user_id = $_SESSION['r_user_id']; 
-    $parent_id = $_SESSION['parent_id'];
+    
+    $parent_id = $_POST['parent_id'];
 
     // Error check: if any required fields are missing
-    if (empty($fname) || empty($lname) || empty($contact) || empty($address) || empty($gender) || empty($email_address) || empty($date_of_birth) || empty($id_number) || empty($grade) || empty($section)) {
+    if (empty($fname) || empty($lname) || empty($contact) || empty($address) || empty($gender) || empty($email_address) || empty($date_of_birth) || empty($id_number) || empty($grade) || empty($section) || empty($parent_id)) {
         $em = "Please fill in all fields.";
         header("Location: ../student-add.php?error=$em");
         exit;
     }
 
     // Prepare SQL query to insert data into the database
-    $sql = "INSERT INTO students (contact, fname, lname, grade, section, address, gender, email_address, date_of_birth, r_user_id, id_number,parent_id) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+    $sql = "INSERT INTO students (contact, fname, lname, grade, section, address, gender, email_address, date_of_birth, id_number,parent_id) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
     try {
         $stmt = $conn->prepare($sql);
-        $stmt->execute([ $contact, $fname, $lname, $grade, $section, $address, $gender, $email_address, $date_of_birth, $r_user_id, $parent_id, $id_number]);
+        $stmt->execute([ $contact, $fname, $lname, $grade, $section, $address, $gender, $email_address, $date_of_birth, $parent_id, $id_number]);
 
         // Redirect with success message
         $sm = "New student registered successfully!";
