@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.php">
       <img src="../1.jpg" width="40">
@@ -7,7 +7,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0"
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 '"
           id="navLinks">
         <li class="nav-item">
           <a class="nav-link" 

@@ -66,7 +66,7 @@ if (isset($_SESSION['admin_id']) &&
                     
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
-                    <th scope="col">Id Number</th>
+                    <th scope="col">ID Number</th>
                     <th scope="col">Grade</th>
                     <th scope="col">Action</th>
                   </tr>

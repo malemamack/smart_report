@@ -7,7 +7,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role']) && $_SESSION['role'
         isset($_POST['student_id']) &&
         isset($_POST['fname']) &&
         isset($_POST['lname']) &&
-
+        
         isset($_POST['contact']) &&
         isset($_POST['address']) &&
         isset($_POST['email_address']) &&
@@ -33,7 +33,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role']) && $_SESSION['role'
         $date_of_birth = trim($_POST['date_of_birth']);
         $section = trim($_POST['section']);
         $id_number = trim($_POST['id_number']);
-        $r_user_id = trim($_POST['parent_id']);
+        $parent_id = trim($_POST['parent_id']);
         $grade = trim($_POST['grade']);
 
         $data = "contact=$contact"; // Retain contact for redirection purposes
@@ -60,12 +60,12 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role']) && $_SESSION['role'
         // Update record in the database
         try {
             $sql = "UPDATE students 
-                    SET fname = ?, lname = ?, grade = ?, address = ?, gender = ?, section = ?, 
+                    SET  fname = ?, lname = ?, grade = ?, address = ?, gender = ?, section = ?, 
                         email_address = ?, date_of_birth = ?, parent_id = ?, id_number = ?, contact = ? 
                     WHERE student_id = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([
-                
+    
                 $fname,
                 $lname,
                 $grade,
@@ -82,7 +82,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role']) && $_SESSION['role'
 
             // Redirect with success message
             $sm = "Successfully updated!";
-            header("Location: ../student-edit.php?success=$sm&$data");
+            header("Location: ../student.php?success=$sm&$data");
             exit;
         } catch (PDOException $e) {
             // Handle errors during the update
