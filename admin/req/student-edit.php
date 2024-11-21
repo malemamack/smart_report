@@ -7,7 +7,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role']) && $_SESSION['role'
         isset($_POST['student_id']) &&
         isset($_POST['fname']) &&
         isset($_POST['lname']) &&
-        isset($_POST['preffered_name']) &&
+
         isset($_POST['contact']) &&
         isset($_POST['address']) &&
         isset($_POST['email_address']) &&
@@ -15,7 +15,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role']) && $_SESSION['role'
         isset($_POST['date_of_birth']) &&
         isset($_POST['section']) &&
         isset($_POST['id_number']) &&
-        isset($_POST['r_user_id']) &&
+        isset($_POST['parent_id']) &&
         isset($_POST['grade'])
     ) {
         // Include database connection
@@ -25,7 +25,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role']) && $_SESSION['role'
         $student_id = trim($_POST['student_id']);
         $fname = trim($_POST['fname']);
         $lname = trim($_POST['lname']);
-        $preffered_name = trim($_POST['preffered_name']);
+
         $contact = trim($_POST['contact']);
         $address = trim($_POST['address']);
         $email_address = trim($_POST['email_address']);
@@ -33,7 +33,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role']) && $_SESSION['role'
         $date_of_birth = trim($_POST['date_of_birth']);
         $section = trim($_POST['section']);
         $id_number = trim($_POST['id_number']);
-        $r_user_id = trim($_POST['r_user_id']);
+        $r_user_id = trim($_POST['parent_id']);
         $grade = trim($_POST['grade']);
 
         $data = "contact=$contact"; // Retain contact for redirection purposes
@@ -60,12 +60,12 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role']) && $_SESSION['role'
         // Update record in the database
         try {
             $sql = "UPDATE students 
-                    SET preffered_name = ?, fname = ?, lname = ?, grade = ?, address = ?, gender = ?, section = ?, 
-                        email_address = ?, date_of_birth = ?, r_user_id = ?, id_number = ?, contact = ? 
+                    SET fname = ?, lname = ?, grade = ?, address = ?, gender = ?, section = ?, 
+                        email_address = ?, date_of_birth = ?, parent_id = ?, id_number = ?, contact = ? 
                     WHERE student_id = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([
-                $preffered_name,
+                
                 $fname,
                 $lname,
                 $grade,
@@ -74,7 +74,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role']) && $_SESSION['role'
                 $section,
                 $email_address,
                 $date_of_birth,
-                $r_user_id,
+                $parent_id,
                 $id_number,
                 $contact,
                 $student_id
