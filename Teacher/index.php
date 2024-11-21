@@ -29,7 +29,7 @@ if (isset($_SESSION['teacher_id']) && $_SESSION['role'] == 'Teacher') {
 	<title>Teacher - Home</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/style.css">
-	<link rel="icon" href="../logo.png">
+	<link rel="icon" href="../1.jpg">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -45,11 +45,11 @@ if (isset($_SESSION['teacher_id']) && $_SESSION['role'] == 'Teacher') {
                 <li class="list-group-item">First name: <?=$teacher['fname']?></li>
                 <li class="list-group-item">Last name: <?=$teacher['lname']?></li>
                 <li class="list-group-item">Username: <?=$teacher['username']?></li>
-                <li class="list-group-item">Employee number: <?=$teacher['employee_number']?></li>
+        
                 <li class="list-group-item">Address: <?=$teacher['address']?></li>
                 <li class="list-group-item">Date of birth: <?=$teacher['date_of_birth']?></li>
                 <li class="list-group-item">Phone number: <?=$teacher['phone_number']?></li>
-                <li class="list-group-item">Qualification: <?=$teacher['qualification']?></li>
+            
                 <li class="list-group-item">Email address: <?=$teacher['email_address']?></li>
                 <li class="list-group-item">Gender: <?=$teacher['gender']?></li>
                 <li class="list-group-item">Date of joined: <?=$teacher['date_of_joined']?></li>

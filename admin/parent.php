@@ -48,7 +48,7 @@ if (isset($_SESSION['admin_id']) &&
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">ID</th>
+                    
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Username</th>
@@ -60,14 +60,14 @@ if (isset($_SESSION['admin_id']) &&
                     $i++;  ?>
                   <tr>
                     <th scope="row"><?=$i?></th>
-                    <td><?=$r_user['parent_id']?></td>
+                  
                     <td><a href="parent-view.php?parent_id=<?=$r_user['parent_id']?>">
                          <?=$r_user['fname']?></a></td>
                     <td><?=$r_user['lname']?></td>
                     <td><?=$r_user['username']?></td>
                     <td>
                         <a href="parent-edit.php?parent_id=<?=$r_user['parent_id']?>"
-                           class="btn btn-warning">Edit</a>
+                           class="btn btn-primary">Edit</a>
                         <a href="parent-delete.php?parent_id=<?=$r_user['parent_id']?>"
                            class="btn btn-danger">Delete</a>
                     </td>

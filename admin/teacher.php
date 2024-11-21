@@ -33,7 +33,7 @@ if (isset($_SESSION['admin_id']) &&
         <a href="teacher-add.php"
            class="btn btn-dark">Add New Teacher</a>
 
-           <form action="teacher-search.php" 
+           <form action="teacher.php" 
                  class="mt-3 n-table"
                  method="get">
              <div class="input-group mb-3">
@@ -67,13 +67,12 @@ if (isset($_SESSION['admin_id']) &&
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">ID</th>
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Username</th>
                     <th scope="col">Subject</th>
                     <th scope="col">Class</th>
-                    <th scope="col">Action</th>
+                    <th class="col-md-6" scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -81,7 +80,6 @@ if (isset($_SESSION['admin_id']) &&
                     $i++;  ?>
                   <tr>
                     <th scope="row"><?=$i?></th>
-                    <td><?=$teacher['teacher_id']?></td>
                     <td><a href="teacher-view.php?teacher_id=<?=$teacher['teacher_id']?>">
                          <?=$teacher['fname']?></a></td>
                     <td><?=$teacher['lname']?></td>
@@ -118,7 +116,7 @@ if (isset($_SESSION['admin_id']) &&
                     </td>
                     <td>
                         <a href="teacher-edit.php?teacher_id=<?=$teacher['teacher_id']?>"
-                           class="btn btn-warning">Edit</a>
+                           class="btn btn-primary">Edit</a>
                         <a href="teacher-delete.php?teacher_id=<?=$teacher['teacher_id']?>"
                            class="btn btn-danger">Delete</a>
                     </td>

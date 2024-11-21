@@ -43,7 +43,7 @@ if (isset($_SESSION['teacher_id']) &&
 	<title>Teacher - Students Grade</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/style.css">
-	<link rel="icon" href="../logo.png">
+	<link rel="icon" href="../1.jpg">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -107,25 +107,25 @@ if (isset($_SESSION['teacher_id']) &&
         
         <form method="POST" action="req\save-score.php">
     <label for="score-1">Test 1 Score:</label>
-    <input type="number" name="score-1" id="score-1" min="0" max="100" required>
+    <input type="number" name="score-1" id="score-1" min="0" max="00" required>
     <label for="aoutof-1">Out of:</label>
-    <input type="number" name="aoutof-1" id="aoutof-1" min="0" max="100" required><br>
+    <input type="number" name="aoutof-1" id="aoutof-1" min="0" max="300" required><br>
 
     <label for="score-2">Test 2 Score:</label>
-    <input type="number" name="score-2" id="score-2" min="0" max="100" required>
+    <input type="number" name="score-2" id="score-2" min="0" max="300" required>
     <label for="aoutof-2">Out of:</label>
-    <input type="number" name="aoutof-2" id="aoutof-2" min="0" max="100" required><br>
+    <input type="number" name="aoutof-2" id="aoutof-2" min="0" max="300" required><br>
 
     <label for="score-3">Test 3 Score:</label>
-    <input type="number" name="score-3" id="score-3" min="0" max="100" required>
+    <input type="number" name="score-3" id="score-3" min="0" max="300" required>
     <label for="aoutof-3">Out of:</label>
-    <input type="number" name="aoutof-3" id="aoutof-3" min="0" max="100" required><br>
+    <input type="number" name="aoutof-3" id="aoutof-3" min="0" max="300" required><br>
 
     <label for="exam">Exam Score:</label>
-    <input type="number" name="exam" id="exam" min="0" max="100" required><br>
+    <input type="number" name="exam" id="exam" min="0" max="300" required><br>
 
     <label for="final_mark">Final Mark:</label>
-    <input type="number" name="final_mark" id="final_mark" min="0" max="100" required><br>
+    <input type="number" name="final_mark" id="final_mark" min="0" max="300" required><br>
 
     <label for="attendance">Attendance:</label>
     <input type="text" name="attendance" id="attendance"><br>
