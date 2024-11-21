@@ -2,6 +2,7 @@
 session_start();
 include "../DB_connection.php";
 
+// Function to get the student's scores by ID
 function getScoreById($student_id, $conn) {
     $sql = "SELECT * FROM student_score WHERE student_id = :student_id";
     $stmt = $conn->prepare($sql);
@@ -10,6 +11,7 @@ function getScoreById($student_id, $conn) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+// Function to get the subject by ID
 function getSubjectById($subject_id, $conn) {
     $sql = "SELECT * FROM subjects WHERE subject_id = :subject_id";
     $stmt = $conn->prepare($sql);
@@ -18,6 +20,7 @@ function getSubjectById($subject_id, $conn) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+// Function to get the learner's name
 function getLearnerName($student_id, $conn) {
     $sql = "SELECT fname FROM students WHERE student_id = :student_id";
     $stmt = $conn->prepare($sql);
@@ -26,16 +29,18 @@ function getLearnerName($student_id, $conn) {
     return $stmt->fetch(PDO::FETCH_ASSOC)['fname'];
 }
 
+// Function to calculate the grade
 function gradeCalc($total) {
-    if ($total >= 90) return "A+";
-    if ($total >= 80) return "A";
-    if ($total >= 70) return "B";
-    if ($total >= 60) return "C";
-    if ($total >= 50) return "D";
-    return "F";
+    if ($total >= 80) return "7";
+    if ($total >= 70) return "6";
+    if ($total >= 60) return "5";
+    if ($total >= 50) return "4";
+    if ($total >= 40) return "3";
+    if ($total >= 30) return "2";
+    return "1";
 }
 
-// Function to populate history table
+// Function to populate the history table
 function populateHistory($conn) {
     $sql = "INSERT INTO student_score_history (student_id, subject_id, semester, year, results)
             SELECT student_id, subject_id, semester, year, results FROM student_score";
@@ -43,19 +48,16 @@ function populateHistory($conn) {
     $stmt->execute();
 }
 
-// Function to check if settings have changed
+// Function to check if the settings have changed
 function checkYearChange($current_year, $conn) {
-    // Fetch the current year from settings
     $sql = "SELECT current_year FROM setting";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $setting = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Compare with provided year and populate history if different
     if ($current_year != $setting['current_year']) {
         populateHistory($conn);
 
-        // Update settings table with new year
         $sql = "UPDATE setting SET current_year = :current_year";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':current_year', $current_year, PDO::PARAM_INT);
@@ -63,15 +65,23 @@ function checkYearChange($current_year, $conn) {
     }
 }
 
+// Main script execution
 if (isset($_GET['student_id']) && is_numeric($_GET['student_id'])) {
     $student_id = intval($_GET['student_id']);
     $fname = getLearnerName($student_id, $conn);
     $scores = getScoreById($student_id, $conn);
 
     if ($scores && $fname) {
-        // Example current year
-        $current_year = 2025;
-        checkYearChange($current_year, $conn);
+        $sql = "SELECT current_year FROM setting";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $year_current = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$year_current) {
+            $year_current['current_year'] = date("Y");
+        }
+
+        checkYearChange($year_current['current_year'], $conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,6 +114,7 @@ if (isset($_GET['student_id']) && is_numeric($_GET['student_id'])) {
                     <th>Total</th>
                     <th>Grade</th>
                     <th>Term</th>
+                    <th>Year</th>
                 </tr>
             </thead>
             <tbody>
@@ -113,14 +124,14 @@ if (isset($_GET['student_id']) && is_numeric($_GET['student_id'])) {
                     $total = 0;
                     $outOf = 0;
                     $results = explode(',', trim($score['results']));
-                    $test1 = $test2 = $test3 = $exam = $final_mark = $attendance = $comment = '';
+                    $test1 = $test2 = $test3 = $exam = $final_mark = $attendance  = $comment = '';
                     foreach ($results as $result) {
                         if (strpos($result, 'Attendance') !== false) {
                             $attendance = explode(': ', trim($result))[1];
                         } elseif (strpos($result, 'Comment') !== false) {
                             $comment = explode(': ', trim($result))[1];
                         } else {
-                            list($marks, $max) = explode(' ', trim($result));
+                            list($marks, $max) = explode(': ', trim($result));
                             $total += intval($marks);
                             $outOf += intval($max);
                             if (empty($test1)) {
@@ -147,6 +158,7 @@ if (isset($_GET['student_id']) && is_numeric($_GET['student_id'])) {
                         <td><?= htmlspecialchars("$total / $outOf") ?></td>
                         <td><?= htmlspecialchars(gradeCalc($total)) ?></td>
                         <td><?= htmlspecialchars($score['semester']) ?></td>
+                        <td><?= htmlspecialchars($year_current['current_year']) ?></td>
                     </tr>
                 <?php
                 }
