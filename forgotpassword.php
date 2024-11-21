@@ -1,21 +1,73 @@
-<?php
-if (isset($_GET['error'])) {
-    echo "<p style='color:red;'>".htmlspecialchars($_GET['error'])."</p>";
-}
+<?php 
+include "DB_connection.php";
+include "data/setting.php";
+$setting = getSetting($conn);
 
-if (isset($_GET['success'])) {
-    echo "<p style='color:green;'>".htmlspecialchars($_GET['success'])."</p>";
-}
-?>
 
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Password</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Welcome to <?=$setting['school_name']?></title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="icon" href="logo.png">
+	<style>
+		.form-contai {
+	background-color: grey;
+	padding: 30px;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	max-width: 400px;
+}
+
+h2 {
+	text-align: center;
+	font-size: 24px;
+	margin-bottom: 20px;
+	color: #333;
+}
+
+label {
+	font-size: 14px;
+	color: #555;
+	margin-bottom: 8px;
+	display: block;
+}
+
+input[type="email"], input[type="submit"] {
+	width: 100%;
+	padding: 12px;
+	margin-bottom: 15px;
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	font-size: 16px;
+	color: #333;
+	transition: all 0.3s ease-in-out;
+}
+
+input[type="email"]:focus {
+	border-color: #007bff;
+	outline: none;
+}
+
+input[type="submit"] {
+	background-color: #007bff;
+	color: white;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+	background-color: #0056b3;
+}
+	</style>
 </head>
-<<<<<<< HEAD
 <body class="body-home">
     <div class="black-fill"><br /> <br />
     	<div class="container">
@@ -42,17 +94,23 @@ if (isset($_GET['success'])) {
 		  </div>
 		    </div>
 		</nav>
-		<div class="contai">
         <section class="welcome-text d-flex justify-content-center align-items-center flex-column">
-		<img src="1.jpg" style="border-radius: 30%;" >
+        	<div class="contai">
+        
 			<form action="forgotpasswordprc.php" method="post">
-    <!-- <div class="form-contai"> -->
+    <div class="form-contai text-center">
+	<div class="logo mb-4">
+                <img src="1.jpg" style="border-radius: 40%;" width="100">
+            </div>
         <h2>Forgot Password</h2>
+        
         <label for="email">Enter your email address:</label>
         <input type="email" id="email" name="email" required>
+        
         <input type="submit" value="Send">
+    </div>
 </form>
-</div>
+
 <section class="footer">
     <div class="text-center text-light">
         Copyright &copy; <?=$setting['current_year']?> <?=$setting['school_name']?>. All rights reserved.
@@ -60,14 +118,11 @@ if (isset($_GET['success'])) {
 </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>	
-=======
-<body>
-    <h1>Forgot Password</h1>
-    <form action="process_forgot_password.php" method="post">
-        <label for="email_address">Email Address:</label>
-        <input type="email" name="email_address" id="email_address" required>
-        <button type="submit">Send Reset Link</button>
-    </form>
->>>>>>> 515eecc55affe2af4f2bf8c710a1db370b79f8c3
 </body>
 </html>
+
+
+
+
+
+      
