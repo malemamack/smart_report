@@ -151,7 +151,7 @@ if (isset($_POST['resend'])) {
     document.addEventListener('DOMContentLoaded', function() {
         const resendButton = document.getElementById('resendButton');
         let cooldown = <?php echo isset($_SESSION['otp_time']) ? 
-            max(0, 30 - (time() - $_SESSION['otp_time'])) : 0; ?>;
+            max(0, 10 - (time() - $_SESSION['otp_time'])) : 0; ?>;
         
         function updateButton() {
             if (cooldown > 0) {
@@ -172,7 +172,7 @@ if (isset($_POST['resend'])) {
         // Add click handler
         resendButton.addEventListener('click', function() {
             if (!this.disabled) {
-                cooldown = 30;
+                cooldown = 10;
                 updateButton();
             }
         });
