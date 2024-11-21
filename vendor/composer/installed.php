@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
-        'pretty_version' => 'dev-kat-branch',
-        'version' => 'dev-kat-branch',
-        'reference' => '61a6716cb50174a552127cb8434dd6b023e744de',
+        'pretty_version' => 'dev-develop',
+        'version' => 'dev-develop',
+        'reference' => '4107700e9b90c4ba67acda380ff5e9f295b72055',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => 'dev-kat-branch',
-            'version' => 'dev-kat-branch',
-            'reference' => '61a6716cb50174a552127cb8434dd6b023e744de',
+            'pretty_version' => 'dev-develop',
+            'version' => 'dev-develop',
+            'reference' => '4107700e9b90c4ba67acda380ff5e9f295b72055',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

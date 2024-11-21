@@ -14,7 +14,7 @@ if ($setting != 0) {
 	<title>Welcome to <?=$setting['school_name']?></title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
-	<link rel="icon" href="logo.png">
+	<link rel="icon" href="1.jpg">
 </head>
 <body class="body-home">
     <div class="black-fill"><br /> <br />
