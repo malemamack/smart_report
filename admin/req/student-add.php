@@ -30,16 +30,16 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role']) && $_SESSION['role'
     }
 
     // Prepare SQL query to insert data into the database
-    $sql = "INSERT INTO students (contact, fname, lname, grade, section, address, gender, email_address, date_of_birth, id_number,parent_id) 
+    $sql = "INSERT INTO students (contact, fname, lname, grade, section, address, gender, email_address, date_of_birth, id_number, parent_id) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
     try {
         $stmt = $conn->prepare($sql);
-        $stmt->execute([ $contact, $fname, $lname, $grade, $section, $address, $gender, $email_address, $date_of_birth, $parent_id, $id_number]);
+        $stmt->execute([ $contact, $fname, $lname, $grade, $section, $address, $gender, $email_address, $date_of_birth, $id_number , $parent_id]);
 
         // Redirect with success message
         $sm = "New student registered successfully!";
-        header("Location: ../student-add.php?success=$sm");
+        header("Location: ../student.php?success=$sm");
         exit;
     } catch (PDOException $e) {
         // If an error occurs during the insertion, show an error message

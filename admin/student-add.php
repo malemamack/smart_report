@@ -113,7 +113,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 <div class="mb-3">
     <label class="form-label">Select Parent</label>
     <select class="form-select" name="parent_id">
-        <option value="">Select Parent</option>
+        <option value="<?= $parent['parent_id'] ?>">Select Parent</option>
         <?php
         // Assuming $parents is fetched from the database
         if ($parents) {
