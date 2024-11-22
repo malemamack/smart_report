@@ -51,7 +51,7 @@ if (isset($_SESSION['admin_id']) &&
            class="btn btn-dark">Go Back</a>
 
         <form method="post"
-              class="shadow p-3 mt-5 form-w" 
+              class="shadow p-3 mt-5 form-w " 
               action="req/parent-add.php">
         <h3>Add New Parent User</h3><hr>
         <?php if (isset($_GET['error'])) { ?>

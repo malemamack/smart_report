@@ -29,9 +29,7 @@ if (isset($_SESSION['admin_id']) &&
             $lname = $_POST['lname'];
             $uname = $_POST['username'];
             $pass = $_POST['pass'];
-
             $address = $_POST['address'];
-            
             $phone_number = $_POST['phone_number'];
             $id_number = $_POST['id_number'];
             $email_address = $_POST['email_address'];

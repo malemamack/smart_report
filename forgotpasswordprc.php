@@ -82,11 +82,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <p>If you did not request a password reset, please ignore this email.</p>
                     END;
 
-                    $mail->send();  // Send the email
-                    echo "Reset email sent to: " . $email . "<br>"; // Debugging
-                } catch (Exception $e) {
-                    echo "Error sending email: " . $mail->ErrorInfo . "<br>"; // Debugging error message
-                }
+                    
+                        $mail->send();  // Send the email
+                        // Redirect to a new page after successful email send
+                        header("Location: success.php"); 
+                        exit; // Ensure no further code is executed after the redirect
+                    } catch (Exception $e) {
+                        // Redirect to an error page or show the error message
+                        header("Location: token_error.php" . urlencode($mail->ErrorInfo));
+                        exit;
+                    }
+                    
             } else {
                 echo "Error updating reset token for $email.<br>"; // Debugging
             }

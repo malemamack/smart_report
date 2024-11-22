@@ -61,9 +61,10 @@ if (isset($_GET['token'])) {
 
     // If user not found, display error and exit
     if (!$user) {
-        echo "No matching token found or token has expired.";
-        exit;  // Stop further execution if token is invalid or expired
+        header("Location: token_error.php");
+        exit;  // Stop further execution
     }
+    
 } else {
     echo "No token provided.";
     exit;
@@ -100,22 +101,79 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $update_stmt->bind_param("ss", $new_password_hashed, $token);
 
         if ($update_stmt->execute()) {
-            echo "Your new password has been updated successfully.";
+            echo '<div style="color: white; background-color: #0056b0; padding: 10px; text-align: center; border-radius: 5px;">Your new password has been updated successfully.</div>';
+
         } else {
             echo "Error resetting password. Please try again.";
         }
     }
 }
 ?>
-
-
-<form method="POST">
-    <label for="new_password">Enter new password:</label><br>
-    <input type="password" name="new_password" id="new_password" required placeholder="Enter new password"/><br><br>
-    
-    <label for="confirm_password">Confirm new password:</label><br>
-    <input type="password" name="confirm_password" id="confirm_password" required placeholder="Confirm new password"/><br><br>
-    
-    <button type="submit">Reset Password</button>
-    <button><a href="login.php">login</a></button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Reset</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #343a40;
+        }
+        .form-container label {
+            font-weight: 600;
+            color: #495057;
+        }
+        .form-container button {
+            width: 100%;
+            font-size: 16px;
+        }
+        .form-container a {
+            text-decoration: none;
+            color: #fff;
+        }
+        .form-container a:hover {
+            text-decoration: underline;
+        }
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body class="body-home" style="background-color: #343a40;">
+    <div class="form-container">
+        <h1>Reset Password</h1>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="new_password" class="form-label">Enter new password:</label>
+                <input type="password" name="new_password" id="new_password" class="form-control" required placeholder="Enter new password">
+            </div>
+            <div class="mb-3">
+                <label for="confirm_password" class="form-label">Confirm new password:</label>
+                <input type="password" name="confirm_password" id="confirm_password" class="form-control" required placeholder="Confirm new password">
+            </div>
+            <button type="submit" class="btn btn-primary mb-3"><a href="login.php">Reset Password</a></button>
+        </form>
+        <div class="form-footer">
+            <button class="btn btn-secondary">
+                <a href="login.php">Login</a>
+            </button>
+        </div>
+    </div>
+</body>
+</html>

@@ -13,10 +13,10 @@ $setting = getSetting($conn);
 	<title>Welcome to <?=$setting['school_name']?></title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
-	<link rel="icon" href="logo.png">
+	<link rel="icon" href="1.png">
 	<style>
 		.form-contai {
-	background-color: grey;
+	background-color: white;
 	padding: 30px;
 	border-radius: 8px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -83,7 +83,7 @@ input[type="submit"]:hover {
 		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 		        <li class="nav-item">
-		          <a class="nav-link active" aria-current="page" href="#">Home</a>
+		          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
 		        </li>
 		      </ul>
 		      <ul class="navbar-nav me-right mb-2 mb-lg-0">

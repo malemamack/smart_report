@@ -94,6 +94,23 @@ if (isset($_GET['student_id']) && is_numeric($_GET['student_id'])) {
     <link rel="icon" href="../1.jpg">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    .table-dark {
+        background-color: #0056b3; /* Primary blue for header */
+        color: #ffffff; /* White text for readability */
+    }
+    th {
+        background-color: #003d80 !important; /* Darker blue for table header */
+        color: #ffffff !important; /* White text */
+        border: 1px solid #ffffff; /* Optional: White border for distinction */
+        text-align: center; /* Center align header text */
+    }
+    table {
+        border-collapse: collapse; /* Neater table appearance */
+        width: 100%;
+    }
+</style>
+
 </head>
 <body>
 <?php include "inc/navbar.php"; ?>
