@@ -10,18 +10,18 @@ if (isset($_SESSION['admin_id']) &&
     isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] == 'Admin') {
-    	
+        
         if (isset($_POST['fname']) &&
             isset($_POST['lname']) &&
             isset($_POST['username']) &&
             isset($_POST['pass'])     &&
             isset($_POST['address'])  &&
-            
             isset($_POST['phone_number'])  &&
-
             isset($_POST['email_address']) &&
-            isset($_POST['date_of_birth'])) {
-            isset($_POST['id_number'])  &&
+            isset($_POST['date_of_birth']) &&
+            isset($_POST['id_number']) &&
+            isset($_POST['gender'])) {
+
             include '../../DB_connection.php';
             include "../data/parent.php";
 
@@ -85,7 +85,7 @@ if (isset($_SESSION['admin_id']) &&
                                <p><strong>Username:</strong> $uname</p>
                                <p><strong>Password:</strong> $pass</p>
                                <p>Please log in and update your password at your earliest convenience.</p>
-                               <p>Best Regards,<br>School Admin Team</p>";
+                               <p>Best Regards,<br>Diopong Primary School Admin Team</p>";
 
                 $mail->send();
                 $sm = "New parent registered successfully, and login details have been sent!";

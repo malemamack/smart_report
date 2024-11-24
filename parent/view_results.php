@@ -159,6 +159,8 @@ if (isset($_GET['student_id']) && is_numeric($_GET['student_id'])) {
                                 $test3 = "$marks $max";
                             } elseif (empty($exam)) {
                                 $exam = "$marks $max";
+                            } elseif (empty($final_mark)) {
+                                $final_mark = "$marks $max";
                             }
                         }
                     }

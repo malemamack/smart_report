@@ -64,7 +64,6 @@ if (isset($_GET['token'])) {
         header("Location: token_error.php");
         exit;  // Stop further execution
     }
-    
 } else {
     echo "No token provided.";
     exit;
@@ -76,9 +75,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
 
+    // Define the strong password regex pattern
+    $password_pattern = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/';
+
     // Check if passwords match
     if ($new_password !== $confirm_password) {
-        echo "Passwords do not match. Please try again.";
+        echo '<div style="color: red; background-color: #f8d7da; padding: 10px; text-align: center; border-radius: 5px;">
+                Passwords do not match. Please try again.
+              </div>';
+    } elseif (!preg_match($password_pattern, $new_password)) {
+        echo '<div style="color: red; background-color: #f8d7da; padding: 10px; text-align: center; border-radius: 5px;">
+                Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character.
+              </div>';
     } else {
         // Hash the new password
         $new_password_hashed = password_hash($new_password, PASSWORD_DEFAULT);
@@ -102,13 +110,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($update_stmt->execute()) {
             echo '<div style="color: white; background-color: #0056b0; padding: 10px; text-align: center; border-radius: 5px;">Your new password has been updated successfully.</div>';
-
         } else {
             echo "Error resetting password. Please try again.";
         }
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: gray;
             font-family: Arial, sans-serif;
         }
         .form-container {
@@ -142,38 +150,54 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             width: 100%;
             font-size: 16px;
         }
-        .form-container a {
-            text-decoration: none;
-            color: #fff;
-        }
-        .form-container a:hover {
-            text-decoration: underline;
-        }
         .form-footer {
             text-align: center;
             margin-top: 20px;
         }
+        #loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
     </style>
 </head>
-<body class="body-home" style="background-color: #343a40;">
+<body>
+    <div id="loader" class="d-none">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
     <div class="form-container">
         <h1>Reset Password</h1>
         <form method="POST">
             <div class="mb-3">
                 <label for="new_password" class="form-label">Enter new password:</label>
-                <input type="password" name="new_password" id="new_password" class="form-control" required placeholder="Enter new password">
+                <input type="password" name="new_password" id="new_password" class="form-control" required 
+                       placeholder="Enter new password">
+                <small class="form-text text-muted">
+                    Password must be at least 8 characters long, 
+                    include an uppercase letter, 
+                    a lowercase letter, 
+                    a number, and 
+                    a special character.
+                </small>
             </div>
             <div class="mb-3">
                 <label for="confirm_password" class="form-label">Confirm new password:</label>
-                <input type="password" name="confirm_password" id="confirm_password" class="form-control" required placeholder="Confirm new password">
+                <input type="password" name="confirm_password" id="confirm_password" class="form-control" required 
+                       placeholder="Confirm new password">
             </div>
-            <button type="submit" class="btn btn-primary mb-3"><a href="login.php">Reset Password</a></button>
+            <button type="submit" class="btn btn-primary">Reset Password</button>
+            <br><br>
+            <a href="login.php" class="btn btn-secondary" style="color:#fff;">Login</a>
         </form>
-        <div class="form-footer">
-            <button class="btn btn-secondary">
-                <a href="login.php">Login</a>
-            </button>
-        </div>
     </div>
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            document.getElementById('loader').classList.remove('d-none');
+        });
+    </script>
 </body>
 </html>

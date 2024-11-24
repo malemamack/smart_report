@@ -21,7 +21,7 @@
           <a class="nav-link text-white" href="students.php">Students Grade</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="pass.php">Change Password</a>
+          <a class="nav-link text-white" href="teacher-change-password.php">Change Password</a>
         </li>
       </ul>
       <ul class="navbar-nav me-right mb-2 mb-lg-0">

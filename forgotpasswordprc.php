@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $mail->Port = 587;
 
                     // Recipients
-                    $mail->setFrom('no-reply@yourdomain.com', 'Your School Name');  // Set the sender's email and name
+                    $mail->setFrom('no-reply@yourdomain.com', 'Diopong Primary School Admin Team');  // Set the sender's email and name
                     $mail->addAddress($email);  // Add the recipient's email address
 
                     // Content

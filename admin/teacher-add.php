@@ -13,7 +13,6 @@ if (isset($_SESSION['admin_id']) &&
        $subjects = getAllSubjects($conn);
        $classes = getAllClasses($conn);
 
-
        $fname = '';
        $lname = '';
        $uname = '';
@@ -27,18 +26,27 @@ if (isset($_SESSION['admin_id']) &&
        if (isset($_GET['address'])) $address = $_GET['address'];
        if (isset($_GET['pn'])) $pn = $_GET['pn'];
        if (isset($_GET['email'])) $email = $_GET['email'];
- ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Admin - Add Teacher</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../css/style.css">
-	<link rel="icon" href="../1.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Add Teacher</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../1.jpg">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+        #loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
+  </style>
 </head>
 <body>
     <?php 
@@ -167,48 +175,51 @@ if (isset($_SESSION['admin_id']) &&
              
           </div>
         </div>
-
       <button type="submit" class="btn btn-primary">Add</button>
+      <div id="loader" class="d-none">
+          <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+          </div>
+      </div>
      </form>
      </div>
      
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>	
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>    
     <script>
         $(document).ready(function(){
-             $("#navLinks li:nth-child(2) a").addClass('active');
+             $("#navLinks li:nth-child(7) a").addClass('active');
         });
 
         function makePass(length) {
-            var result           = '';
-            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var result = '';
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
             var charactersLength = characters.length;
             for ( var i = 0; i < length; i++ ) {
-              result += characters.charAt(Math.floor(Math.random() * 
-         charactersLength));
+              result += characters.charAt(Math.floor(Math.random() * charactersLength));
 
            }
            var passInput = document.getElementById('passInput');
            passInput.value = result;
         }
 
+        document.querySelector('form').addEventListener('submit', function(event) {
+            document.getElementById('loader').classList.remove('d-none');
+        });
+
         var gBtn = document.getElementById('gBtn');
         gBtn.addEventListener('click', function(e){
-          e.preventDefault();
-          makePass(4);
+            e.preventDefault();
+            makePass(12);
         });
     </script>
-
 </body>
 </html>
 <?php 
-
   }else {
     header("Location: ../login.php");
     exit;
   } 
 }else {
-	header("Location: ../login.php");
-	exit;
+    header("Location: ../login.php");
+    exit;
 } 
-
-?>

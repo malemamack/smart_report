@@ -6,7 +6,6 @@ require "../vendor/autoload.php"; // Load PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-
 if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['role'])) {
 
     include "../DB_connection.php";
@@ -41,8 +40,8 @@ if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['role'])) {
         }
 
         // Prepare and execute query
-        $stmt = $conn->prepare(query: $sql);
-        $stmt->execute(params: [$uname]);
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$uname]);
 
         // Check if user exists
         if ($stmt->rowCount() == 1) {
@@ -90,7 +89,7 @@ if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['role'])) {
                 } else {
                     // For Admin, Parent, and Teacher roles, login directly
                     $_SESSION[strtolower($role) . '_id'] = $user[strtolower($role) . '_id']; // Store the role-specific ID
-                    header(header: "Location: ../" . strtolower(string: $role) . "/index.php");
+                    header("Location: ../" . strtolower($role) . "/index.php");
                     exit;
                 }
             } else {
