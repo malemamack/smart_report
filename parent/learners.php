@@ -35,12 +35,43 @@ $result = $stmt->get_result();
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>parent - Your Learners</title>
+	<title>Parent - Your Learners</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/style.css">
 	<link rel="icon" href="../1.jpg">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background */
+        }
+        .table-dark {
+            background-color: #0056b3; /* Blue header for table */
+            color: #ffffff; /* White text */
+        }
+        th {
+            background-color: #003d80 !important; /* Darker blue for thead */
+            color: #ffffff !important; /* White text */
+        }
+        .btn-custom {
+            background-color: #0056b3; /* Primary blue */
+            color: white;
+            border: none;
+        }
+        .btn-custom:hover {
+            background-color: #003d80; /* Darker blue on hover */
+        }
+        .btn-back {
+            background-color: #6c757d; /* Gray background */
+            color: white;
+        }
+        .btn-back:hover {
+            background-color: #5a6268; /* Darker gray */
+        }
+        .btn-info {
+            background-color: #17a2b8; /* Default Bootstrap Info color */
+        }
+    </style>
 </head>
 <body>
 <?php 
@@ -88,9 +119,9 @@ $result = $stmt->get_result();
             </div>
         <?php endif; ?>
 
-        <!-- Logout Button -->
+        <!-- Back Button -->
         <div class="text-center mt-4">
-            <a href="../logout.php" class="btn btn-danger">Logout</a>
+            <a href="index.php" class="btn btn-back">Back</a>
         </div>
     </div>
 
