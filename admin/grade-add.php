@@ -11,6 +11,55 @@ if (isset($_SESSION['admin_id']) &&
        if (isset($_GET['grade_code'])) $grade_code = $_GET['grade_code'];
        if (isset($_GET['grade'])) $grade = $_GET['grade'];
 
+
+      // verifying the form in the grade-add //
+
+       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $grade_code = $_POST['grade_code'] ?? '';
+    
+        // Check if the field is empty
+        if (empty($grade_code)) {
+            echo "Error: Grade Code is required.";
+            exit;
+        }
+    
+        // Validate pattern (alphanumeric only)
+        if (!preg_match('/^[A-Za-z0-9]+$/', $grade_code)) {
+            echo "Error: Invalid Grade Code. Only letters and numbers are allowed.";
+            exit;
+        }
+    
+        echo "Success: Grade Code is valid: " . htmlspecialchars($grade_code);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+          $grade = $_POST['grade'] ?? '';
+      
+          // Trim and sanitize the input
+          $grade = htmlspecialchars(trim($grade));
+      
+          // Check if the field is empty
+          if (empty($grade)) {
+              echo "Error: Grade is required.";
+              exit;
+          }
+      
+          // Validate the input format
+          if (!preg_match('/^[A-Za-z0-9\s]', $grade)) {
+              echo "Error: Invalid Grade. Only letters, numbers, and spaces are allowed.";
+              exit;
+          }
+      
+          echo "Success: Grade is valid: $grade";
+      }
+
+
+
+
+
+
+
+    }
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,15 +99,23 @@ if (isset($_SESSION['admin_id']) &&
           <label class="form-label">Grade Code</label>
           <input type="text" 
                  class="form-control"
-                 value="<?=$grade_code?>" 
-                 name="grade_code">
+                 value="<?= htmlspecialchars($grade_code) ?>"
+                 id="grade_code" 
+                 name="grade_code"
+                 required 
+                 pattern="[A-Za-z0-9]+"
+                title="Grade Code must contain only letters and numbers.">
         </div>
         <div class="mb-3">
           <label class="form-label">Grade</label>
           <input type="text" 
+                  id="grade"
                  class="form-control"
-                 value="<?=$grade?>"
-                 name="grade">
+                 value="<?= htmlspecialchars($grade) ?>" 
+                 name="grade"
+                 required 
+                  pattern="[A-Za-z0-9\s]+" 
+                  title="Grade must contain only letters, numbers, and spaces.">
         </div>
       <button type="submit" class="btn btn-primary">Create</button>
      </form>

@@ -17,7 +17,7 @@ $mail->Password = getenv('SMTP_PASSWORD');
 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 $mail->Port = 587;
 
-$mail->setFrom('no-reply@yourdomain.com', 'DIOPONG PRIMARY SCHOOL');
+$mail->setFrom('malemamahlatse70@gmail.com', 'DIOPONG PRIMARY SCHOOL');
 $mail->addAddress($to);
 $mail->isHTML(true);
 $mail->Subject = 'Your OTP Code';

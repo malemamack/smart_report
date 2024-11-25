@@ -17,7 +17,72 @@ if (isset($_SESSION['admin_id']) &&
        if ($grades == 0) {
          header("Location: grade.php");
          exit;
+
+
+         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+          $grade_code = $_POST['grade_code'] ?? '';
+      
+          // Trim and sanitize input
+          $grade_code = htmlspecialchars(trim($grade_code));
+      
+          // Check if the field is empty
+          if (empty($grade_code)) {
+              echo "Error: Grade Code is required.";
+              exit;
+          }
+      
+          // Validate alphanumeric format
+          if (!preg_match('/^[A-Za-z0-9]', $grade_code)) {
+              echo "Error: Invalid Grade Code. Only letters and numbers are allowed.";
+              exit;
+          }
+      
+          // If valid, process the grade code
+          echo "Success: Grade Code is valid: $grade_code";          
+        }
        }
+
+       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $grade = $_POST['grade'] ?? '';
+
+    // Sanitize and trim the input
+    $grade = htmlspecialchars(trim($grade));
+
+    // Check if the field is empty
+    if (empty($grade)) {
+        echo "Error: Grade is required.";
+        exit;
+    }
+
+    // Validate the format (alphanumeric with spaces)
+    if (!preg_match('/^[A-Za-z0-9\s]+$/', $grade)) {
+        echo "Error: Invalid Grade. Only letters, numbers, and spaces are allowed.";
+        exit;
+    }
+
+    echo "Success: Grade is valid: $grade";
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $grade = $_POST['grade'] ?? '';
+
+  // Sanitize and trim the input
+  $grade = htmlspecialchars(trim($grade));
+
+  // Check if the field is empty
+  if (empty($grade)) {
+      echo "Error: Grade is required.";
+      exit;
+  }
+
+  // Validate the format (alphanumeric with spaces)
+  if (!preg_match('/^[A-Za-z0-9\s]+$/', $grade)) {
+      echo "Error: Invalid Grade. Only letters, numbers, and spaces are allowed.";
+      exit;
+  }
+
+  echo "Success: Grade is valid: $grade";
+}
 
 
  ?>
@@ -59,15 +124,22 @@ if (isset($_SESSION['admin_id']) &&
           <label class="form-label">Grade Code</label>
           <input type="text" 
                  class="form-control"
-                 value="<?=$grades['grade_code']?>" 
-                 name="grade_code">
+                 value="<?= htmlspecialchars($grades['grade_code'] ?? '') ?>" 
+                 name="grade_code"
+                 required 
+                 pattern="[A-Za-z0-9]+" 
+                 title="Grade Code must contain only letters and numbers.">
         </div>
         <div class="mb-3">
           <label class="form-label">Grade</label>
           <input type="text" 
                  class="form-control"
-                 value="<?=$grades['grade']?>"
-                 name="grade">
+                 id="grade"
+                 value="<?= htmlspecialchars($grades['grade'] ?? '') ?>" 
+                 name="grade"
+                 required 
+                 pattern="[A-Za-z0-9\s]+" 
+                 title="Grade must contain only letters, numbers, and spaces.">
         </div>
         <input type="text" 
                  class="form-control"
