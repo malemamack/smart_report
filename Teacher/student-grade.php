@@ -106,29 +106,33 @@ if (isset($_SESSION['teacher_id']) &&
         </form>
         <form method="post" action="req/save-score.php">
     <div class="input-group mb-3">
-        <input type="number" min="0" max="100" class="form-control" placeholder="Test 1 Score" name="score-1">
+        <input type="number" min="0" max="300" class="form-control" placeholder="Test 1 Score" name="score-1">
         <span class="input-group-text">/</span>
-        <input type="number" min="0" max="100" class="form-control" placeholder="Out of" name="aoutof-1">
+        <input type="number" min="0" max="300" class="form-control" placeholder="Out of" name="aoutof-1">
     </div>
     <div class="input-group mb-3">
-        <input type="number" min="0" max="100" class="form-control" placeholder="Test 2 Score" name="score-2">
+        <input type="number" min="0" max="300" class="form-control" placeholder="Test 2 Score" name="score-2">
         <span class="input-group-text">/</span>
-        <input type="number" min="0" max="100" class="form-control" placeholder="Out of" name="aoutof-2">
+        <input type="number" min="0" max="300" class="form-control" placeholder="Out of" name="aoutof-2">
     </div>
     <div class="input-group mb-3">
-        <input type="number" min="0" max="100" class="form-control" placeholder="Test 3 Score" name="score-3">
+        <input type="number" min="0" max="300" class="form-control" placeholder="Test 3 Score" name="score-3">
         <span class="input-group-text">/</span>
-        <input type="number" min="0" max="100" class="form-control" placeholder="Out of" name="aoutof-3">
+        <input type="number" min="0" max="300" class="form-control" placeholder="Out of" name="aoutof-3">
     </div>
     
     <div class="input-group mb-3">
-        <input type="number" min="0" max="100" class="form-control" placeholder="exam" name="exam">
+    <input type="number" min="0" max="300" class="form-control" placeholder="exam" name="score-4">
+    <span class="input-group-text">/</span>
+        <input type="number" min="0" max="300" class="form-control" placeholder="Out of" name="aoutof-4">
     </div>
     <div class="input-group mb-3">
-        <input type="number" min="0" max="100" class="form-control" placeholder="final_mark" name="final_mark">
+    <input type="number" min="0" max="300" class="form-control" placeholder="final_mark" name="score-5">
+    <span class="input-group-text">/</span>
+        <input type="number" min="0" max="300" class="form-control" placeholder="Out of" name="aoutof-5">
     </div>
     <div class="input-group mb-3">
-        <input type="number" min="0" max="100" class="form-control" placeholder="Attendance" name="attendance">
+        <input type="text" min="0" max="300" class="form-control" placeholder="Attendance" name="attendance">
     </div>
     <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Comment" name="comment">
