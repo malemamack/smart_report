@@ -1,18 +1,11 @@
-<?php 
-include "DB_connection.php";
-include "data/setting.php";
-$setting = getSetting($conn);
-
-if ($setting != 0) {
-
- ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Welcome to <?=$setting['school_name']?></title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Sent Successfully</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="icon" href="1.jpg">
 </head>
@@ -23,7 +16,7 @@ if ($setting != 0) {
     	     id="homeNav">
 		  <div class="container-fluid">
 		    <a class="navbar-brand" href="#">
-		    	<img src="1.jpg" width="40" style="border-radius:50%;">
+		    	<img src="1.jpg" width="50" height="50" >
 		    </a>
 		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		      <span class="navbar-toggler-icon"></span>
@@ -31,7 +24,7 @@ if ($setting != 0) {
 		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 		        <li class="nav-item">
-		          <a class="nav-link active" aria-current="page" href="#">Home</a>
+		          <a class="nav-link active" aria-current="page" href="index.php">Home</a>
 		        </li>
 		      </ul>
 		      <ul class="navbar-nav me-right mb-2 mb-lg-0">
@@ -43,20 +36,12 @@ if ($setting != 0) {
 		    </div>
 		</nav>
         <section class="welcome-text d-flex justify-content-center align-items-center flex-column">
-        	<img src="1.jpg" height="40%" width="150" style="border-radius: 50%;" >
-        	<h4>Welcome to <?=$setting['school_name']?></h4>
-        	<p><?=$setting['slogan']?></p>
-        
-        <div class="text-center text-light">
-        	Copyright &copy; <?=$setting['current_year']?> <?=$setting['school_name']?>. All rights reserved.
+        	<div class="contai">
+            <h1 style="color: white;">Success!</h1>
+            <p style="color: white;">Your email has been sent successfully. Please check your inbox.</p>
         </div>
-
-    	</div>
+        <a href="index.php" class="btn btn-primary mt-3">Go Back to Home</a>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>	
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-<?php }else {
-	header("Location: login.php");
-	exit;
-}  ?>

@@ -14,6 +14,10 @@ if (isset($_SESSION['teacher_id']) && isset($_SESSION['role'])) {
                 $score_2 = $_POST['score-2'];
                 $aoutof_2 = $_POST['aoutof-2'];
                 $score_3 = $_POST['score-3'];
+                $score_4 = $_POST['score-4'];
+                $aoutof_4 = $_POST['aoutof'];
+                $score_5 = $_POST['score-5'];
+                $aoutof_5 = $_POST['aoutof-5'];
                 $aoutof_3 = $_POST['aoutof-3'];
                 $attendance = $_POST['attendance'];
                 $comment = $_POST['comment'];
@@ -24,7 +28,7 @@ if (isset($_SESSION['teacher_id']) && isset($_SESSION['role'])) {
                 $teacher_id = $_SESSION['teacher_id'];
 
                 // Construct results string
-                $data = "$score_1/$aoutof_1, $score_2/$aoutof_2, $score_3/$aoutof_3, Attendance: $attendance, Comment: $comment";
+                $data = "$score_1/$aoutof_1, $score_2/$aoutof_2, $score_3/$aoutof_3, $score_4/$aoutof_4, $score_5/$aoutof_5, Attendance: $attendance, Comment: $comment";
                 
                 // Update or Insert data
                 try {

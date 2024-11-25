@@ -60,7 +60,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 header("Location: ../teacher-add.php?error=$em&$data");
                 exit;
             } else if (!unameIsUnique($uname, $conn)) {
-                $em = "Username is taken! try another";
+                $em = "Username is taken! Try another.";
                 header("Location: ../teacher-add.php?error=$em&$data");
                 exit;
             } else if (empty($pass)) {
@@ -71,80 +71,75 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 $em = "Address is required";
                 header("Location: ../teacher-add.php?error=$em&$data");
                 exit;
-            }else if (empty($phone_number)) {
+            } else if (empty($phone_number)) {
                 $em = "Phone number is required";
                 header("Location: ../teacher-add.php?error=$em&$data");
                 exit;
-            }else if (empty($email_address)) {
+            } else if (empty($email_address)) {
                 $em = "Email address is required";
                 header("Location: ../teacher-add.php?error=$em&$data");
                 exit;
             } else if (empty($gender)) {
-                $em = "Gender address is required";
+                $em = "Gender is required";
                 header("Location: ../teacher-add.php?error=$em&$data");
                 exit;
             } else if (empty($date_of_birth)) {
-                $em = "Date of birth address is required";
+                $em = "Date of birth is required";
                 header("Location: ../teacher-add.php?error=$em&$data");
                 exit;
             } else {
-               // Save the unhashed password in a separate variable
-$plain_pass = $pass;
+                // Save the unhashed password in a separate variable
+                $plain_pass = $pass;
 
-// Hash the password
-$hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
+                // Hash the password
+                $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
 
-// Insert the teacher data into the database
-$sql  = "INSERT INTO teachers(username, password, class, fname, lname, subjects, address, date_of_birth, phone_number, gender, email_address) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-$stmt = $conn->prepare($sql);
-$stmt->execute([$uname, $hashed_pass, $classes, $fname, $lname, $subjects, $address, $date_of_birth, $phone_number, $gender, $email_address]);
+                // Insert the teacher data into the database
+                $sql  = "INSERT INTO teachers(username, password, class, fname, lname, subjects, address, date_of_birth, phone_number, gender, email_address) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([$uname, $hashed_pass, $classes, $fname, $lname, $subjects, $address, $date_of_birth, $phone_number, $gender, $email_address]);
 
-// Prepare email content
-$to = $email_address;
-$subject = "Your Account Details";
-$message = "Hello $fname $lname,\n\n";
-$message .= "Your account has been created successfully. Here are your login details:\n";
-$message .= "Username: $uname\n";
-$message .= "Password: $plain_pass\n\n"; // Use the unhashed password here
-$message .= "Regards,\n";
-$message .= "Your School Admin";
+                // Prepare email content
+                $to = $email_address;
+                $subject = "Your Account Details";
+                $message = "Hello $fname $lname,\n\n";
+                $message .= "Your account has been created successfully. Here are your login details:\n";
+                $message .= "Username: $uname\n";
+                $message .= "Password: $plain_pass\n\n"; // Use the unhashed password here
+                $message .= "Regards,\n";
+                $message .= "Diopong Primary School Admin Team";
 
-// Initialize PHPMailer
-$mail = new PHPMailer(true);
-try {
-    //Server settings
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
-    $mail->SMTPAuth = true;
-    $mail->Username = 'malemamahlatse70@gmail.com'; // Your email
-    $mail->Password = 'cdbhkiurykowykqw'; // Your SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
+                // Initialize PHPMailer
+                $mail = new PHPMailer(true);
+                try {
+                    //Server settings
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'malemamahlatse70@gmail.com'; // Your email
+                    $mail->Password = 'cdbhkiurykowykqw'; // Your SMTP password
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port = 587;
 
-    //Recipients
-    $mail->setFrom('malemamahlatse70@gmail.com', 'School Admin');
-    $mail->addAddress($to, "$fname $lname");
+                    //Recipients
+                    $mail->setFrom('malemamahlatse70@gmail.com', 'School Admin');
+                    $mail->addAddress($to, "$fname $lname");
 
-    // Content
-    $mail->isHTML(false);
-    $mail->Subject = $subject;
-    $mail->Body = $message;
+                    // Content
+                    $mail->isHTML(false);
+                    $mail->Subject = $subject;
+                    $mail->Body = $message;
 
-    // Send email
-    if ($mail->send()) {
-        echo 'Message has been sent';
-    } else {
-        echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
-    }
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-}
+                    // Send email
+                    $mail->send();
+                } catch (Exception $e) {
+                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                }
 
-// Success message
-$sm = "New teacher registered successfully, and login details have been sent!";
-header("Location: ../teacher.php?success=$sm");
-exit;
-
+                // Success message
+                $sm = "New teacher registered successfully, and login details have been sent!";
+                header("Location: ../teacher.php?success=$sm");
+                exit;
             }
         } else {
             $em = "An error occurred";
@@ -159,3 +154,4 @@ exit;
     header("Location: ../../logout.php");
     exit;
 }
+?>

@@ -64,13 +64,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com'; // Your SMTP server
             $mail->SMTPAuth = true;
-            $mail->Username = 'malemamahlatse70@gmail.com';       // SMTP username
+            $mail->Username = 'wilmaoka28@gmail.com';       // SMTP username
             $mail->Password = 'cdbhkiurykowykqw';     // Your email password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
                     // Recipients
-                    $mail->setFrom('no-reply@yourdomain.com', 'Your School Name');  // Set the sender's email and name
+                    $mail->setFrom('no-reply@yourdomain.com', 'Diopong Primary School Admin Team');  // Set the sender's email and name
                     $mail->addAddress($email);  // Add the recipient's email address
 
                     // Content
@@ -82,11 +82,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <p>If you did not request a password reset, please ignore this email.</p>
                     END;
 
-                    $mail->send();  // Send the email
-                    echo "Reset email sent to: " . $email . "<br>"; // Debugging
-                } catch (Exception $e) {
-                    echo "Error sending email: " . $mail->ErrorInfo . "<br>"; // Debugging error message
-                }
+                    
+                        $mail->send();  // Send the email
+                        // Redirect to a new page after successful email send
+                        header("Location: success.php"); 
+                        exit; // Ensure no further code is executed after the redirect
+                    } catch (Exception $e) {
+                        // Redirect to an error page or show the error message
+                        header("Location: token_error.php" . urlencode($mail->ErrorInfo));
+                        exit;
+                    }
+                    
             } else {
                 echo "Error updating reset token for $email.<br>"; // Debugging
             }

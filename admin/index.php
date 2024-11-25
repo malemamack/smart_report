@@ -14,7 +14,7 @@
 	<title>Admin - Home</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/style.css">
-	<link rel="icon" href="../1.jpg">
+	<link rel="icon" href="../1.jpg" >
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -42,6 +42,12 @@
                 </a> 
                 <a href="course.php" class="col btn btn-primary m-2 py-3">
                     <i class="fa fa-book fs-1" aria-hidden="true"></i><br>Subjects
+                </a>
+                <a href="admin-change-password.php" class="col btn btn-primary m-2 py-3">
+                    <i class="fa fa-level-up fs-1" aria-hidden="true"></i><br>Change Password
+                </a> 
+                <a href="settings.php" class="col btn btn-primary m-2 py-3">
+                    <i class="fa fa-book fs-1" aria-hidden="true"></i><br>Settings
                 </a> 
                
             </div>
