@@ -27,6 +27,7 @@ if (isset($_SESSION['admin_id']) &&
         if ($students != 0) {
      ?>
      <div class="container mt-5">
+     <a href="index.php" class="btn btn-dark">Go Back</a>
         <a href="student-add.php"
            class="btn btn-dark">Add New Learner</a>
            <form action="student-search.php" 

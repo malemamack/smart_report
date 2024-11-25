@@ -33,6 +33,9 @@ if (isset($_SESSION['r_user_id']) &&
 </head>
 <body>
     <div class="container mt-5">
+
+    <a href="index.php" class="btn btn-dark">Go Back</a>
+
         <div class="card" style="width: 22rem;">
             <img src="../img/student-<?=$student['gender']?>.png" class="card-img-top" alt="Student Image">
             <div class="card-body">

@@ -26,6 +26,9 @@ if (isset($_SESSION['teacher_id']) &&
               class="shadow p-3 my-5 form-w" 
               action="req/teacher-change.php"
               id="change_password">
+        
+              <a href="index.php" class="btn btn-dark">Go Back</a>
+
         <h3>Change Password</h3><hr>
           <?php if (isset($_GET['perror'])) { ?>
             <div class="alert alert-danger" role="alert">

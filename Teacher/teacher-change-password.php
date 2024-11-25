@@ -46,6 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <?php 
         include "inc/navbar.php";
      ?>
+
+<a href="index.php" class="btn btn-dark">Go Back</a>
+
     <div class="container mt-5">
         <h3>Change Password</h3><hr>
         <?php if (isset($error)) { ?>

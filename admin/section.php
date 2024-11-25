@@ -26,6 +26,7 @@ if (isset($_SESSION['admin_id']) &&
         if ($sections != 0) {
      ?>
      <div class="container mt-5">
+     <a href="index.php" class="btn btn-dark">Go Back</a>
         <a href="section-add.php"
            class="btn btn-dark">Add New Section</a>
 

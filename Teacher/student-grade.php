@@ -53,6 +53,8 @@ if (isset($_SESSION['teacher_id']) &&
         if ($student != 0 && $setting !=0 && $subjects !=0 && $teacher_subjects != 0) {
      ?>
 
+<a href="index.php" class="btn btn-dark">Go Back</a>
+
      <div class="d-flex align-items-center flex-column"><br><br>
         <div class="login shadow p-3">
         <form method="post"

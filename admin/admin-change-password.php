@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
      ?>
     <div class="container mt-5">
+    <a href="index.php" class="btn btn-dark">Go Back</a>
         <h3>Change Password</h3><hr>
         <?php if (isset($error)) { ?>
             <div class="alert alert-danger" role="alert">

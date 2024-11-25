@@ -33,6 +33,8 @@ if (isset($_SESSION['teacher_id']) &&
      ?>
      <div class="container mt-5">
 
+     <a href="index.php" class="btn btn-dark">Go Back</a>
+
            <div class="table-responsive">
               <table class="table table-bordered mt-3 n-table">
                 <thead>

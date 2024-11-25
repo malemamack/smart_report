@@ -114,6 +114,9 @@ if (isset($_GET['student_id']) && is_numeric($_GET['student_id'])) {
 </head>
 <body>
 <?php include "inc/navbar.php"; ?>
+
+<a href="index.php" class="btn btn-dark">Go Back</a>
+
 <div class="container mt-5">
     <h2 class="text-center">Results for Learner: <?= htmlspecialchars($fname) ?> (ID: <?= htmlspecialchars($student_id) ?>)</h2>
     <div class="table-responsive" style="width: 90%; max-width: 900px; margin: auto;">

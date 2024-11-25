@@ -37,6 +37,8 @@ if (isset($_SESSION['teacher_id']) &&
         if ($students != 0) {
             $check = 0;
      ?>
+
+<a href="index.php" class="btn btn-dark">Go Back</a>
      
   <?php $i = 0; foreach ($students as $student ) { 
        $g = getGradeById($class['grade'], $conn);

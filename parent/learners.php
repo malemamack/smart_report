@@ -78,6 +78,7 @@ $result = $stmt->get_result();
         include "inc/navbar.php";
      ?>
     <div class="container mt-5">
+    <a href="index.php" class="btn btn-dark">Go Back</a>
         <h2 class="text-center">Your Learners</h2>
 
         <!-- Display Learners -->

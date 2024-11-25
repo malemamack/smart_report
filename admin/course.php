@@ -28,6 +28,7 @@ if (isset($_SESSION['admin_id']) &&
         if ($courses != 0) {
      ?>
      <div class="container mt-5">
+     <a href="index.php" class="btn btn-dark">Go Back</a>
         <a href="course-add.php"
            class="btn btn-dark">Add New Subject</a>
 
