@@ -165,7 +165,7 @@ body.otp-body {
 }
 
 .nav-link:hover {
-	color: #FFD700; /* Gold color for hover effect */
+	color: #0056b3; /* Gold color for hover effect */
 	text-decoration: underline; /* Optional underline on hover */
 	transition: color 0.3s ease-in-out;
   }

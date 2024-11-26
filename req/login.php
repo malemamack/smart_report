@@ -53,11 +53,13 @@ if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['role'])) {
             // Verify password
             if ($username === $uname && password_verify($pass, $password)) {
                 $_SESSION['role'] = $role;
+                $_SESSION['email'] = $email; // Store email in session for OTP sending
 
                 // Generate and send OTP for Admin, Parent, and Teacher roles
                 if ($role == 'Admin' || $role == 'Parent' || $role == 'Teacher') {
                     $otp = rand(100000, 999999); // Generate a 6-digit OTP
                     $_SESSION['otp'] = $otp; // Store OTP in session
+                    $_SESSION['otp_time'] = time(); // Store OTP generation time
                     $_SESSION['temp_user_id'] = $user[strtolower($role) . '_id'] ?? null; // Ensure role_id exists
                     
                     // Send OTP via PHPMailer
@@ -107,4 +109,3 @@ if (isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['role'])) {
     header("Location: ../login.php");
     exit;
 }
-?>

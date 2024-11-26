@@ -47,7 +47,7 @@ if ($setting != 0) {
         	<h4>Welcome to <?=$setting['school_name']?></h4>
         	<p><?=$setting['slogan']?></p>
         
-        <div class="text-center text-light">
+        <div class="text-center text-light" style="bottom:0;">
         	Copyright &copy; <?=$setting['current_year']?> <?=$setting['school_name']?>. All rights reserved.
         </div>
 
