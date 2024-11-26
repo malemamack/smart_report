@@ -405,7 +405,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT for table `registrar_office`
 --
 ALTER TABLE `registrar_office`
-  MODIFY `r_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `r_use_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `section`
