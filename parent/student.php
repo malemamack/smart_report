@@ -87,6 +87,7 @@ if (isset($_SESSION['teacher_id']) &&
                     </td>
                     <td><?=$student['lname']?></td>
                     <td><?=$student['username']?></td>
+                    
                     <td>
                       <?php 
                            $grade = $student['grade'];
