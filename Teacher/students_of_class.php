@@ -22,12 +22,12 @@ if (isset($_SESSION['teacher_id']) &&
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Teacher - Students</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../css/style.css">
-	<link rel="icon" href="../1.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher - Students</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../1.jpg">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -54,8 +54,9 @@ if (isset($_SESSION['teacher_id']) &&
                     <th scope="col">ID</th>
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
-                    <th scope="col">id_number</th>
+                    <th scope="col">ID Number</th>
                     <th scope="col">Grade</th>
+                    <th scope="col">View Results</th>
                   </tr>
                 </thead>
                 <tbody>  
@@ -80,6 +81,9 @@ if (isset($_SESSION['teacher_id']) &&
                             }
                         ?>
                     </td>
+                    <td>
+                      <a href="teacher_view_results.php?student_id=<?=$student['student_id']?>" class="btn btn-primary btn-sm">View Results</a>
+                    </td>
                   </tr>
                 <?php } } ?>
                 </tbody>
@@ -97,7 +101,7 @@ if (isset($_SESSION['teacher_id']) &&
         exit;
     } ?>
      
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>	
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>    
     <script>
         $(document).ready(function(){
              $("#navLinks li:nth-child(3) a").addClass('active');
@@ -113,8 +117,7 @@ if (isset($_SESSION['teacher_id']) &&
     exit;
   } 
 }else {
-	header("Location: ../login.php");
-	exit;
+    header("Location: ../login.php");
+    exit;
 } 
-
 ?>
