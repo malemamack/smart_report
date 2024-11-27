@@ -26,6 +26,125 @@ if (isset($_SESSION['admin_id']) &&
        if (isset($_GET['address'])) $address = $_GET['address'];
        if (isset($_GET['pn'])) $pn = $_GET['pn'];
        if (isset($_GET['email'])) $email = $_GET['email'];
+
+
+
+       if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $fname = $_POST['fname'] ?? '';
+    
+        // Validate to allow only letters and spaces
+        if (!preg_match('/^[A-Za-z\s]+$/', $fname)) {
+            echo "Invalid input. Only letters and spaces are allowed.";
+            // Handle the error (e.g., show a form with an error message)
+        } else {
+            // Proceed with the sanitized value
+            $fname = htmlspecialchars($fname, ENT_QUOTES, 'UTF-8');
+            // Save to database or process further
+        }
+    }
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+      $lname = $_POST['lname'] ?? '';
+  
+      // Validate to allow only letters and spaces
+      if (!preg_match('/^[A-Za-z\s]+$/', $lname)) {
+          echo "Invalid input. Only letters and spaces are allowed.";
+          // Handle the error (e.g., show a form with an error message)
+      } else {
+          // Proceed with the sanitized value
+          $fname = htmlspecialchars($lname, ENT_QUOTES, 'UTF-8');
+          // Save to database or process further
+      }
+  }
+
+  if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $username = $_POST['username'] ?? '';
+
+    // Validate username: only letters, numbers, and underscores, 3-20 characters
+    if (!preg_match('/^[A-Za-z0-9_]{5,20}$/@#&', $username)) {
+        echo "Invalid username. It must be 5-20 characters long and contain only letters, numbers, and underscores.";
+        // Handle the error appropriately
+    } else {
+        // Sanitize the input before using it
+        $username = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
+        // Save to database or process further
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  $address = $_POST['address'] ?? '';
+
+  // Trim whitespace
+  $address = trim($address);
+
+  // Check if the address is empty
+  if (empty($address)) {
+      echo "Address is required.";
+  } elseif (strlen($address) > 255) {
+      echo "Address must be 255 characters or less.";
+  } else {
+      // Sanitize the input before using or saving it
+      $address = htmlspecialchars($address, ENT_QUOTES, 'UTF-8');
+
+      // Save to database or process further
+      echo "Address is valid!";
+  }
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  $email_address = $_POST['email_address'] ?? '';
+
+  // Trim whitespace
+  $email_address = trim($email_address);
+
+  // Validate the email address
+  if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
+      echo "Invalid email address.";
+  } else {
+      // Sanitize and process the email address
+      $email_address = htmlspecialchars($email_address, ENT_QUOTES, 'UTF-8');
+      echo "Email address is valid!";
+      // Save to the database or proceed further
+  }
+}
+
+// if ($_SERVER["REQUEST_METHOD"] === "POST") {
+//   $phone_number = $_POST['phone_number'] ?? '';
+
+//   // Remove whitespace and sanitize input
+//   $phone_number = trim($phone_number);
+
+//   // Validate South African phone number format
+//   if (!preg_match('0,0[0-9]{9}$/', $phone_number)) {
+//       echo "Invalid phone number. It must start with 0 or 0 and contain 9 digits.";
+//   } else {
+//       // Sanitize and process the phone number
+//       $phone_number = htmlspecialchars($phone_number, ENT_QUOTES, 'UTF-8');
+//       echo "Phone number is valid!";
+//       // Save to the database or proceed further
+//   }
+// }
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  $email_address = $_POST['email_address'] ?? '';
+
+  // Trim whitespace
+  $email_address = trim($email_address);
+
+  // Validate the email address
+  if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
+      echo "Invalid email address.";
+  } else {
+      // Sanitize and process the email address
+      $email_address = htmlspecialchars($email_address, ENT_QUOTES, 'UTF-8');
+      echo "Email address is valid!";
+      // Save to the database or proceed further
+  }
+}
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,22 +193,37 @@ if (isset($_SESSION['admin_id']) &&
           <label class="form-label">First name</label>
           <input type="text" 
                  class="form-control"
-                 value="<?=$fname?>" 
-                 name="fname">
+                 id="fname"
+                 value="<?= htmlspecialchars($teacher['fname'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
+                 name="fname"
+                 pattern="[A-Za-z\s]+" 
+                 title="Please enter only letters" 
+                 maxlength="100"
+                 required>
         </div>
         <div class="mb-3">
           <label class="form-label">Last name</label>
           <input type="text" 
                  class="form-control"
-                 value="<?=$lname?>"
-                 name="lname">
+                 id="lname"
+                 value="<?= htmlspecialchars($teacher['lname'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
+                 name="lname"
+                 pattern="[A-Za-z\s]+" 
+                 title="Please enter only letters" 
+                 maxlength="100"
+                 required>
         </div>
         <div class="mb-3">
           <label class="form-label">Username</label>
           <input type="text" 
                  class="form-control"
-                 value="<?=$uname?>"
-                 name="username">
+                 id="uname"
+                 value="<?= htmlspecialchars($teacher['username'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
+                 name="username"
+                 pattern="^[A-Za-z0-9_]{5,20}$" 
+                 title="Username must be 5-20  characters long and can  contain only letters, numbers,  and underscores." 
+                 maxlength="20" 
+                 required>
         </div>
         <div class="mb-3">
           <label class="form-label">Password</label>
@@ -108,22 +242,35 @@ if (isset($_SESSION['admin_id']) &&
           <label class="form-label">Address</label>
           <input type="text" 
                  class="form-control"
-                 value="<?=$address?>"
-                 name="address">
+                 id="address"
+                  value="<?= htmlspecialchars($teacher['address'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                 name="address"
+                 maxlength="255" 
+                 required>
         </div>
         <div class="mb-3">
           <label class="form-label">Phone Number</label>
           <input type="text" 
                  class="form-control"
                  value="<?=$pn?>"
-                 name="phone_number">
+                 name="phone_number"
+                 id="phone numbers" 
+                 value="<?= htmlspecialchars($teacher['phone_number'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
+                 name="phone_number"
+                
+                maxlength="10" 
+                required>
         </div>
         <div class="mb-3">
           <label class="form-label">Email Address</label>
           <input type="text" 
                  class="form-control"
                  value="<?=$email?>"
-                 name="email_address">
+                 name="email_address"
+                 value="<?= htmlspecialchars($email_address) ?>" 
+                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                 title="Please enter a valid email address (e.g., example@example.com)" 
+                 required>
         </div>
         <div class="mb-3">
           <label class="form-label">Gender</label><br>

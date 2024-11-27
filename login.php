@@ -26,7 +26,13 @@
                     <?php } ?>
                     <div class="mb-3">
                         <label class="form-label">Username</label>
-                        <input type="text" class="form-control"  name="uname">
+                        <input type="text" class="form-control" 
+                        name="uname"
+                        value="<?= htmlspecialchars($uname ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                        pattern="[A-Za-z0-9._@$%!-()&]{5,20}" 
+                        maxlength="20" 
+                        title="Username must be 5-20 characters long and can only contain letters, numbers, underscores (_), and periods (.)"
+                        required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>
