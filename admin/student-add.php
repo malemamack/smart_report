@@ -20,6 +20,55 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         
         if (isset($_GET['id_number'])) $id_number = $_GET['id_number'];
         if (isset($_GET['contact'])) $contact = $_GET['contact'];
+
+
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $fname = $_POST['fname'] ?? '';
+        
+            // Validate to allow only letters and spaces
+            if (!preg_match('/^[A-Za-z\s]+$/', $fname)) {
+                echo "Invalid input. Only letters and spaces are allowed.";
+                // Handle the error (e.g., show a form with an error message)
+            } else {
+                // Proceed with the sanitized value
+                $fname = htmlspecialchars($fname, ENT_QUOTES, 'UTF-8');
+                // Save to database or process further
+            }
+        }
+    
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+          $lname = $_POST['lname'] ?? '';
+      
+          // Validate to allow only letters and spaces
+          if (!preg_match('/^[A-Za-z\s]+$/', $lname)) {
+              echo "Invalid input. Only letters and spaces are allowed.";
+              // Handle the error (e.g., show a form with an error message)
+          } else {
+              // Proceed with the sanitized value
+              $fname = htmlspecialchars($lname, ENT_QUOTES, 'UTF-8');
+              // Save to database or process further
+          }
+      }
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $id_number = $_POST['id_number'];
+            if (!preg_match("/^\d{13}$/", $id_number)) {
+                $error = "ID Number should be exactly 13 digits.";
+            } else {
+                // Process the form data
+            }
+        }
+
+        if (isset($_POST['email_address'])) {
+            $email_address = $_POST['email_address'];
+            if (filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
+                // Valid email
+            } else {
+                echo "Invalid email format.";
+            }
+        }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,33 +100,73 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <?php } ?>
             <div class="mb-3">
                 <label class="form-label">First name</label>
-                <input type="text" class="form-control" value="<?= $fname ?>" name="fname">
+                <input type="text" class="form-control" value="<?= $fname ?>" id="fname"
+                 value="<?= htmlspecialchars($parent['fname'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
+                 name="fname"
+                 pattern="[A-Za-z\s]+" 
+                 title="Please enter only letters" 
+                 maxlength="100"
+                 <?php if (!empty($error)): ?>
+                  <div class="error"><?=htmlspecialchars($error)?></div>
+                   <?php endif; ?>
+                 required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Last name</label>
-                <input type="text" class="form-control" value="<?= $lname ?>" name="lname">
+                <input type="text" class="form-control" 
+                value="<?= htmlspecialchars($parent['lname'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                 name="lname" pattern="[A-Za-z\s]+" 
+                 title="Please enter only letters" 
+                 maxlength="100"
+                 required
+                 <?php if (!empty($error)): ?>
+                 <div class="error"><?=htmlspecialchars($error)?></div>
+                <?php endif; ?>>
             </div>
             <div class="mb-3">
                 <label class="form-label">Address</label>
-                <input type="text" class="form-control" value="<?= $address ?>" name="address">
+                <input type="text" class="form-control" 
+                 value="<?= $address ?>" 
+                 name="address"  
+                 maxlength="255" 
+                 required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Email address</label>
-                <input type="email" class="form-control" value="<?= $email_address ?>" name="email_address">
+                <input type="email" 
+                 class="form-control" 
+                 value="<?= htmlspecialchars($email_address) ?>" 
+                 name="email_address" 
+                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                 title="Please enter a valid email address (e.g., example@example.com)" 
+                 required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Date of birth</label>
-                <input type="date" class="form-control" name="date_of_birth">
+                <input type="date" 
+                class="form-control" 
+                name="date_of_birth">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">ID Number</label>
-                <input type="text" class="form-control" value="<?= $id_number ?>" name="id_number">
+                <input type="text" 
+                 class="form-control" 
+                 name="id_number"
+                 value="<?= htmlspecialchars($id_number) ?>" 
+                 name="id_number"
+                 pattern="\d{13}" 
+                 title="ID Number should be exactly 13 digits.">
+             <?php if (!empty($error)): ?>
+             <div class="error"><?= htmlspecialchars($error) ?></div>
+             <?php endif; ?>  >
             </div>
             <div class="mb-3">
                 <label class="form-label">Contact Number</label>
-                <input type="text" class="form-control" value="<?= $contact ?>" name="contact">
-            </div><hr>
+                <input type="text" 
+                class="form-control" 
+                value="<?= htmlspecialchars($student['contact number'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
+                </div><hr>
             <div class="mb-3">
                 <label class="form-label">Gender</label><br>
                 <input type="radio" value="Male" checked name="gender"> Male

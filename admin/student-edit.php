@@ -24,6 +24,54 @@ if (isset($_SESSION['admin_id']) &&
        }
 
 
+       if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $fname = $_POST['fname'] ?? '';
+    
+        // Validate to allow only letters and spaces
+        if (!preg_match('/^[A-Za-z\s]+$/', $fname)) {
+            echo "Invalid input. Only letters and spaces are allowed.";
+            // Handle the error (e.g., show a form with an error message)
+        } else {
+            // Proceed with the sanitized value
+            $fname = htmlspecialchars($fname, ENT_QUOTES, 'UTF-8');
+            // Save to database or process further
+        }
+    }
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+      $lname = $_POST['lname'] ?? '';
+  
+      // Validate to allow only letters and spaces
+      if (!preg_match('/^[A-Za-z\s]+$/', $lname)) {
+          echo "Invalid input. Only letters and spaces are allowed.";
+          // Handle the error (e.g., show a form with an error message)
+      } else {
+          // Proceed with the sanitized value
+          $fname = htmlspecialchars($lname, ENT_QUOTES, 'UTF-8');
+          // Save to database or process further
+      }
+  }
+
+  if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $email_address = $_POST['email_address'] ?? '';
+  
+    // Trim whitespace
+    $email_address = trim($email_address);
+  
+    // Validate the email address
+    if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
+        echo "Invalid email address.";
+    } else {
+        // Sanitize and process the email address
+        $email_address = htmlspecialchars($email_address, ENT_QUOTES, 'UTF-8');
+        echo "Email address is valid!";
+        // Save to the database or proceed further
+    }
+  }
+
+  
+
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,29 +111,51 @@ if (isset($_SESSION['admin_id']) &&
           <label class="form-label">First name</label>
           <input type="text" 
                  class="form-control"
-                 value="<?=$student['fname']?>" 
-                 name="fname">
+                 id="fname"
+                 value="<?= htmlspecialchars($student['fname'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
+                 name="fname"
+                 pattern="[A-Za-z\s]+" 
+                 title="Please enter only letters" 
+                 maxlength="100"
+                 <?php if (!empty($error)): ?>
+                  <div class="error"><?=htmlspecialchars($error)?></div>
+                   <?php endif; ?>
+                 required>
         </div>
         <div class="mb-3">
           <label class="form-label">Last name</label>
           <input type="text" 
                  class="form-control"
-                 value="<?=$student['lname']?>"
-                 name="lname">
+                 id="lname"
+                 value="<?= htmlspecialchars($student['lname'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
+                 name="lname"
+                 pattern="[A-Za-z\s]+" 
+                 title="Please enter only letters" 
+                 maxlength="100"
+                 required
+                 <?php if (!empty($error)): ?>
+                 <div class="error"><?=htmlspecialchars($error)?></div>
+                <?php endif; ?>>
         </div>
         <div class="mb-3">
           <label class="form-label">Address</label>
           <input type="text" 
                  class="form-control"
-                 value="<?=$student['address']?>"
-                 name="address">
+                  id="address"
+                  value="<?= htmlspecialchars($student['address'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                 name="address"
+                 maxlength="255" 
+                 required>
         </div>
         <div class="mb-3">
           <label class="form-label">Email address</label>
           <input type="text" 
                  class="form-control"
-                 value="<?=$student['email_address']?>"
-                 name="email_address">
+                 id="email_address" 
+                 value="<?= htmlspecialchars($student['email_address'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
+                 name="email_address"
+                 maxlength="255" 
+                 required>
         </div>
         <div class="mb-3">
           <label class="form-label">Date of birth</label>
