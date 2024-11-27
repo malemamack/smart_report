@@ -166,7 +166,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                  name="fname" 
                  required pattern="[A-Za-z\s'-]" 
                  maxlength="50" 
-                 title="First name can only contain letters & spaces.">       
+                 title="First name can only contain letters & spaces."
+                 required>       
             </div>
             <div class="mb-3">
               <label class="form-label">Last name</label>
@@ -176,16 +177,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               name="lname" 
               required pattern="[A-Za-z\s'-]" 
               maxlength="50" 
-              title="Last name can only contain letters & spaces.">
+              title="Last name can only contain letters & spaces."
+              required>
             </div>
             <div class="mb-3">
               <label class="form-label">Username</label>
               <input type="text" 
               class="form-control" 
               value="<?= htmlspecialchars($uname ?? '', ENT_QUOTES, 'UTF-8') ?>" 
-              name="username" pattern="[A-Za-z0-9._@$%!-()&]{5,20}" 
+              name="username" 
+              pattern="[A-Za-z0-9._@$%!-()&]{5,20}" 
               maxlength="20" 
-              title="Username must be 5-20 characters long and can only contain letters, numbers, underscores (_), and periods (.)">
+              title="Username must be 5-20 characters long and can only contain letters, numbers, underscores (_), and periods (.)"
+              required>
             </div>
             <div class="mb-3">
               <label class="form-label">Password</label>
@@ -193,7 +197,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                    <input type="text" 
                    class="form-control" 
                    name="pass" 
-                   id="passInput">
+                   id="passInput"
+                   required>
 
                   <button class="btn btn-secondary" id="gBtn">Random</button>
               </div>
@@ -217,7 +222,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 value="<?= htmlspecialchars($id_number) ?>" 
                  name="id_number"
                  pattern="\d{13}" 
-                 title="ID Number should be exactly 13 digits.">
+                 title="ID Number should be exactly 13 digits."
+                 required>
              <?php if (!empty($error)): ?>
              <div class="error"><?= htmlspecialchars($error) ?></div>
              <?php endif; ?>>
@@ -227,7 +233,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <input type="text" 
                class="form-control" 
                value="<?=$pn?>" 
-               name="phone_number">
+               name="phone_number"
+               required>
             </div>
             <div class="mb-3">
               <label class="form-label">Email Address</label>

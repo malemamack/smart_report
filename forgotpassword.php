@@ -2,6 +2,26 @@
 include "DB_connection.php";
 include "data/setting.php";
 $setting = getSetting($conn);
+
+
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $email_address = $_POST['email_address'] ?? '';
+  
+    // Trim whitespace
+    $email_address = trim($email_address);
+  
+    // Validate the email address
+    if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
+        echo "Invalid email address.";
+    } else {
+        // Sanitize and process the email address
+        $email_address = htmlspecialchars($email_address, ENT_QUOTES, 'UTF-8');
+        echo "Email address is valid!";
+        // Save to the database or proceed further
+    }
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -106,7 +126,10 @@ $setting = getSetting($conn);
                             </div>
                             <h2>Forgot Password</h2>
                             <label for="email">Enter your email address:</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email"
+                            value="<?= htmlspecialchars($email_address) ?>"                 
+                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                             title="Please enter a valid email address (e.g., example@example.com)" required>
                             <input type="submit" value="Send">
                         </div>
                     </form>
