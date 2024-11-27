@@ -33,30 +33,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="1.png">
     <style>
-        .form-contai {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            width: 100%;
+        .contai {
             max-width: 400px;
+	width: 90%;
+	background: rgba(255,255,255, 0.5);
+	padding: 10px;
+	border-radius: 10px;
         }
         h2 {
             text-align: center;
             font-size: 24px;
             margin-bottom: 20px;
-            color: #333;
+            color: black;
         }
         label {
             font-size: 14px;
-            color: #555;
+            color: black;
             margin-bottom: 8px;
             display: block;
         }
-        input[type="email"], input[type="submit"] {
+        input[type="email"] {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
+            padding: 5px;
+            margin-bottom: 10px;
             border-radius: 5px;
             border: 1px solid #ddd;
             font-size: 16px;
@@ -75,9 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
+       
         #loader {
             position: absolute;
             top: 50%;
@@ -85,9 +82,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             transform: translate(-50%, -50%);
             z-index: 9999;
         }
+
+        .nav-link{
+	font-size: 20px;
+	font-weight: 500;
+	color: white;
+	}
     </style>
 </head>
-<body class="body-home">
+<body class="body-home" style="background-image: url(IMG_3108.jpg);">
     <div id="loader" class="d-none">
         <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -106,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                                <a class="nav-link" aria-current="page" href="index.php">Home</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav me-right mb-2 mb-lg-0">

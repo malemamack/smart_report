@@ -41,18 +41,15 @@ if (isset($_SESSION['parent_id']) && isset($_SESSION['role'])) {
     ?>
     <div class="container mt-5 d-flex justify-content-center">
         <div class="row text-center">
-            <a href="#" class="col btn btn-custom m-3 py-3">
+            <!-- <a href="#" class="col btn btn-custom m-3 py-3">
                 <i class="fa fa-user-plus fs-1" aria-hidden="true"></i><br>
                 Dashboard
-            </a> 
+            </a>  -->
             <a href="learners.php" class="col btn btn-custom m-3 py-3">
                 <i class="fa fa-user fs-1" aria-hidden="true"></i><br>
                 Your Learners
             </a> 
-            <a href="parent-change-password.php" class="col btn btn-custom m-3 py-3">
-                <i class="fa fa-user fs-1" aria-hidden="true"></i><br>
-                Change Password
-            </a> 
+            
         </div>
     </div>
     
