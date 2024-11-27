@@ -15,8 +15,39 @@ if ($setting != 0) {
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="icon" href="1.jpg">
+	<style>
+	.nav-link{
+	font-size: 20px;
+	font-weight: 500;
+	color: white;
+	}
+	.welcome-text p{
+	font-weight: 500;
+	font-size: 15px;
+	}
+
+	.welcome-text img{
+		height:60%;
+		width:200px;
+		border-radius: 50%;
+	}
+
+	.welcome-text{
+	margin: 5px;
+	}
+	.text-center{
+		padding-top: 35px;
+		font-weight: 300;
+	}
+
+	.body-home, .body-login {
+	background: url(../img/IMG_3108.jpg);
+	background-size: cover;
+	background-attachment: fixed;
+	}
+	</style>
 </head>
-<body class="body-home">
+<body class="body-home" style="background-image: url(IMG_3108.jpg);">
     <div class="black-fill"><br /> <br />
     	<div class="container">
     	<nav class="navbar navbar-expand-lg bg-light"
@@ -30,9 +61,7 @@ if ($setting != 0) {
 		    </button>
 		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-		        <li class="nav-item">
-		          <a class="nav-link active" aria-current="page" href="#">Home</a>
-		        </li>
+		       
 		      </ul>
 		      <ul class="navbar-nav me-right mb-2 mb-lg-0">
 		      	<li class="nav-item">
@@ -43,7 +72,7 @@ if ($setting != 0) {
 		    </div>
 		</nav>
         <section class="welcome-text d-flex justify-content-center align-items-center flex-column">
-        	<img src="1.jpg" height="40%" width="150" style="border-radius: 50%;" >
+        	<img src="1.jpg" >
         	<h4>Welcome to <?=$setting['school_name']?></h4>
         	<p><?=$setting['slogan']?></p>
         

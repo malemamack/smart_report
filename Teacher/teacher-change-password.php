@@ -27,7 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $new_password_hashed = password_hash($new_password, PASSWORD_DEFAULT);
             $stmt = $conn->prepare("UPDATE teachers SET password = ? WHERE teacher_id = ?");
             $stmt->execute([$new_password_hashed, $teacher_id]);
-            $success = "Password changed successfully.";
+
+            // Set success message in JavaScript
+            echo "<script>
+                    alert('Password changed successfully. You will be redirected to the login page.');
+                    window.location.href = '../login.php';
+                  </script>";
+            exit;
         } else {
             $error = "Old password is incorrect.";
         }
@@ -43,46 +49,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-<?php 
-        include "inc/navbar.php";
-     ?>
+<?php include "inc/navbar.php"; ?>
 
 <a href="index.php" class="btn btn-dark">Go Back</a>
 
-    <div class="container mt-5">
-        <h3>Change Password</h3><hr>
-        <?php if (isset($error)) { ?>
-            <div class="alert alert-danger" role="alert">
-                <?= $error ?>
-            </div>
-        <?php } ?>
-        <?php if (isset($success)) { ?>
-            <div class="alert alert-success" role="alert">
-                <?= $success ?>
-            </div>
-        <?php } ?>
-        <form method="post">
-            <div class="mb-3">
-                <label class="form-label">Old Password</label>
-                <input type="password" class="form-control" name="old_password" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">New Password</label>
-                <input type="password" class="form-control" name="new_password" required>
-                <small class="form-text text-muted">
-                    Password must be at least 8 characters long, 
-                    include an uppercase letter, 
-                    a lowercase letter, 
-                    a number, and 
-                    a special character.
-                </small>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Confirm New Password</label>
-                <input type="password" class="form-control" name="confirm_password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Change Password</button>
-        </form>
-    </div>
+<div class="container mt-5">
+    <h3>Change Password</h3><hr>
+    <?php if (isset($error)) { ?>
+        <div class="alert alert-danger" role="alert">
+            <?= htmlspecialchars($error) ?>
+        </div>
+    <?php } ?>
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label">Old Password</label>
+            <input type="password" class="form-control" name="old_password" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">New Password</label>
+            <input type="password" class="form-control" name="new_password" required>
+            <small class="form-text text-muted">
+                Password must be at least 8 characters long, 
+                include an uppercase letter, 
+                a lowercase letter, 
+                a number, and 
+                a special character.
+            </small>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Confirm New Password</label>
+            <input type="password" class="form-control" name="confirm_password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Change Password</button>
+    </form>
+</div>
 </body>
 </html>

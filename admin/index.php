@@ -43,9 +43,7 @@
                 <a href="course.php" class="col btn btn-primary m-2 py-3">
                     <i class="fa fa-book fs-1" aria-hidden="true"></i><br>Subjects
                 </a>
-                <a href="admin-change-password.php" class="col btn btn-primary m-2 py-3">
-                    <i class="fa fa-level-up fs-1" aria-hidden="true"></i><br>Change Password
-                </a> 
+                
                 <a href="settings.php" class="col btn btn-primary m-2 py-3">
                     <i class="fa fa-book fs-1" aria-hidden="true"></i><br>Settings
                 </a> 

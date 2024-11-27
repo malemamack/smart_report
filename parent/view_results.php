@@ -151,7 +151,7 @@ if (isset($_GET['student_id']) && is_numeric($_GET['student_id'])) {
                         } elseif (strpos($result, 'Comment') !== false) {
                             $comment = explode(': ', trim($result))[1];
                         } else {
-                            list($marks, $max) = explode(': ', trim($result));
+                            list($marks, $max) = explode(', ', trim($result));
                             $total += intval($marks);
                             $outOf += intval($max);
                             if (empty($test1)) {

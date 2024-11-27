@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="loading.css"> <!-- Add this line for loading spinner CSS -->
     <link rel="icon" href="1.jpg">
 </head>
-<body class="body-login">
+<body class="body-login" style="background-image: url(IMG_3108.jpg);">
     <div id="loader"><div class="loader-spinner"></div></div>
     <div id="content">
         <div class="black-fill"><br /><br />
@@ -26,7 +26,7 @@
                     <?php } ?>
                     <div class="mb-3">
                         <label class="form-label">Username</label>
-                        <input type="text" class="form-control" name="uname">
+                        <input type="text" class="form-control"  name="uname">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>
@@ -47,7 +47,7 @@
                 </form>
                 <br /><br />
                 <div class="text-center text-light">
-                    Copyright &copy; 2022 Diopong Primary School. All rights reserved.
+                    Copyright &copy; 2024 Diopong Primary School. All rights reserved.
                 </div>
             </div>
         </div>

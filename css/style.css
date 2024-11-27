@@ -1,12 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 .body-home, .body-login {
-	background: url(../img/1.jpg);
+	
 	background-size: cover;
 	background-attachment: fixed;
 }
 .black-fill {
 	background: rgba(0,0,0, 0.7);
 	min-height: 100vh;
+	font-weight: bold;
+}
+
+.black-fill select{
+	font-weight: bold;
+}
+
+.black-fill button{
+	font-weight: bold;
+}
+
+.black-fill .btn{
+	font-weight: bold;
+	background-color: rgba(0,0,0, 0.6);
+}
+
+.black-fill .btn:hover{
+	 background-color: rgba(0,0,0, 0.3);;
+
+}
+
+/* .black-fill Button:hover{
+	background-color:  rgba(11, 235, 67);
+} */
+
+.black-fill .mb-3 input{
+	font-weight: bold;
 }
 #homeNav {
 	background: rgba(255,255,255, 0.5) !important;
@@ -27,36 +54,9 @@
 	color: #222;
 	background: rgba(255,255,255, 0.5);
 	padding: 5px;
+	font-weight: 500;
+	font-size: 50px;
 	border-radius: 4px;
-}
-#about {
-	min-height: 100vh;
-}
-#about .card-1{
-	max-width: 600px;
-	width: 90%;
-	background: rgba(255,255,255, 0.5);
-	padding: 20px;
-	border-radius: 5px;
-}
-#about .card-1 h5{
-	font-family: 'Lobster', cursive;
-	font-size: 28px;
-}
-
-#contact {
-	min-height: 100vh;
-}
-#contact form{
-	max-width: 600px;
-	width: 90%;
-	background: rgba(10, 10, 10, 0.5);
-	padding: 20px;
-	border-radius: 5px;
-}
-#contact form h3 {
-	text-align: center;
-	font-family: 'Lobster', cursive;
 }
 textarea {
 	resize: none;
@@ -84,54 +84,7 @@ textarea {
 	width: 100%;
 }
 
-/* Set background color to black */
-body.otp-body {
-    background-color: black;
-    height: 100vh;
-    margin: 0;
-}
 
-/* Center the container in the middle of the screen */
-.otp-black-fill {
-    background-color: black; /* black background */
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Create a white box/container for the OTP content */
-.otp-container {
-    background-color: white; /* white background for container */
-    padding: 40px;
-    border-radius: 10px; /* rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
-    width: 100%;
-    max-width: 400px; /* max width of the container */
-}
-
-/* Style the OTP input field */
-.otp-input {
-    font-size: 1.2rem;
-    padding: 10px;
-}
-
-/* Style the OTP title */
-.otp-title {
-    font-size: 1.6rem;
-    font-weight: bold;
-}
-
-/* Style the OTP buttons */
-.otp-btn {
-    padding: 10px 20px;
-}
-
-/* Style for OTP error message */
-.otp-error {
-    margin-top: 10px;
-    color: red;
-}
 
 .btn-primary {
     background-color: #0056b3 !important;
@@ -169,4 +122,6 @@ body.otp-body {
 	text-decoration: underline; /* Optional underline on hover */
 	transition: color 0.3s ease-in-out;
   }
+
+
   
