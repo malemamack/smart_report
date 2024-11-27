@@ -243,7 +243,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 value="<?=$email?>" 
                 name="email_address"
                 value="<?= htmlspecialchars($email_address) ?>" 
-                 name="email_address" 
                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
                  title="Please enter a valid email address (e.g., example@example.com)" 
                  required>
