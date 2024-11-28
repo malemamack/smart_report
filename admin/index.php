@@ -45,8 +45,13 @@
                 </a>
                 
                 <a href="settings.php" class="col btn btn-primary m-2 py-3">
-                    <i class="fa fa-book fs-1" aria-hidden="true"></i><br>Settings
+                    <i class="fa fa-gear fs-1" aria-hidden="true"></i><br>Settings
                 </a> 
+
+                <a href="admin-change-password.php" class="col btn btn-primary m-2 py-3">
+                    <i class="fa fa-lock fs-1" aria-hidden="true"></i><br>change-password
+                </a> 
+                
                
             </div>
         </div>
