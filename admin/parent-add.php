@@ -162,7 +162,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <label class="form-label">First name</label>
               <input type="text" 
                  class="form-control" 
-                 value="<?= htmlspecialchars($fname ?? '', ENT_QUOTES, 'UTF-8')?>" 
+                 value="<?= htmlspecialchars($parent['fname'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
                  name="fname" 
                  required pattern="[A-Za-z\s'-]" 
                  maxlength="50" 
@@ -173,7 +173,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <label class="form-label">Last name</label>
               <input type="text" 
               class="form-control" 
-              value="<?= htmlspecialchars($Lname ?? '', ENT_QUOTES, 'UTF-8')?>" 
+             value="<?= htmlspecialchars($parent['lname'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
               name="lname" 
               required pattern="[A-Za-z\s'-]" 
               maxlength="50" 
@@ -184,7 +184,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <label class="form-label">Username</label>
               <input type="text" 
               class="form-control" 
-              value="<?= htmlspecialchars($uname ?? '', ENT_QUOTES, 'UTF-8') ?>" 
+              value="<?= htmlspecialchars($parent['username'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
               name="username" 
               pattern="[A-Za-z0-9._@$%!-()&]{5,20}" 
               maxlength="20" 
@@ -208,7 +208,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <input type="text" 
               class="form-control" 
                  name="address"
-                 value="<?= htmlspecialchars($r_user['address'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                 value="<?= htmlspecialchars($parent['address'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
                  name="address"
                  maxlength="255" 
                  required>
@@ -217,22 +217,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <label class="form-label">ID Number</label>
               <input type="text" 
                 class="form-control" 
-                value="<?=$r_user['id_number']??''?>" 
+                
                 name="id_number"
-                value="<?= htmlspecialchars($id_number) ?>" 
-                 name="id_number"
+                value="<?= htmlspecialchars($parent['$id_number'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
                  pattern="\d{13}" 
                  title="ID Number should be exactly 13 digits."
                  required>
-             <?php if (!empty($error)): ?>
-             <div class="error"><?= htmlspecialchars($error) ?></div>
-             <?php endif; ?>>
+             
             </div>
             <div class="mb-3">
               <label class="form-label">Phone Number</label>
               <input type="text" 
                class="form-control" 
-               value="<?=$pn?>" 
+               value="<?= htmlspecialchars($parent['$phone_number'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
                name="phone_number"
                required>
             </div>
@@ -242,7 +239,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 class="form-control" 
                 value="<?=$email?>" 
                 name="email_address"
-                value="<?= htmlspecialchars($email_address) ?>" 
+                value="<?= htmlspecialchars($student['$email_parent'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
                  title="Please enter a valid email address (e.g., example@example.com)" 
                  required>
