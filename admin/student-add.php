@@ -6,6 +6,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         include "data/grade.php";
         include "data/section.php";
         include "data/student.php";
+
+        $fname = '';
+        $lname = '';
+        $address = '';
+        $contact = '';
+        $email = '';
+        $id_number = '';
         
         $grades = getAllGrades($conn);
         $sections = getAllSections($conn);
@@ -22,51 +29,86 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         if (isset($_GET['contact'])) $contact = $_GET['contact'];
 
 
+        $errors = [];
+        $fname = $lname = $address = $email_address = $id_number = $contact = $parent_id = '';
+        $date_of_birth = '';
+
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $fname = $_POST['fname'] ?? '';
-        
-            // Validate to allow only letters and spaces
-            if (!preg_match('/^[A-Za-z\s]+$/', $fname)) {
-                echo "Invalid input. Only letters and spaces are allowed.";
-                // Handle the error (e.g., show a form with an error message)
-            } else {
-                // Proceed with the sanitized value
-                $fname = htmlspecialchars($fname, ENT_QUOTES, 'UTF-8');
-                // Save to database or process further
-            }
-        }
+            // Sanitize inputs
+            $fname = trim($_POST['fname'] ?? '');
+            $lname = trim($_POST['lname'] ?? '');
+            $address = trim($_POST['address'] ?? '');
+            $email_address = trim($_POST['email_address'] ?? '');
+            $id_number = trim($_POST['id_number'] ?? '');
+            $contact = trim($_POST['contact'] ?? '');
+            $parent_id = $_POST['parent_id'] ?? '';
+            $date_of_birth = $_POST['date_of_birth'] ?? '';
     
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-          $lname = $_POST['lname'] ?? '';
-      
-          // Validate to allow only letters and spaces
-          if (!preg_match('/^[A-Za-z\s]+$/', $lname)) {
-              echo "Invalid input. Only letters and spaces are allowed.";
-              // Handle the error (e.g., show a form with an error message)
-          } else {
-              // Proceed with the sanitized value
-              $fname = htmlspecialchars($lname, ENT_QUOTES, 'UTF-8');
-              // Save to database or process further
-          }
-      }
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $id_number = $_POST['id_number'];
+            // Validate inputs
+            if (!preg_match('/^[A-Za-z\s]+$/', $fname)) {
+                $errors[] = "First name must contain only letters and spaces.";
+            }
+    
+            if (!preg_match('/^[A-Za-z\s]+$/', $lname)) {
+                $errors[] = "Last name must contain only letters and spaces.";
+            }
+    
+            if (empty($address)) {
+                $errors[] = "Address is required.";
+            }
+    
+            if (!filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
+                $errors[] = "Invalid email format.";
+            }
+    
             if (!preg_match("/^\d{13}$/", $id_number)) {
-                $error = "ID Number should be exactly 13 digits.";
+                $errors[] = "ID Number should be exactly 13 digits.";
+            }
+    
+            if (!preg_match("/^\d{10}$/", $contact)) {
+                $errors[] = "Contact number must be 10 digits.";
+            }
+    
+            if (empty($parent_id) || $parent_id === '0') {
+                $errors[] = "Please select a parent.";
+            }
+    
+            if (empty($date_of_birth)) {
+                $errors[] = "Date of birth is required.";
             } else {
-                // Process the form data
+                function saveStudent($conn, $fname, $lname, $address, $email, $id_number, $contact, $parent_id, $dob) {
+                    try {
+                        $sql = "INSERT INTO students (first_name, last_name, address, email, id_number, contact, parent_id, date_of_birth) 
+                                VALUES (:fname, :lname, :address, :email, :id_number, :contact, :parent_id, :dob)";
+                        
+                        $stmt = $conn->prepare($sql);
+                
+                        // Bind parameters with data types
+                        $stmt->bindValue(':fname', $fname, PDO::PARAM_STR);
+                        $stmt->bindValue(':lname', $lname, PDO::PARAM_STR);
+                        $stmt->bindValue(':address', $address, PDO::PARAM_STR);
+                        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+                        $stmt->bindValue(':id_number', $id_number, PDO::PARAM_STR);
+                        $stmt->bindValue(':contact', $contact, PDO::PARAM_STR);
+                        $stmt->bindValue(':parent_id', $parent_id, PDO::PARAM_INT);
+                        $stmt->bindValue(':dob', $dob, PDO::PARAM_STR);
+                
+                        // Execute query
+                        if ($stmt->execute()) {
+                            return true; // Success
+                        } else {
+                            return false; // Failed
+                        }
+                    } catch (PDOException $e) {
+                        // Log the error or return a meaningful message
+                        error_log("Database Error: " . $e->getMessage());
+                        return false;
+                    }
+                }
             }
         }
-
-        if (isset($_POST['email_address'])) {
-            $email_address = $_POST['email_address'];
-            if (filter_var($email_address, FILTER_VALIDATE_EMAIL)) {
-                // Valid email
-            } else {
-                echo "Invalid email format.";
-            }
-        }
+        
+    
 
 
 ?>
@@ -100,47 +142,42 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <?php } ?>
             <div class="mb-3">
                 <label class="form-label">First name</label>
-                <input type="text" class="form-control" value="<?= $fname ?>" id="fname"
-                 value="<?= htmlspecialchars($parent['fname'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
+                <input type="text" class="form-control"  
+                id="fname"
+                 value="<?= htmlspecialchars($student['fname'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
                  name="fname"
                  pattern="[A-Za-z\s]+" 
                  title="Please enter only letters" 
                  maxlength="100"
-                 <?php if (!empty($error)): ?>
-                  <div class="error"><?=htmlspecialchars($error)?></div>
-                   <?php endif; ?>
+                
                  required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Last name</label>
                 <input type="text" class="form-control" 
-                value="<?= htmlspecialchars($parent['lname'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                value="<?= htmlspecialchars($student['lname'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
                  name="lname" pattern="[A-Za-z\s]+" 
                  title="Please enter only letters" 
                  maxlength="100"
-                 required
-                 <?php if (!empty($error)): ?>
-                 <div class="error"><?=htmlspecialchars($error)?></div>
-                <?php endif; ?>>
+                 required>
+                
             </div>
             <div class="mb-3">
                 <label class="form-label">Address</label>
                 <input type="text" class="form-control" 
-                 value="<?= $address ?>" 
+                 value="<?= htmlspecialchars($student['address'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
                  name="address"  
                  maxlength="255" 
                  required>
             </div>
             <div class="mb-3">
-                <label class="form-label">Email address</label>
-                <input type="email" 
-                 class="form-control" 
-                 value="<?= htmlspecialchars($email_address) ?>" 
-                 name="email_address" 
-                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
-                 title="Please enter a valid email address (e.g., example@example.com)" 
-                 required>
-            </div>
+    <label class="form-label">Email Address</label>
+    <input type="email" 
+        class="form-control" 
+        name="email_address" 
+        value="<?= htmlspecialchars($student['email_address'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
+        required>
+</div>
             <div class="mb-3">
                 <label class="form-label">Date of birth</label>
                 <input type="date" 
@@ -153,20 +190,23 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 <input type="text" 
                  class="form-control" 
                  name="id_number"
-                 value="<?= htmlspecialchars($id_number) ?>" 
+                 value="<?= htmlspecialchars($student['id_number'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
                  name="id_number"
                  pattern="\d{13}" 
                  title="ID Number should be exactly 13 digits.">
              <?php if (!empty($error)): ?>
              <div class="error"><?= htmlspecialchars($error) ?></div>
-             <?php endif; ?>  >
+             <?php endif; ?>  
             </div>
             <div class="mb-3">
-                <label class="form-label">Contact Number</label>
-                <input type="text" 
-                class="form-control" 
-                value="<?= htmlspecialchars($student['contact number'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
-                </div><hr>
+    <label class="form-label">Contact Number</label>
+    <input type="text" 
+        class="form-control" 
+        name="contact"
+        value="<?= htmlspecialchars($student['contact'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
+        pattern="\d{10}" 
+        title="Contact number must be exactly 10 digits." 
+        required><hr>
             <div class="mb-3">
                 <label class="form-label">Gender</label><br>
                 <input type="radio" value="Male" checked name="gender"> Male
@@ -180,7 +220,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 <div class="row row-cols-5">
                     <?php foreach ($grades as $grade): ?>
                         <div class="col">
-                            <input type="radio" name="grade" value="<?= $grade['grade_id'] ?>">
+                            <input type="radio" 
+                            name="grade" 
+                            value="<?= $grade['grade_id'] ?>">
                             <?= $grade['grade_code'] ?>-<?= $grade['grade'] ?>
                         </div>
                     <?php endforeach ?>
@@ -191,7 +233,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 <div class="row row-cols-5">
                     <?php foreach ($sections as $section): ?>
                         <div class="col">
-                            <input type="radio" name="section" value="<?= $section['section_id'] ?>">
+                            <input type="radio" 
+                             name="section" 
+                             value="<?= $section['section_id'] ?>">
                             <?= $section['section'] ?>
                         </div>
                     <?php endforeach ?>
