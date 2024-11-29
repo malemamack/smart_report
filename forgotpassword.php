@@ -3,7 +3,7 @@ include "DB_connection.php";
 include "data/setting.php";
 $setting = getSetting($conn);
 
-
+$email_address='';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email_address = $_POST['email_address'] ?? '';
