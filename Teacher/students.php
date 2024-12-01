@@ -26,7 +26,8 @@ if (isset($_SESSION['teacher_id']) &&
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body class="body-login" style="background-image: url(../2.jpg);">
+  <div style="background: rgba(0,0,0, 0.7);">
     <?php 
         include "inc/navbar.php";
         if ($classes != 0) {
@@ -36,7 +37,7 @@ if (isset($_SESSION['teacher_id']) &&
      <a href="index.php" class="btn btn-dark">Go Back</a>
 
            <div class="table-responsive">
-              <table class="table table-bordered mt-3 n-table">
+              <table class="table table-bordered mt-3 n-table" style="background-color: white;">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -81,14 +82,14 @@ if (isset($_SESSION['teacher_id']) &&
               </div>
          <?php } ?>
      </div>
-     
+     </div> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>    
     <script>
         $(document).ready(function(){
              $("#navLinks li:nth-child(3) a").addClass('active');
         });
     </script>
-
+  
 </body>
 </html>
 <?php 

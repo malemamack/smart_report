@@ -1,7 +1,6 @@
 <?php
 session_start();
 if (isset($_SESSION['teacher_id']) && isset($_SESSION['role'])) {
-
     if ($_SESSION['role'] == 'Teacher') {
         include "../DB_connection.php";
         include "data/student.php";
@@ -24,8 +23,8 @@ if (isset($_SESSION['teacher_id']) && isset($_SESSION['role'])) {
         $teacher_subjects = str_split(trim($teacher['subjects']));
         $setting = getSetting($conn);
         
-        // Function to get results for a specific student under the teacher's subjects
-        function getResultsByStudent($teacher_subjects, $student_id, $setting, $conn) {
+        // Function to get results for a specific student
+        function getAllResultsByStudent($student_id, $teacher_subjects, $setting, $conn) {
             $results = [];
             foreach ($teacher_subjects as $subject_id) {
                 $sql = "SELECT ss.*, s.fname AS student_fname, s.lname AS student_lname, subj.subject_code 
@@ -48,7 +47,22 @@ if (isset($_SESSION['teacher_id']) && isset($_SESSION['role'])) {
             return $results;
         }
 
-        $results = getResultsByStudent($teacher_subjects, $student_id, $setting, $conn);
+        $results = getAllResultsByStudent($student_id, $teacher_subjects, $setting, $conn);
+
+        // Function to calculate grade based on total score
+        function gradeCalc($total) {
+            if ($total >= 80) {
+                return 'A';
+            } elseif ($total >= 70) {
+                return 'B';
+            } elseif ($total >= 60) {
+                return 'C';
+            } elseif ($total >= 50) {
+                return 'D';
+            } else {
+                return 'F';
+            }
+        }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,6 +89,9 @@ if (isset($_SESSION['teacher_id']) && isset($_SESSION['role'])) {
         table {
             border-collapse: collapse; /* Neater table appearance */
             width: 100%;
+        }
+        .active {
+            color: #0056b3 !important;
         }
     </style>
 </head>
@@ -145,7 +162,7 @@ if (isset($_SESSION['teacher_id']) && isset($_SESSION['role'])) {
                                 <td><?= htmlspecialchars(gradeCalc($total)) ?></td>
                                 <td><?= htmlspecialchars($result['semester']) ?></td>
                                 <td><?= htmlspecialchars($result['year']) ?></td>
-                                <td><button href="edit_score.php?student_id=<?= $student_id ?>&subject_id=<?= $result['subject_id'] ?>" class="btn btn-secondary btn-sm">Edit</button></td>
+                                <td><a href="edit_score.php?student_id=<?= $student_id ?>&subject_id=<?= $result['subject_id'] ?>" class="btn btn-secondary btn-sm">Edit</a></td>
                             </tr>
                         <?php
                         }
@@ -174,4 +191,4 @@ if (isset($_SESSION['teacher_id']) && isset($_SESSION['role'])) {
     exit;
 }
 $conn = null;
-?>
+?>  

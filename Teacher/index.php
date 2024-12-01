@@ -33,11 +33,13 @@ if (isset($_SESSION['teacher_id']) && $_SESSION['role'] == 'Teacher') {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body class="body-login" style="background-image: url(../2.jpg); ">
+  
+    <div style="background: rgba(0,0,0, 0.7);">
     <?php include "inc/navbar.php"; ?>
-    <div class="container mt-5">
-        <div class="card" style="width: 22rem;">
-            <img src="../img/teacher-<?=$teacher['gender']?>.png" class="card-img-top" alt="Teacher Image">
+    <div class="container mt-5" >
+        <div class="card" style="width: 35rem; text-align:center; justify-self: center;">
+            <img src="../img/teacher-<?=$teacher['gender']?>.png" width="22px" class="card-img-top" alt="Teacher Image">
             <div class="card-body">
                 <h5 class="card-title text-center">@<?=$teacher['username']?></h5>
             </div>
@@ -81,6 +83,7 @@ if (isset($_SESSION['teacher_id']) && $_SESSION['role'] == 'Teacher') {
                 </li>
             </ul>
         </div>
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
