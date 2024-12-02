@@ -122,7 +122,7 @@ $result = $stmt->get_result();
 
         <!-- Back Button -->
         <div class="text-center mt-4">
-            <a href="index.php" class="btn btn-back">Back</a>
+            <!-- <a href="index.php" class="btn btn-back">Back</a> -->
         </div>
     </div>
 
