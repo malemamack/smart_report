@@ -89,13 +89,46 @@ if (isset($_SESSION['teacher_id']) && isset($_SESSION['role'])) {
         table {
             border-collapse: collapse; /* Neater table appearance */
             width: 100%;
+            background-color: rgba(255, 255, 255, 0.7); font-weight: 600; font-size:13px;
         }
         .active {
             color: #0056b3 !important;
         }
+        .background-image-container {
+    position: relative; /* Needed to position the overlay */
+    background-image: url(../2.jpg);
+    background-size: cover; /* Ensures the image covers the entire container */
+    background-position: center; /* Centers the image */
+    height: 100vh; /* Example height, adjust as needed */
+    width: 100%; /* Example width, adjust as needed */
+    overflow: hidden;
+}
+
+.background-image-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Overlay color */
+    z-index: 1; /* Ensures the overlay is above the image */
+}
+.content {
+    position: relative; /* Needed to make it appear above the overlay */
+    z-index: 2; /* Places content above the overlay */
+   
+}
+
+h2{
+    color: rgba(255, 255, 255, 0.8);
+}
     </style>
 </head>
-<body>
+<body class="body-login">
+
+  <div class="background-image-container">
+    <div class="content">
     <?php include "inc/navbar.php"; ?>
     <div class="container mt-5">
         <?php if (!empty($results)) { ?>
