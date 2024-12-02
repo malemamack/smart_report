@@ -43,9 +43,9 @@
         </li>
       </ul>
       <ul class="navbar-nav me-right mb-2 mb-lg-0">
-      <li class="nav-item">
+      <!-- <li class="nav-item">
           <a class="nav-link" href="admin-change-password.php">Password Change</a>
-        </li>  
+        </li>   -->
       <li class="nav-item">
           <a class="nav-link" href="../logout.php">Logout</a>
         </li>

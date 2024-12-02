@@ -44,7 +44,7 @@ if (isset($_SESSION['admin_id']) &&
           }
       
           // Validate the input format
-          if (!preg_match('/^[A-Za-z0-9\s]', $grade)) {
+          if (!preg_match('/^[A-Za-z0-9]+$/', $grade)) {
               echo "Error: Invalid Grade. Only letters, numbers, and spaces are allowed.";
               exit;
           }
