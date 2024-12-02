@@ -1,0 +1,100 @@
+0000000000000000000000000000000000000000 a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 malemamack <malemamack@gmail.com> 1731497452 +0200	commit (initial): first commit
+a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 malemamack <malemamack@gmail.com> 1731497578 +0200	checkout: moving from main to dev-branch
+a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 malemamack <malemamack@gmail.com> 1731497984 +0200	checkout: moving from dev-branch to dev-branch
+a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 malemamack <malemamack@gmail.com> 1731498030 +0200	checkout: moving from dev-branch to mahlatse
+a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 malemamack <malemamack@gmail.com> 1731498052 +0200	checkout: moving from mahlatse to main
+a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 malemamack <malemamack@gmail.com> 1731498376 +0200	checkout: moving from main to mahlatse
+a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 8b5051fc117c1ebc58ee86978b59a6bee4976387 malemamack <malemamack@gmail.com> 1731502002 +0200	commit: verify otp styling
+8b5051fc117c1ebc58ee86978b59a6bee4976387 515eecc55affe2af4f2bf8c710a1db370b79f8c3 malemamack <malemamack@gmail.com> 1731929597 +0200	commit: otp, parent, teacher register and view report and parent dashboard
+515eecc55affe2af4f2bf8c710a1db370b79f8c3 a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 malemamack <malemamack@gmail.com> 1731929884 +0200	checkout: moving from mahlatse to dev-branch
+a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 515eecc55affe2af4f2bf8c710a1db370b79f8c3 malemamack <malemamack@gmail.com> 1731929913 +0200	pull origin mahlatse: Fast-forward
+515eecc55affe2af4f2bf8c710a1db370b79f8c3 13bbefd667e6d31dc3a3ba03e2a579f53aaf67da malemamack <malemamack@gmail.com> 1731935546 +0200	commit: otp styling
+13bbefd667e6d31dc3a3ba03e2a579f53aaf67da 515eecc55affe2af4f2bf8c710a1db370b79f8c3 malemamack <malemamack@gmail.com> 1731935573 +0200	checkout: moving from dev-branch to mahlatse
+515eecc55affe2af4f2bf8c710a1db370b79f8c3 13bbefd667e6d31dc3a3ba03e2a579f53aaf67da malemamack <malemamack@gmail.com> 1731935619 +0200	checkout: moving from mahlatse to dev-branch
+13bbefd667e6d31dc3a3ba03e2a579f53aaf67da 13bbefd667e6d31dc3a3ba03e2a579f53aaf67da malemamack <malemamack@gmail.com> 1731935688 +0200	checkout: moving from dev-branch to dev-branch
+13bbefd667e6d31dc3a3ba03e2a579f53aaf67da 515eecc55affe2af4f2bf8c710a1db370b79f8c3 malemamack <malemamack@gmail.com> 1732013056 +0200	checkout: moving from dev-branch to mahlatse
+515eecc55affe2af4f2bf8c710a1db370b79f8c3 a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 malemamack <malemamack@gmail.com> 1732013134 +0200	checkout: moving from mahlatse to main
+a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 515eecc55affe2af4f2bf8c710a1db370b79f8c3 malemamack <malemamack@gmail.com> 1732013170 +0200	checkout: moving from main to mahlatse
+515eecc55affe2af4f2bf8c710a1db370b79f8c3 29e1e6a8578306c290bb804fd405b3442d6e06e4 malemamack <malemamack@gmail.com> 1732013444 +0200	checkout: moving from mahlatse to develop
+29e1e6a8578306c290bb804fd405b3442d6e06e4 602506dc533235d039f1ea0155d331691eb5403e malemamack <malemamack@gmail.com> 1732014135 +0200	commit: teacher_add hashed password changed to normal password
+602506dc533235d039f1ea0155d331691eb5403e 515eecc55affe2af4f2bf8c710a1db370b79f8c3 malemamack <malemamack@gmail.com> 1732014175 +0200	checkout: moving from develop to mahlatse
+515eecc55affe2af4f2bf8c710a1db370b79f8c3 602506dc533235d039f1ea0155d331691eb5403e malemamack <malemamack@gmail.com> 1732014201 +0200	checkout: moving from mahlatse to develop
+602506dc533235d039f1ea0155d331691eb5403e 515eecc55affe2af4f2bf8c710a1db370b79f8c3 malemamack <malemamack@gmail.com> 1732014343 +0200	checkout: moving from develop to mahlatse
+515eecc55affe2af4f2bf8c710a1db370b79f8c3 602506dc533235d039f1ea0155d331691eb5403e malemamack <malemamack@gmail.com> 1732014362 +0200	merge develop: Fast-forward
+602506dc533235d039f1ea0155d331691eb5403e 602506dc533235d039f1ea0155d331691eb5403e malemamack <malemamack@gmail.com> 1732014554 +0200	checkout: moving from mahlatse to develop
+602506dc533235d039f1ea0155d331691eb5403e 602506dc533235d039f1ea0155d331691eb5403e malemamack <malemamack@gmail.com> 1732014889 +0200	checkout: moving from develop to mahlatse
+602506dc533235d039f1ea0155d331691eb5403e 0fba8dcf5ffa65b4036f113d67e550b8bb026f89 malemamack <malemamack@gmail.com> 1732014918 +0200	checkout: moving from mahlatse to kat-branch
+0fba8dcf5ffa65b4036f113d67e550b8bb026f89 602506dc533235d039f1ea0155d331691eb5403e malemamack <malemamack@gmail.com> 1732014985 +0200	checkout: moving from kat-branch to mahlatse
+602506dc533235d039f1ea0155d331691eb5403e 602506dc533235d039f1ea0155d331691eb5403e malemamack <malemamack@gmail.com> 1732015733 +0200	checkout: moving from mahlatse to develop
+602506dc533235d039f1ea0155d331691eb5403e 602506dc533235d039f1ea0155d331691eb5403e malemamack <malemamack@gmail.com> 1732015908 +0200	checkout: moving from develop to mahlatse-branch
+602506dc533235d039f1ea0155d331691eb5403e 602506dc533235d039f1ea0155d331691eb5403e malemamack <malemamack@gmail.com> 1732017791 +0200	checkout: moving from mahlatse-branch to develop
+602506dc533235d039f1ea0155d331691eb5403e 5f8ef91879633c688bf394d11883c116f41ea6dd malemamack <malemamack@gmail.com> 1732017802 +0200	pull: Fast-forward
+5f8ef91879633c688bf394d11883c116f41ea6dd 602506dc533235d039f1ea0155d331691eb5403e malemamack <malemamack@gmail.com> 1732017815 +0200	checkout: moving from develop to mahlatse-branch
+602506dc533235d039f1ea0155d331691eb5403e 5f8ef91879633c688bf394d11883c116f41ea6dd malemamack <malemamack@gmail.com> 1732017848 +0200	merge develop: Fast-forward
+5f8ef91879633c688bf394d11883c116f41ea6dd cd79d4a7a0043b270d84f0cd183a402606d99d4c malemamack <malemamack@gmail.com> 1732083432 +0200	commit: student score
+cd79d4a7a0043b270d84f0cd183a402606d99d4c 5f8ef91879633c688bf394d11883c116f41ea6dd malemamack <malemamack@gmail.com> 1732083465 +0200	checkout: moving from mahlatse-branch to develop
+5f8ef91879633c688bf394d11883c116f41ea6dd c68bf4b3aede00efd521deb703c43b92651f8689 malemamack <malemamack@gmail.com> 1732083491 +0200	pull: Fast-forward
+c68bf4b3aede00efd521deb703c43b92651f8689 cd79d4a7a0043b270d84f0cd183a402606d99d4c malemamack <malemamack@gmail.com> 1732083521 +0200	checkout: moving from develop to mahlatse-branch
+cd79d4a7a0043b270d84f0cd183a402606d99d4c fa9a4c275ec6db85977d9256c58ea6bc6a70fc82 malemamack <malemamack@gmail.com> 1732083572 +0200	commit (merge): Merge branch 'develop' into mahlatse-branch
+fa9a4c275ec6db85977d9256c58ea6bc6a70fc82 c68bf4b3aede00efd521deb703c43b92651f8689 malemamack <malemamack@gmail.com> 1732083652 +0200	checkout: moving from mahlatse-branch to develop
+c68bf4b3aede00efd521deb703c43b92651f8689 c68bf4b3aede00efd521deb703c43b92651f8689 malemamack <malemamack@gmail.com> 1732083675 +0200	checkout: moving from develop to develop
+c68bf4b3aede00efd521deb703c43b92651f8689 fa9a4c275ec6db85977d9256c58ea6bc6a70fc82 malemamack <malemamack@gmail.com> 1732083867 +0200	checkout: moving from develop to mahlatse-branch
+fa9a4c275ec6db85977d9256c58ea6bc6a70fc82 fbf05fe519a400360e2dd6d282f20096f19e727c malemamack <malemamack@gmail.com> 1732110656 +0200	commit: modified teacher/req/save-score & student-grade and view-results
+fbf05fe519a400360e2dd6d282f20096f19e727c c68bf4b3aede00efd521deb703c43b92651f8689 malemamack <malemamack@gmail.com> 1732110681 +0200	checkout: moving from mahlatse-branch to develop
+c68bf4b3aede00efd521deb703c43b92651f8689 9bb33d53f0e737479e65c17f2d1a90da31fa71d2 malemamack <malemamack@gmail.com> 1732110691 +0200	pull: Fast-forward
+9bb33d53f0e737479e65c17f2d1a90da31fa71d2 fbf05fe519a400360e2dd6d282f20096f19e727c malemamack <malemamack@gmail.com> 1732110715 +0200	checkout: moving from develop to mahlatse-branch
+fbf05fe519a400360e2dd6d282f20096f19e727c 0fb75255f774042344577a1d31a3462d655c6ca4 malemamack <malemamack@gmail.com> 1732110847 +0200	commit (merge): incoming updated file
+0fb75255f774042344577a1d31a3462d655c6ca4 9bb33d53f0e737479e65c17f2d1a90da31fa71d2 malemamack <malemamack@gmail.com> 1732131314 +0200	checkout: moving from mahlatse-branch to develop
+9bb33d53f0e737479e65c17f2d1a90da31fa71d2 9ec432137f50d92ba439eca6d2607ccc25a3d4cd malemamack <malemamack@gmail.com> 1732172215 +0200	commit: view
+9ec432137f50d92ba439eca6d2607ccc25a3d4cd 3f53e47c8b60172dd794ddb561060a82355bc70f malemamack <malemamack@gmail.com> 1732172227 +0200	pull --tags origin develop: Merge made by the 'ort' strategy.
+3f53e47c8b60172dd794ddb561060a82355bc70f 0fb75255f774042344577a1d31a3462d655c6ca4 malemamack <malemamack@gmail.com> 1732172273 +0200	checkout: moving from develop to mahlatse-branch
+0fb75255f774042344577a1d31a3462d655c6ca4 5c4c6e0646336f2b5e1e79e8952c522d30efceea malemamack <malemamack@gmail.com> 1732175094 +0200	commit: view_report, add_report
+5c4c6e0646336f2b5e1e79e8952c522d30efceea 6da2f4f929842ada742c718d00d52a9e958ccfa6 malemamack <malemamack@gmail.com> 1732183464 +0200	commit: view_report
+6da2f4f929842ada742c718d00d52a9e958ccfa6 3f53e47c8b60172dd794ddb561060a82355bc70f malemamack <malemamack@gmail.com> 1732183527 +0200	checkout: moving from mahlatse-branch to develop
+3f53e47c8b60172dd794ddb561060a82355bc70f 9958d513d797eaef4d69ae0ccd1e8675044b3b88 malemamack <malemamack@gmail.com> 1732183540 +0200	pull: Fast-forward
+9958d513d797eaef4d69ae0ccd1e8675044b3b88 6da2f4f929842ada742c718d00d52a9e958ccfa6 malemamack <malemamack@gmail.com> 1732183563 +0200	checkout: moving from develop to mahlatse-branch
+6da2f4f929842ada742c718d00d52a9e958ccfa6 0a9f65e6671c81ad3be3ef80ab373bf7b92517eb malemamack <malemamack@gmail.com> 1732183736 +0200	commit (merge): Merge branch 'develop' into mahlatse-branch
+0a9f65e6671c81ad3be3ef80ab373bf7b92517eb 9958d513d797eaef4d69ae0ccd1e8675044b3b88 malemamack <malemamack@gmail.com> 1732183805 +0200	checkout: moving from mahlatse-branch to develop
+9958d513d797eaef4d69ae0ccd1e8675044b3b88 0a9f65e6671c81ad3be3ef80ab373bf7b92517eb malemamack <malemamack@gmail.com> 1732183862 +0200	merge mahlatse-branch: Fast-forward
+0a9f65e6671c81ad3be3ef80ab373bf7b92517eb 0a9f65e6671c81ad3be3ef80ab373bf7b92517eb malemamack <malemamack@gmail.com> 1732186848 +0200	checkout: moving from develop to mahlatse-branch
+0a9f65e6671c81ad3be3ef80ab373bf7b92517eb be73434c63b5f251fcec436e18c242a3dc5203f4 malemamack <malemamack@gmail.com> 1732309030 +0200	commit: add and view results
+be73434c63b5f251fcec436e18c242a3dc5203f4 7b8e6c755d1f7f179213b440570e484c94724d44 malemamack <malemamack@gmail.com> 1732459160 +0200	commit: strong password, loader page, colors, change password, success reset password, invalid reset password, admin settings,
+7b8e6c755d1f7f179213b440570e484c94724d44 0a9f65e6671c81ad3be3ef80ab373bf7b92517eb malemamack <malemamack@gmail.com> 1732516886 +0200	checkout: moving from mahlatse-branch to develop
+0a9f65e6671c81ad3be3ef80ab373bf7b92517eb fde0dd61837c948273a35005d660e78f1b035e8f malemamack <malemamack@gmail.com> 1732516904 +0200	pull: Fast-forward
+fde0dd61837c948273a35005d660e78f1b035e8f 7b8e6c755d1f7f179213b440570e484c94724d44 malemamack <malemamack@gmail.com> 1732516930 +0200	checkout: moving from develop to mahlatse-branch
+7b8e6c755d1f7f179213b440570e484c94724d44 7056def0fcee5f4847356bcca6bf4b3edc850887 malemamack <malemamack@gmail.com> 1732516995 +0200	commit (merge): verify otp
+7056def0fcee5f4847356bcca6bf4b3edc850887 fde0dd61837c948273a35005d660e78f1b035e8f malemamack <malemamack@gmail.com> 1732517051 +0200	checkout: moving from mahlatse-branch to develop
+fde0dd61837c948273a35005d660e78f1b035e8f 7056def0fcee5f4847356bcca6bf4b3edc850887 malemamack <malemamack@gmail.com> 1732517071 +0200	merge mahlatse-branch: Fast-forward
+7056def0fcee5f4847356bcca6bf4b3edc850887 7056def0fcee5f4847356bcca6bf4b3edc850887 malemamack <malemamack@gmail.com> 1732517121 +0200	checkout: moving from develop to mahlatse-branch
+7056def0fcee5f4847356bcca6bf4b3edc850887 48bef6758995dab097ba9b07b0fe5087dfb4e88f malemamack <malemamack@gmail.com> 1732628166 +0200	commit: view
+48bef6758995dab097ba9b07b0fe5087dfb4e88f 7056def0fcee5f4847356bcca6bf4b3edc850887 malemamack <malemamack@gmail.com> 1732628216 +0200	checkout: moving from mahlatse-branch to develop
+7056def0fcee5f4847356bcca6bf4b3edc850887 1a5f6985abe21b187a7fb12457c8459db5131acc malemamack <malemamack@gmail.com> 1732628229 +0200	pull: Fast-forward
+1a5f6985abe21b187a7fb12457c8459db5131acc 48bef6758995dab097ba9b07b0fe5087dfb4e88f malemamack <malemamack@gmail.com> 1732628277 +0200	checkout: moving from develop to mahlatse-branch
+48bef6758995dab097ba9b07b0fe5087dfb4e88f 1a5f6985abe21b187a7fb12457c8459db5131acc malemamack <malemamack@gmail.com> 1732628319 +0200	checkout: moving from mahlatse-branch to develop
+1a5f6985abe21b187a7fb12457c8459db5131acc 4743daace4b737bc142fb15e1c91535806b3ba66 malemamack <malemamack@gmail.com> 1732628458 +0200	commit (merge): Merge branch 'mahlatse-branch' into develop
+4743daace4b737bc142fb15e1c91535806b3ba66 48bef6758995dab097ba9b07b0fe5087dfb4e88f malemamack <malemamack@gmail.com> 1732628556 +0200	checkout: moving from develop to mahlatse-branch
+48bef6758995dab097ba9b07b0fe5087dfb4e88f 4743daace4b737bc142fb15e1c91535806b3ba66 malemamack <malemamack@gmail.com> 1732628643 +0200	checkout: moving from mahlatse-branch to develop
+4743daace4b737bc142fb15e1c91535806b3ba66 48bef6758995dab097ba9b07b0fe5087dfb4e88f malemamack <malemamack@gmail.com> 1732628660 +0200	checkout: moving from develop to mahlatse-branch
+48bef6758995dab097ba9b07b0fe5087dfb4e88f 4743daace4b737bc142fb15e1c91535806b3ba66 malemamack <malemamack@gmail.com> 1732628682 +0200	merge develop: Fast-forward
+4743daace4b737bc142fb15e1c91535806b3ba66 4743daace4b737bc142fb15e1c91535806b3ba66 malemamack <malemamack@gmail.com> 1732628808 +0200	checkout: moving from mahlatse-branch to develop
+4743daace4b737bc142fb15e1c91535806b3ba66 ef773d02427ffd31afde41a3f9705ad76e133683 malemamack <malemamack@gmail.com> 1732652688 +0200	pull: Fast-forward
+ef773d02427ffd31afde41a3f9705ad76e133683 4743daace4b737bc142fb15e1c91535806b3ba66 malemamack <malemamack@gmail.com> 1732652699 +0200	checkout: moving from develop to mahlatse-branch
+4743daace4b737bc142fb15e1c91535806b3ba66 ef773d02427ffd31afde41a3f9705ad76e133683 malemamack <malemamack@gmail.com> 1732653384 +0200	checkout: moving from mahlatse-branch to develop
+ef773d02427ffd31afde41a3f9705ad76e133683 4743daace4b737bc142fb15e1c91535806b3ba66 malemamack <malemamack@gmail.com> 1732653413 +0200	checkout: moving from develop to mahlatse-branch
+4743daace4b737bc142fb15e1c91535806b3ba66 ef773d02427ffd31afde41a3f9705ad76e133683 malemamack <malemamack@gmail.com> 1732653427 +0200	checkout: moving from mahlatse-branch to develop
+ef773d02427ffd31afde41a3f9705ad76e133683 4743daace4b737bc142fb15e1c91535806b3ba66 malemamack <malemamack@gmail.com> 1732653488 +0200	checkout: moving from develop to mahlatse-branch
+4743daace4b737bc142fb15e1c91535806b3ba66 6656e35da15d9aa8073aa52f7f5a8b5f747116f4 malemamack <malemamack@gmail.com> 1732655628 +0200	commit: verify
+6656e35da15d9aa8073aa52f7f5a8b5f747116f4 7c32f3684c5410bbb5d215f6635e265e258fce48 malemamack <malemamack@gmail.com> 1732715367 +0200	commit: styling
+7c32f3684c5410bbb5d215f6635e265e258fce48 ef773d02427ffd31afde41a3f9705ad76e133683 malemamack <malemamack@gmail.com> 1732715437 +0200	checkout: moving from mahlatse-branch to develop
+ef773d02427ffd31afde41a3f9705ad76e133683 984c9dcd0ab1492e3026ded770828151578b8c9c malemamack <malemamack@gmail.com> 1732715448 +0200	pull: Fast-forward
+984c9dcd0ab1492e3026ded770828151578b8c9c 7c32f3684c5410bbb5d215f6635e265e258fce48 malemamack <malemamack@gmail.com> 1732715503 +0200	checkout: moving from develop to mahlatse-branch
+7c32f3684c5410bbb5d215f6635e265e258fce48 dbcaea7ff3e616146411e05646a78ca3e6bea387 malemamack <malemamack@gmail.com> 1732716080 +0200	commit (merge): Merge branch 'develop' into mahlatse-branch
+dbcaea7ff3e616146411e05646a78ca3e6bea387 c3a7b728807ea0ec842669da9f1964d080afce83 malemamack <malemamack@gmail.com> 1732716135 +0200	commit: vendor
+c3a7b728807ea0ec842669da9f1964d080afce83 984c9dcd0ab1492e3026ded770828151578b8c9c malemamack <malemamack@gmail.com> 1732716183 +0200	checkout: moving from mahlatse-branch to develop
+984c9dcd0ab1492e3026ded770828151578b8c9c 44cd9aa17b762e9cb1163a5555a6666fecab2cf1 malemamack <malemamack@gmail.com> 1732716213 +0200	commit: vendor
+44cd9aa17b762e9cb1163a5555a6666fecab2cf1 2b8a8bb41ff71e03aee87a8d9bde39cbebbcbcd0 malemamack <malemamack@gmail.com> 1732716361 +0200	commit (merge): Merge branch 'mahlatse-branch' into develop
+2b8a8bb41ff71e03aee87a8d9bde39cbebbcbcd0 c3a7b728807ea0ec842669da9f1964d080afce83 malemamack <malemamack@gmail.com> 1732716398 +0200	checkout: moving from develop to mahlatse-branch
+c3a7b728807ea0ec842669da9f1964d080afce83 b291131e14e863913b4b29f81c7435692fa8f77b malemamack <malemamack@gmail.com> 1733048594 +0200	commit: teacher view
+b291131e14e863913b4b29f81c7435692fa8f77b c2477e354affb2c725379ea2e0f3443409337a70 malemamack <malemamack@gmail.com> 1733120923 +0200	commit: styling
+c2477e354affb2c725379ea2e0f3443409337a70 2b8a8bb41ff71e03aee87a8d9bde39cbebbcbcd0 malemamack <malemamack@gmail.com> 1733122584 +0200	checkout: moving from mahlatse-branch to develop
+2b8a8bb41ff71e03aee87a8d9bde39cbebbcbcd0 c2477e354affb2c725379ea2e0f3443409337a70 malemamack <malemamack@gmail.com> 1733122627 +0200	checkout: moving from develop to mahlatse-branch

@@ -1,0 +1,4 @@
+0000000000000000000000000000000000000000 a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 malemamack <malemamack@gmail.com> 1731498030 +0200	branch: Created from origin/mahlatse
+a89a265b92d34ff9f455c2b6dd8a8b6e888cc4e6 8b5051fc117c1ebc58ee86978b59a6bee4976387 malemamack <malemamack@gmail.com> 1731502002 +0200	commit: verify otp styling
+8b5051fc117c1ebc58ee86978b59a6bee4976387 515eecc55affe2af4f2bf8c710a1db370b79f8c3 malemamack <malemamack@gmail.com> 1731929597 +0200	commit: otp, parent, teacher register and view report and parent dashboard
+515eecc55affe2af4f2bf8c710a1db370b79f8c3 602506dc533235d039f1ea0155d331691eb5403e malemamack <malemamack@gmail.com> 1732014362 +0200	merge develop: Fast-forward

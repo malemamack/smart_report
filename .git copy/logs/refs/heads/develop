@@ -1,0 +1,17 @@
+0000000000000000000000000000000000000000 29e1e6a8578306c290bb804fd405b3442d6e06e4 malemamack <malemamack@gmail.com> 1732013444 +0200	branch: Created from refs/remotes/origin/develop
+29e1e6a8578306c290bb804fd405b3442d6e06e4 602506dc533235d039f1ea0155d331691eb5403e malemamack <malemamack@gmail.com> 1732014135 +0200	commit: teacher_add hashed password changed to normal password
+602506dc533235d039f1ea0155d331691eb5403e 5f8ef91879633c688bf394d11883c116f41ea6dd malemamack <malemamack@gmail.com> 1732017802 +0200	pull: Fast-forward
+5f8ef91879633c688bf394d11883c116f41ea6dd c68bf4b3aede00efd521deb703c43b92651f8689 malemamack <malemamack@gmail.com> 1732083491 +0200	pull: Fast-forward
+c68bf4b3aede00efd521deb703c43b92651f8689 9bb33d53f0e737479e65c17f2d1a90da31fa71d2 malemamack <malemamack@gmail.com> 1732110691 +0200	pull: Fast-forward
+9bb33d53f0e737479e65c17f2d1a90da31fa71d2 9ec432137f50d92ba439eca6d2607ccc25a3d4cd malemamack <malemamack@gmail.com> 1732172215 +0200	commit: view
+9ec432137f50d92ba439eca6d2607ccc25a3d4cd 3f53e47c8b60172dd794ddb561060a82355bc70f malemamack <malemamack@gmail.com> 1732172227 +0200	pull --tags origin develop: Merge made by the 'ort' strategy.
+3f53e47c8b60172dd794ddb561060a82355bc70f 9958d513d797eaef4d69ae0ccd1e8675044b3b88 malemamack <malemamack@gmail.com> 1732183540 +0200	pull: Fast-forward
+9958d513d797eaef4d69ae0ccd1e8675044b3b88 0a9f65e6671c81ad3be3ef80ab373bf7b92517eb malemamack <malemamack@gmail.com> 1732183862 +0200	merge mahlatse-branch: Fast-forward
+0a9f65e6671c81ad3be3ef80ab373bf7b92517eb fde0dd61837c948273a35005d660e78f1b035e8f malemamack <malemamack@gmail.com> 1732516904 +0200	pull: Fast-forward
+fde0dd61837c948273a35005d660e78f1b035e8f 7056def0fcee5f4847356bcca6bf4b3edc850887 malemamack <malemamack@gmail.com> 1732517071 +0200	merge mahlatse-branch: Fast-forward
+7056def0fcee5f4847356bcca6bf4b3edc850887 1a5f6985abe21b187a7fb12457c8459db5131acc malemamack <malemamack@gmail.com> 1732628229 +0200	pull: Fast-forward
+1a5f6985abe21b187a7fb12457c8459db5131acc 4743daace4b737bc142fb15e1c91535806b3ba66 malemamack <malemamack@gmail.com> 1732628458 +0200	commit (merge): Merge branch 'mahlatse-branch' into develop
+4743daace4b737bc142fb15e1c91535806b3ba66 ef773d02427ffd31afde41a3f9705ad76e133683 malemamack <malemamack@gmail.com> 1732652688 +0200	pull: Fast-forward
+ef773d02427ffd31afde41a3f9705ad76e133683 984c9dcd0ab1492e3026ded770828151578b8c9c malemamack <malemamack@gmail.com> 1732715448 +0200	pull: Fast-forward
+984c9dcd0ab1492e3026ded770828151578b8c9c 44cd9aa17b762e9cb1163a5555a6666fecab2cf1 malemamack <malemamack@gmail.com> 1732716213 +0200	commit: vendor
+44cd9aa17b762e9cb1163a5555a6666fecab2cf1 2b8a8bb41ff71e03aee87a8d9bde39cbebbcbcd0 malemamack <malemamack@gmail.com> 1732716361 +0200	commit (merge): Merge branch 'mahlatse-branch' into develop
