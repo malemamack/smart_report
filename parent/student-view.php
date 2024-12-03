@@ -9,6 +9,7 @@ if (isset($_SESSION['r_user_id']) &&
        include "data/subject.php";
        include "data/grade.php";
        include "data/section.php";
+       
 
        if (isset($_GET['student_id'])) {
            $student_id = $_GET['student_id'];
