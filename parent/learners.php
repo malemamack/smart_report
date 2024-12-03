@@ -71,20 +71,44 @@ $result = $stmt->get_result();
         .btn-info {
             background-color: #17a2b8; /* Default Bootstrap Info color */
         }
+
+        body.body-login {
+    background-image: url('../2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 100%;
+    padding-bottom: 400px;
+}
+
+body.body-login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Black overlay with 70% transparency */
+    z-index: -1; /* Ensure it sits behind all content */
+}
+h2{
+    color: rgba(255, 255, 255, 0.8);
+}
     </style>
 </head>
-<body>
+<body class="body-login">
 <?php 
         include "inc/navbar.php";
      ?>
     <div class="container mt-5">
-    <a href="index.php" class="btn btn-dark">Go Back</a>
+    <a href="index.php" class="btn btn-light">Go Back</a>
         <h2 class="text-center">Your Learners</h2>
 
         <!-- Display Learners -->
         <?php if ($result->num_rows > 0): ?>
-            <table class="table table-bordered table-hover mt-4">
-                <thead class="table-dark">
+            <table class="table table-bordered table-hover mt-4" style="background-color:#f8f9fa;">
+                <thead class="table-dark" style="background-color:#f8f9fa;">
                     <tr>
                         <th>#</th>
                         <th>First Name</th>
@@ -120,10 +144,7 @@ $result = $stmt->get_result();
             </div>
         <?php endif; ?>
 
-        <!-- Back Button -->
-        <div class="text-center mt-4">
-            <!-- <a href="index.php" class="btn btn-back">Back</a> -->
-        </div>
+        
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
