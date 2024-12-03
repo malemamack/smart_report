@@ -122,6 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </nav>
             <section class="welcome-text d-flex justify-content-center align-items-center flex-column">
                 <div class="contai">
+                    
                     <form action="forgotpasswordprc.php" method="post">
                         <div class="form-contai text-center">
                             <div class="logo mb-4">
