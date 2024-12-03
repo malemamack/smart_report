@@ -120,20 +120,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['otp'])) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 	<link rel="icon" href="1.jpg">
-
+ 
 </head>
 
-<body class="body-home">
+<body class="body-login" style="background-image: url(IMG_3108.jpg);">
     <div class="black-fill"><br /> <br />
-    	<div class="container" style="width:45%; border-radius: 100px;">
+        <div class="container" style="width: 38%; border-radius: 17%; padding: 20px; overflow: hidden;">
     	<nav class="navbar navbar-expand-lg bg-light"
     	     id="homeNav">
 		  <div class="container-fluid" st>
-     <div class="container d-flex justify-content-center align-items-center flex-column" style="height: 80vh;">
+     <div class="container d-flex justify-content-center align-items-center flex-column" style="height: 70vh;">
         <div class="text-center mb-4">
             <img src="1.jpg" alt="School Logo" style="border-radius: 40%;" width="100">
         </div>
-        <h2>Enter the OTP sent to your email</h2>
+        <h3>Enter OTP sent to your email</h3>
         <form method="post" action="" class="mb-3">
             <div class="form-group">
                 <input type="text" name="otp" required placeholder="Enter OTP" class="form-control mb-3" pattern="[0-9]{6}" maxlength="6">
@@ -157,6 +157,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['otp'])) {
             <button type="submit" name="resend" class="btn btn-primary w-100" id="resendButton">
                 Resend OTP
             </button>
+         
+
         </form>
         
      </div>
