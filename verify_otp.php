@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['otp'])) {
 
 <body class="body-home">
     <div class="black-fill"><br /> <br />
-    	<div class="container" style="width:45%; border-radius: 100px;">
+    	<div class="container" style="width:40%; border-radius: 100px; overflow : hidden;">
     	<nav class="navbar navbar-expand-lg bg-light"
     	     id="homeNav">
 		  <div class="container-fluid" st>
