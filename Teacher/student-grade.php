@@ -46,14 +46,37 @@ if (isset($_SESSION['teacher_id']) &&
     <link rel="icon" href="../logo.png">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    body.body-login {
+    background-image: url('../2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+body.body-login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Black overlay with 70% transparency */
+    z-index: -1; /* Ensure it sits behind all content */
+}
+
+</style>
 </head>
-<body class="body-login" style="background-image: url(../2.jpg);">
+
+<body class="body-login" >
     <?php 
     include "inc/navbar.php";
         if ($student != 0 && $setting !=0 && $subjects !=0 && $teacher_subjects != 0) {
      ?>
 
-<a href="index.php" class="btn btn-light">Go Back</a>
+<a href="students_of_class.php" class="btn btn-light">Go Back</a>
 
      <div class="d-flex align-items-center flex-column"><br><br>
         <div class="login shadow p-3">

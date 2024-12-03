@@ -3,10 +3,11 @@ session_start();
 include "../DB_connection.php";
 
 // Function to get the student's scores by ID
-function getScoreById($student_id, $conn) {
-    $sql = "SELECT * FROM student_score WHERE student_id = :student_id";
+function getScoreById($student_id, $current_year, $conn) {
+    $sql = "SELECT * FROM student_score WHERE student_id = :student_id AND year = :current_year";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':student_id', $student_id, PDO::PARAM_INT);
+    $stmt->bindParam(':current_year', $current_year, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -29,59 +30,23 @@ function getLearnerName($student_id, $conn) {
     return $stmt->fetch(PDO::FETCH_ASSOC)['fname'];
 }
 
-// Function to calculate the grade
-function gradeCalc($total) {
-    if ($total >= 80) return "7";
-    if ($total >= 70) return "6";
-    if ($total >= 60) return "5";
-    if ($total >= 50) return "4";
-    if ($total >= 40) return "3";
-    if ($total >= 30) return "2";
-    return "1";
-}
-
-// Function to populate the history table
-function populateHistory($conn) {
-    $sql = "INSERT INTO student_score_history (student_id, subject_id, semester, year, results)
-            SELECT student_id, subject_id, semester, year, results FROM student_score";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-}
-
-// Function to check if the settings have changed
-function checkYearChange($current_year, $conn) {
-    $sql = "SELECT current_year FROM setting";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $setting = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($current_year != $setting['current_year']) {
-        populateHistory($conn);
-
-        $sql = "UPDATE setting SET current_year = :current_year";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':current_year', $current_year, PDO::PARAM_INT);
-        $stmt->execute();
-    }
-}
-
 // Main script execution
 if (isset($_GET['student_id']) && is_numeric($_GET['student_id'])) {
     $student_id = intval($_GET['student_id']);
     $fname = getLearnerName($student_id, $conn);
-    $scores = getScoreById($student_id, $conn);
+
+    $sql = "SELECT current_year FROM setting";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $year_current = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$year_current) {
+        $year_current['current_year'] = date("Y");
+    }
+
+    $scores = getScoreById($student_id, $year_current['current_year'], $conn);
 
     if ($scores && $fname) {
-        $sql = "SELECT current_year FROM setting";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $year_current = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if (!$year_current) {
-            $year_current['current_year'] = date("Y");
-        }
-
-        checkYearChange($year_current['current_year'], $conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,30 +57,56 @@ if (isset($_GET['student_id']) && is_numeric($_GET['student_id'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" href="../1.jpg">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-    .table-dark {
-        background-color: #0056b3; /* Primary blue for header */
-        color: #ffffff; /* White text for readability */
-    }
-    th {
-        background-color: #003d80 !important; /* Darker blue for table header */
-        color: #ffffff !important; /* White text */
-        border: 1px solid #ffffff; /* Optional: White border for distinction */
-        text-align: center; /* Center align header text */
-    }
-    table {
-        border-collapse: collapse; /* Neater table appearance */
-        width: 100%;
-    }
-</style>
+        body {
+            background: rgba(0, 0, 0, 0.7) url('../2.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        .table-dark {
+            background-color: #0056b3;
+            color: #ffffff;
+        }
+        th {
+            background-color: #003d80 !important;
+            color: #ffffff !important;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            background-color: white;
+        }
 
+        body.body-login {
+    background-image: url('../2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 100%;
+    padding-bottom: 400px;
+}
+
+body.body-login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Black overlay with 70% transparency */
+    z-index: -1; /* Ensure it sits behind all content */
+}
+
+h2{
+    color: rgba(255, 255, 255, 0.8);
+}
+    </style>
 </head>
-<body>
+<body class="body-login">
 <?php include "inc/navbar.php"; ?>
 
-<a href="index.php" class="btn btn-dark">Go Back</a>
+<a href="index.php" class="btn btn-light">Go Back</a>
 
 <div class="container mt-5">
     <h2 class="text-center">Results for Learner: <?= htmlspecialchars($fname) ?> (ID: <?= htmlspecialchars($student_id) ?>)</h2>
@@ -131,8 +122,6 @@ if (isset($_GET['student_id']) && is_numeric($_GET['student_id'])) {
                     <th>Final Mark</th>
                     <th>Attendance</th>
                     <th>Comment</th>
-                    <th>Total</th>
-                    <th>Grade</th>
                     <th>Term</th>
                     <th>Year</th>
                 </tr>
@@ -141,29 +130,25 @@ if (isset($_GET['student_id']) && is_numeric($_GET['student_id'])) {
                 <?php
                 foreach ($scores as $score) {
                     $subject = getSubjectById($score['subject_id'], $conn);
-                    $total = 0;
-                    $outOf = 0;
                     $results = explode(',', trim($score['results']));
-                    $test1 = $test2 = $test3 = $exam = $final_mark = $attendance  = $comment = '';
+                    $test1 = $test2 = $test3 = $exam = $final_mark = $attendance = $comment = '';
                     foreach ($results as $result) {
                         if (strpos($result, 'Attendance') !== false) {
                             $attendance = explode(': ', trim($result))[1];
                         } elseif (strpos($result, 'Comment') !== false) {
                             $comment = explode(': ', trim($result))[1];
                         } else {
-                            list($marks, $max) = explode(', ', trim($result));
-                            $total += intval($marks);
-                            $outOf += intval($max);
+                            list($marks) = explode(', ', trim($result));
                             if (empty($test1)) {
-                                $test1 = "$marks $max";
+                                $test1 = $marks;
                             } elseif (empty($test2)) {
-                                $test2 = "$marks $max";
+                                $test2 = $marks;
                             } elseif (empty($test3)) {
-                                $test3 = "$marks $max";
+                                $test3 = $marks;
                             } elseif (empty($exam)) {
-                                $exam = "$marks $max";
+                                $exam = $marks;
                             } elseif (empty($final_mark)) {
-                                $final_mark = "$marks $max";
+                                $final_mark = $marks;
                             }
                         }
                     }
@@ -177,8 +162,6 @@ if (isset($_GET['student_id']) && is_numeric($_GET['student_id'])) {
                         <td><?= htmlspecialchars($final_mark) ?></td>
                         <td><?= htmlspecialchars($attendance) ?></td>
                         <td><?= htmlspecialchars($comment) ?></td>
-                        <td><?= htmlspecialchars("$total / $outOf") ?></td>
-                        <td><?= htmlspecialchars(gradeCalc($total)) ?></td>
                         <td><?= htmlspecialchars($score['semester']) ?></td>
                         <td><?= htmlspecialchars($year_current['current_year']) ?></td>
                     </tr>
@@ -193,7 +176,7 @@ if (isset($_GET['student_id']) && is_numeric($_GET['student_id'])) {
 </html>
 <?php
     } else {
-        echo "<div class='alert alert-info text-center'>No results found for this learner.</div>";
+        echo "<div class='alert alert-info text-center'>No results found for this learner in the current year.</div>";
     }
 } else {
     echo "<div class='alert alert-danger text-center'>Invalid Learner ID.</div>";
