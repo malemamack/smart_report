@@ -70,6 +70,11 @@ body.body-login::before {
                 <i class="fa fa-user fs-1" aria-hidden="true"></i><br>
                 Your Learners
             </a> 
+
+            <a href="parent-change-password.php" class="col btn btn-custom m-3 py-3">
+                <i class="fa fa-lock fs-1" aria-hidden="true"></i><br>
+                Change Password
+            </a> 
             
         </div>
     </div>
