@@ -197,114 +197,162 @@ body, html {
 <div class="content">
     <?php include "inc/navbar.php"; ?>
     <div class="container mt-5">
-        <a href="teacher.php" class="btn btn-light">Go Back</a>
-        <form method="post" class="shadow p-3 mt-5 form-w" action="req/teacher-edit.php">
-            <h3>Edit Teacher</h3><hr>
-
-            <?php if (isset($_GET['error'])) { ?>
-                <div class="alert alert-danger" role="alert">
-                    <?= htmlspecialchars($_GET['error'], ENT_QUOTES, 'UTF-8') ?>
-                </div>
-            <?php } ?>
-
-            <?php if (isset($_GET['success'])) { ?>
-                <div class="alert alert-success" role="alert">
-                    <?= htmlspecialchars($_GET['success'], ENT_QUOTES, 'UTF-8') ?>
-                </div>
-            <?php } ?>
-
-            <div class="mb-3">
-                <label class="form-label">First name</label>
-                <input type="text" 
-                       class="form-control"
-                       id="fname"
-                       value="<?= htmlspecialchars($teacher['fname'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
-                       name="fname"
-                       pattern="[A-Za-z\s]+" 
-                       title="Please enter only letters" 
-                       maxlength="100"
-                       required>
+        <a href="teacher.php" class="btn btn-dark">Go Back</a>
+        <form method="post"
+              class="shadow p-3 mt-5 form-w" 
+              action="req/teacher-add.php">
+        <h3>Edit New Teacher</h3><hr>
+        <?php if (isset($_GET['error'])) { ?>
+          <div class="alert alert-danger" role="alert">
+           <?=$_GET['error']?>
+          </div>
+        <?php } ?>
+        <?php if (isset($_GET['success'])) { ?>
+          <div class="alert alert-success" role="alert">
+           <?=$_GET['success']?>
+          </div>
+        <?php } ?>
+        <div class="mb-3">
+          <label class="form-label">First name</label>
+          <input type="text" 
+                 class="form-control"
+                 id="fname"
+                 value="<?= htmlspecialchars($teacher['fname'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
+                 name="fname"
+                 pattern="[A-Za-z\s]+" 
+                 title="Please enter only letters" 
+                 maxlength="100"
+                 required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Last name</label>
+          <input type="text" 
+                 class="form-control"
+                 id="lname"
+                 value="<?= htmlspecialchars($teacher['lname'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
+                 name="lname"
+                 pattern="[A-Za-z\s]+" 
+                 title="Please enter only letters" 
+                 maxlength="100"
+                 required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input type="text" 
+                 class="form-control"
+                 id="uname"
+                 value="<?= htmlspecialchars($teacher['username'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
+                 name="username"
+                 pattern="^[A-Za-z0-9_]{5,20}$" 
+                 title="Username must be 5-20  characters long and can  contain only letters, numbers,  and underscores." 
+                 maxlength="20" 
+                 required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <div class="input-group mb-3">
+              <input type="text" 
+                     class="form-control"
+                     name="pass"
+                     id="passInput">
+              <button class="btn btn-secondary"
+                      id="gBtn">
+                      Random</button>
+          </div>
+          
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Address</label>
+          <input type="text" 
+                 class="form-control"
+                 id="address"
+                  value="<?= htmlspecialchars($teacher['address'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                 name="address"
+                 maxlength="255" 
+                 required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Phone Number</label>
+          <input type="text" 
+                 class="form-control"
+                 value="<?=$pn??''?>"
+                 name="phone_number"
+                 id="phone numbers" 
+                 value="<?= htmlspecialchars($teacher['phone_number'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
+                 name="phone_number"
+                
+                maxlength="10" 
+                required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email Address</label>
+          <input type="text" 
+                 class="form-control"
+                 value="<?=$email??''?>"
+                 name="email_address"
+                 value="<?= htmlspecialchars($email_address) ?>" 
+                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                 title="Please enter a valid email address (e.g., example@example.com)" 
+                 required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Gender</label><br>
+          <input type="radio"
+                 value="Male"
+                 checked 
+                 name="gender"> Male
+                 &nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="radio"
+                 value="Female"
+                 name="gender"> Female
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Date of Birth</label>
+          <input type="date" 
+                 class="form-control"
+                 value=""
+                 name="date_of_birth">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Subject</label>
+          <div class="row row-cols-5">
+            <?php foreach ($subjects as $subject): ?>
+            <div class="col">
+              <input type="checkbox"
+                     name="subjects[]"
+                     value="<?=$subject['subject_id']?>">
+                     <?=$subject['subject']?>
             </div>
-            <div class="mb-3">
-                <label class="form-label">Last name</label>
-                <input type="text" 
-                       class="form-control"
-                       id="lname"
-                       value="<?= htmlspecialchars($teacher['lname'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
-                       name="lname"
-                       pattern="[A-Za-z\s]+" 
-                       title="Please enter only letters" 
-                       maxlength="100"
-                       required>
+            <?php endforeach ?>
+             
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Class</label>
+          <div class="row row-cols-5">
+            <?php foreach ($classes as $class): ?>
+            <div class="col">
+              <input type="checkbox"
+                     name="classes[]"
+                     value="<?=$class['class_id']?>">
+                     <?php 
+                        $grade = getGradeById($class['grade'], $conn); 
+                        $section = getSectioById($class['section'], $conn); 
+                      ?>
+                     <?=$grade['grade_code']?>-<?=$grade['grade'].$section['section']?>
             </div>
-            <div class="mb-3">
-                <label class="form-label">Username</label>
-                <input type="text" 
-                       class="form-control"
-                       id="uname"
-                       value="<?= htmlspecialchars($teacher['username'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
-                       name="username"
-                       pattern="^[A-Za-z0-9_]{5,20}$" 
-                       title="Username must be 5-20 characters long and can contain only letters, numbers, and underscores." 
-                       maxlength="20" 
-                       required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Address</label>
-                <input type="text" 
-                       class="form-control"
-                       id="address"
-                       value="<?= htmlspecialchars($teacher['address'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
-                       name="address"
-                       maxlength="255" 
-                       required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Date of birth</label>
-                <input type="date" 
-                       class="form-control"
-                       id="date_of_birth" 
-                       value="<?= htmlspecialchars($teacher['date_of_birth'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
-                       name="date_of_birth" 
-                       max="<?= date('Y-m-d', strtotime('-18 years')) ?>" 
-                       required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Phone number</label>
-                <input type="text" 
-                       class="form-control"
-                       id="phone_number"
-                       value="<?= htmlspecialchars($teacher['phone_number'] ?? '', ENT_QUOTES, 'UTF-8') ?>" 
-                       name="phone_number"
-                       pattern="^\+?27[0-9]{9}$" 
-                       title="Please enter a valid South African phone number (e.g., +27831234567)." 
-                       maxlength="12" 
-                       required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Email address</label>
-                <input type="email" 
-                       class="form-control"
-                       id="email_address" 
-                       value="<?= htmlspecialchars($email_address, ENT_QUOTES, 'UTF-8') ?>" 
-                       name="email_address" 
-                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
-                       title="Please enter a valid email address (e.g., example@example.com)" 
-                       required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Gender</label><br>
-                <input type="radio" value="Male" <?php if ($teacher['gender'] == 'Male') echo 'checked'; ?> name="gender"> Male
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" value="Female" <?php if ($teacher['gender'] == 'Female') echo 'checked'; ?> name="gender"> Female
-            </div>
-            <input type="hidden" name="teacher_id" value="<?= $teacher['teacher_id'] ?>">
-
-            <button type="submit" class="btn btn-primary">Update</button>
-        </form>
-    </div>
-</div>
-</div>
+            <?php endforeach ?>
+             
+          </div>
+        </div>
+      <button type="submit" class="btn btn-primary">Update</button>
+      <div id="loader" class="d-none">
+          <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+          </div>
+      </div>
+     </form>   
+     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

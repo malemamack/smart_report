@@ -183,7 +183,7 @@ body, html {
 
     <?php 
         include "inc/navbar.php";
-        if ($teachers != 0) {
+        if (is_array($teachers) && count($teachers) > 0) { // Ensure teachers is valid
      ?>
      <div class="container mt-5">
      <a href="index.php" class="btn btn-light">Go Back</a>
@@ -238,37 +238,36 @@ body, html {
                   <tr>
                     <th scope="row"><?=$i?></th>
                     <td><a href="teacher-view.php?teacher_id=<?=$teacher['teacher_id']?>">
-                         <?=$teacher['fname']?></a></td>
-                    <td><?=$teacher['lname']?></td>
-                    <td><?=$teacher['username']?></td>
+                         <?=htmlspecialchars($teacher['fname'])?></a></td>
+                    <td><?=htmlspecialchars($teacher['lname'])?></td>
+                    <td><?=htmlspecialchars($teacher['username'])?></td>
                     <td>
                        <?php 
                            $s = '';
                            $subjects = str_split(trim($teacher['subjects']));
                            foreach ($subjects as $subject) {
                               $s_temp = getSubjectById($subject, $conn);
-                              if ($s_temp != 0) 
-                                $s .=$s_temp['subject_code'].', ';
+                              if (is_array($s_temp)) 
+                                $s .= htmlspecialchars($s_temp['subject_code']).', ';
                            }
-                           echo $s;
+                           echo rtrim($s, ', ');
                         ?>
                     </td>
                     <td>
                       <?php 
                            $c = '';
                            $classes = str_split(trim($teacher['class']));
-
                            foreach ($classes as $class_id) {
                                $class = getClassById($class_id, $conn);
-
-                              $c_temp = getGradeById($class['grade'], $conn);
-                              $section = getSectioById($class['section'], $conn);
-                              if ($c_temp != 0) 
-                                $c .=$c_temp['grade_code'].'-'.
-                                     $c_temp['grade'].$section['section'].', ';
+                               if (is_array($class)) {
+                                   $c_temp = getGradeById($class['grade'], $conn);
+                                   $section = getSectioById($class['section'], $conn);
+                                   if (is_array($c_temp) && is_array($section)) {
+                                       $c .= htmlspecialchars($c_temp['grade_code'].'-'.$c_temp['grade'].$section['section']).', ';
+                                   }
+                               }
                            }
-                           echo $c;
-
+                           echo rtrim($c, ', ');
                         ?>
                     </td>
                     <td>
@@ -309,5 +308,4 @@ body, html {
 	header("Location: ../login.php");
 	exit;
 } 
-
 ?>
