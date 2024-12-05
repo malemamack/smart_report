@@ -107,6 +107,7 @@ h2{
 <?php include "inc/navbar.php"; ?>
 
 <a href="index.php" class="btn btn-light">Go Back</a>
+<!-- <a href="generate_pdf.php" class="btn btn-light">Download</a>  -->
 
 <div class="container mt-5">
     <h2 class="text-center">Results for Learner: <?= htmlspecialchars($fname) ?> (ID: <?= htmlspecialchars($student_id) ?>)</h2>

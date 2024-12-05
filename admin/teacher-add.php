@@ -320,7 +320,7 @@ body, html {
      ?>
      <div class="container mt-5">
         <a href="teacher.php"
-           class="btn btn-dark">Go Back</a>
+           class="btn btn-light">Go Back</a>
 
         <form method="post"
               class="shadow p-3 mt-5 form-w" 
