@@ -33,9 +33,30 @@ if (isset($_SESSION['parent_id']) && isset($_SESSION['role'])) {
         .btn-custom i {
             color: #f8f9fa; /* Icon color */
         }
+
+        body.body-login {
+    background-image: url('../2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 100%;
+    padding-bottom: 400px;
+}
+
+body.body-login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Black overlay with 70% transparency */
+    z-index: -1; /* Ensure it sits behind all content */
+}
     </style>
 </head>
-<body>
+<body class="body-login">
     <?php 
         include "inc/navbar.php";
     ?>
@@ -48,6 +69,11 @@ if (isset($_SESSION['parent_id']) && isset($_SESSION['role'])) {
             <a href="learners.php" class="col btn btn-custom m-3 py-3">
                 <i class="fa fa-user fs-1" aria-hidden="true"></i><br>
                 Your Learners
+            </a> 
+
+            <a href="parent-change-password.php" class="col btn btn-custom m-3 py-3">
+                <i class="fa fa-lock fs-1" aria-hidden="true"></i><br>
+                Change Password
             </a> 
             
         </div>

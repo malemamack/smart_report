@@ -3,7 +3,7 @@ include "DB_connection.php";
 include "data/setting.php";
 $setting = getSetting($conn);
 
-
+$email_address='';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email_address = $_POST['email_address'] ?? '';
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <title>Welcome to <?=$setting['school_name']?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="1.png">
+    <link rel="icon" href="1.jpg">
     <style>
         .contai {
             max-width: 400px;
@@ -122,6 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </nav>
             <section class="welcome-text d-flex justify-content-center align-items-center flex-column">
                 <div class="contai">
+                    
                     <form action="forgotpasswordprc.php" method="post">
                         <div class="form-contai text-center">
                             <div class="logo mb-4">

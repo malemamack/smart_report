@@ -46,14 +46,37 @@ if (isset($_SESSION['teacher_id']) &&
     <link rel="icon" href="../logo.png">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    body.body-login {
+    background-image: url('../2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+body.body-login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Black overlay with 70% transparency */
+    z-index: -1; /* Ensure it sits behind all content */
+}
+
+</style>
 </head>
-<body>
+
+<body class="body-login" >
     <?php 
     include "inc/navbar.php";
         if ($student != 0 && $setting !=0 && $subjects !=0 && $teacher_subjects != 0) {
      ?>
 
-<a href="index.php" class="btn btn-dark">Go Back</a>
+<a href="students_of_class.php" class="btn btn-light">Go Back</a>
 
      <div class="d-flex align-items-center flex-column"><br><br>
         <div class="login shadow p-3">
@@ -89,7 +112,7 @@ if (isset($_SESSION['teacher_id']) &&
             </div>
             <?php } ?>
            
-         <label class="form-label">Subject / Course</label>
+         <label class="form-label">Subject</label>
             <select class="form-control"
                     name="ssubject_id">
                     <?php foreach($subjects as $subject){ 
@@ -108,33 +131,31 @@ if (isset($_SESSION['teacher_id']) &&
         </form>
         <form method="post" action="req/save-score.php">
     <div class="input-group mb-3">
-        <input type="number" min="0" max="300" class="form-control" placeholder="Test 1 Score" name="score-1">
+        <input type="number" min="0" max="300" class="form-control" placeholder="Test 1 Score" name="score-1" id="score1" oninput="calculateFinalMark()">
         <span class="input-group-text">/</span>
-        <input type="number" min="0" max="300" class="form-control" placeholder="Out of" name="aoutof-1">
+        <input type="number" min="50" max="300" class="form-control" placeholder="Out of" name="aoutof-1" id="outof1" oninput="calculateFinalMark()">
     </div>
     <div class="input-group mb-3">
-        <input type="number" min="0" max="300" class="form-control" placeholder="Test 2 Score" name="score-2">
+        <input type="number" min="0" max="300" class="form-control" placeholder="Test 2 Score" name="score-2" id="score2" oninput="calculateFinalMark()">
         <span class="input-group-text">/</span>
-        <input type="number" min="0" max="300" class="form-control" placeholder="Out of" name="aoutof-2">
+        <input type="number" min="50" max="300" class="form-control" placeholder="Out of" name="aoutof-2" id="outof2" oninput="calculateFinalMark()">
     </div>
     <div class="input-group mb-3">
-        <input type="number" min="0" max="300" class="form-control" placeholder="Test 3 Score" name="score-3">
+        <input type="number" min="0" max="300" class="form-control" placeholder="Test 3 Score" name="score-3" id="score3" oninput="calculateFinalMark()">
         <span class="input-group-text">/</span>
-        <input type="number" min="0" max="300" class="form-control" placeholder="Out of" name="aoutof-3">
-    </div>
-    
-    <div class="input-group mb-3">
-    <input type="number" min="0" max="300" class="form-control" placeholder="exam" name="score-4">
-    <span class="input-group-text">/</span>
-        <input type="number" min="0" max="300" class="form-control" placeholder="Out of" name="aoutof-4">
+        <input type="number" min="50" max="300" class="form-control" placeholder="Out of" name="aoutof-3" id="outof3" oninput="calculateFinalMark()">
     </div>
     <div class="input-group mb-3">
-    <input type="number" min="0" max="300" class="form-control" placeholder="final_mark" name="score-5">
-    <span class="input-group-text">/</span>
-        <input type="number" min="0" max="300" class="form-control" placeholder="Out of" name="aoutof-5">
+        <input type="number" min="0" max="300" class="form-control" placeholder="Exam Score" name="score-4" id="exam" oninput="calculateFinalMark()">
+        <span class="input-group-text">/</span>
+        <input type="number" min="50" max="300" class="form-control" placeholder="Out of" name="aoutof-4" id="outof4" oninput="calculateFinalMark()">
     </div>
     <div class="input-group mb-3">
-        <input type="text" min="0" max="300" class="form-control" placeholder="Attendance" name="attendance">
+        <input type="number" class="form-control" placeholder="Final Mark (Calculated)" name="score-5" id="finalMark" readonly>
+        <span class="input-group-text">%</span>
+    </div>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Attendance" name="attendance">
     </div>
     <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Comment" name="comment">
@@ -147,6 +168,7 @@ if (isset($_SESSION['teacher_id']) &&
 
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
+
  <?php  ?> 
         </div>
         </div>
@@ -162,6 +184,29 @@ if (isset($_SESSION['teacher_id']) &&
              $("#navLinks li:nth-child(4) a").addClass('active');
         });
     </script>
+    <script>
+    function calculateFinalMark() {
+        const score1 = parseFloat(document.getElementById('score1').value) || 0;
+        const score2 = parseFloat(document.getElementById('score2').value) || 0;
+        const score3 = parseFloat(document.getElementById('score3').value) || 0;
+        const exam = parseFloat(document.getElementById('exam').value) || 0;
+
+        const outof1 = parseFloat(document.getElementById('outof1').value) || 0;
+        const outof2 = parseFloat(document.getElementById('outof2').value) || 0;
+        const outof3 = parseFloat(document.getElementById('outof3').value) || 0;
+        const outof4 = parseFloat(document.getElementById('outof4').value) || 0;
+
+        const totalScore = score1 + score2 + score3 + exam;
+        const totalOutOf = outof1 + outof2 + outof3 + outof4;
+
+        if (totalOutOf > 0) {
+            const finalMark = (totalScore / totalOutOf) * 100;
+            document.getElementById('finalMark').value = finalMark.toFixed(2); // Round to 2 decimals
+        } else {
+            document.getElementById('finalMark').value = ''; // Clear if "out of" is invalid
+        }
+    }
+</script>
 
 </body>
 </html>
