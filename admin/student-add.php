@@ -124,7 +124,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body class="body-student" style="background-image: url(senepe.jpg);">
     <?php include "inc/navbar.php"; ?>
     <div class="container mt-5">
         <a href="student.php" class="btn btn-dark">Go Back</a>
